@@ -1,0 +1,81 @@
+package com.discrepancyfinder;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class FileReader {
+
+	public static void main(String[] args) {
+		String userInput;
+		Scanner sn = new Scanner(System.in);
+
+		while (true) {
+			System.out.println("*****Discrepancy finder and remediator*****");
+			System.out.println("Press 1 for Java: Find");
+			System.out.println("Press 2 for Java: Find and remidiate");
+			System.out.println("Press 3 for .Net: Find");
+			System.out.println("Press 4 for .Net: Find and remidiate");
+			System.out.println("Press 5 for Tomcat: Find");
+			System.out.println("Press 6 for Tomcat: Find and remidiate");
+			System.out.println("Press 7 to exit");
+			System.out.println("Enter your choice:");
+
+			userInput = sn.next();
+			switch (userInput) {
+			case "1":
+				javaDiscrepancyFinder();
+				break;
+			case "2":
+				break;
+			case "3":
+				dotNetDiscrepancyFinder();
+				break;
+			case "4":
+				break;
+			case "5":
+				tomcatDiscrepancyFinder();
+				break;
+			case "6":
+				break;
+			case "7":
+				System.out.println("Exiting...");
+				System.exit(0);
+			default:
+				System.out.println("Invalid choice. Read the options carefully...");
+			}
+		}
+	}
+
+	public static void javaDiscrepancyFinder() {
+		try {
+			List<String> result = null;
+			try (Stream<Path> walk = Files.walk(Paths.get("E:\\java-files-input"))) {
+				result = walk.map(x -> x.toString()).filter(f -> f.endsWith(".java")).collect(Collectors.toList());
+				for (String fileName : result) {
+					File javaFile = new File("E:\\java-files-input\\" + fileName);
+					DiscrepancyFinder.findDiscrepancy(javaFile);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void dotNetDiscrepancyFinder() {
+
+	}
+
+	public static void tomcatDiscrepancyFinder() {
+
+	}
+
+}
