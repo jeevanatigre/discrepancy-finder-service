@@ -30,9 +30,10 @@ public class FileReader {
 			userInput = sn.next();
 			switch (userInput) {
 			case "1":
-				javaDiscrepancyFinder();
+				javaDiscrepancyFinder(userInput);
 				break;
 			case "2":
+				javaDiscrepancyFinder(userInput);
 				break;
 			case "3":
 				dotNetDiscrepancyFinder();
@@ -46,6 +47,7 @@ public class FileReader {
 				break;
 			case "7":
 				System.out.println("Exiting...");
+				sn.close();
 				System.exit(0);
 			default:
 				System.out.println("Invalid choice. Read the options carefully...");
@@ -53,14 +55,14 @@ public class FileReader {
 		}
 	}
 
-	public static void javaDiscrepancyFinder() {
+	public static void javaDiscrepancyFinder(String userInput) {
 		try {
 			List<String> result = null;
 			try (Stream<Path> walk = Files.walk(Paths.get("E:\\java-files-input"))) {
 				result = walk.map(x -> x.toString()).filter(f -> f.endsWith(".java")).collect(Collectors.toList());
 				for (String fileName : result) {
 					File javaFile = new File("E:\\java-files-input\\" + fileName);
-					DiscrepancyFinder.findDiscrepancy(javaFile);
+					DiscrepancyFinder.findDiscrepancy(javaFile, userInput);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

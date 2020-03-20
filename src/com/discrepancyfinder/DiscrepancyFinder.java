@@ -20,7 +20,7 @@ import org.w3c.dom.NodeList;
 
 public class DiscrepancyFinder {
 
-	public static void findDiscrepancy(File javaFile) {
+	public static void findDiscrepancy(File javaFile, String userInput) {
 		File fXmlFile = new File("E:\\java-rules.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -34,7 +34,6 @@ public class DiscrepancyFinder {
 
 			if (doc.getElementsByTagName("rule").getLength() > 0) {
 				NodeList nList = doc.getElementsByTagName("imports");
-				System.out.println("----------------------------");
 				try {
 					Scanner scanner = new Scanner(new File("E:\\java-files-input\\" + javaFile.getName()));
 					while (scanner.hasNextLine()) {
@@ -52,12 +51,27 @@ public class DiscrepancyFinder {
 						NodeList missingImportList = eElement.getElementsByTagName("import");
 						for(int i = 0; i < missingImportList.getLength(); i++) {
 							Node missingImportNode = missingImportList.item(i);
-							if (codeLineList.contains(((Element) missingImportNode).getAttribute("name").trim()))
-								discrepancyLineList.add(((Element) missingImportNode).getAttribute("name") + "  Line number: "+codeLineList.indexOf(((Element) missingImportNode).getAttribute("name").trim()));
+							String importName = ((Element) missingImportNode).getAttribute("name").trim();
+							if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("1")) 
+								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName));
+							else if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("2")) {
+								codeLineList.remove(importName);
+							}						
 						}
 					}
-					Path file = Paths.get("E:\\java-files-output\\info-" + javaFile.getName() + ".txt");
+				}
+				if (userInput.equalsIgnoreCase("1")) {
+					String directory = "E:\\java-files-output";
+					File dir = new File(directory);
+				    if (!dir.exists()) dir.mkdirs();
+					Path file = Paths.get(directory + "\\info-" + javaFile.getName() + ".txt");
 					Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
+				} else if (userInput.equalsIgnoreCase("2")) {
+					String directory = "E:\\java-files-output-remidiator";
+					File dir = new File(directory);
+				    if (!dir.exists()) dir.mkdirs();
+					Path file = Paths.get(directory + "\\remediated-" + javaFile.getName() + ".java");
+					Files.write(file, codeLineList, StandardCharsets.UTF_8);
 				}
 			}
 		} catch (Exception e) {
