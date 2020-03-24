@@ -48,13 +48,14 @@ public class DiscrepancyFinder {
 					System.out.println("\nCurrent Element :" + nNode.getNodeName());
 					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 						Element eElement = (Element) nNode;
-						NodeList missingImportList = eElement.getElementsByTagName("import");
+						NodeList missingImportList = eElement.getElementsByTagName("import_tag");
 						for(int i = 0; i < missingImportList.getLength(); i++) {
 							Node missingImportNode = missingImportList.item(i);
 							String importName = ((Element) missingImportNode).getAttribute("name").trim();
 							if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("1")) 
 								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName));
 							else if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("2")) {
+								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName));
 								codeLineList.remove(importName);
 							}						
 						}
@@ -69,9 +70,12 @@ public class DiscrepancyFinder {
 				} else if (userInput.equalsIgnoreCase("2")) {
 					String directory = "E:\\java-files-output-remidiator";
 					File dir = new File(directory);
-				    if (!dir.exists()) dir.mkdirs();
+					if (!dir.exists()) dir.mkdirs();
 					Path file = Paths.get(directory + "\\remediated-" + javaFile.getName() + ".java");
 					Files.write(file, codeLineList, StandardCharsets.UTF_8);
+
+					file = Paths.get(directory + "\\info-" + javaFile.getName() + ".txt");
+					Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
 				}
 			}
 		} catch (Exception e) {

@@ -1,18 +1,24 @@
 package com.discrepancyfinder;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.xmlobjectmapper.DiscrepancyRules;
+import com.xmlobjectmapper.Import;
+
 public class FileReader {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		String userInput;
 		Scanner sn = new Scanner(System.in);
 
@@ -31,9 +37,11 @@ public class FileReader {
 			switch (userInput) {
 			case "1":
 				javaDiscrepancyFinder(userInput);
+				generateJavaObjects();
 				break;
 			case "2":
 				javaDiscrepancyFinder(userInput);
+				generateJavaObjects();
 				break;
 			case "3":
 				dotNetDiscrepancyFinder();
@@ -68,6 +76,28 @@ public class FileReader {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void generateJavaObjects() throws IOException {
+		List<String> xmlCodeLineList = new ArrayList<String>();
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File("E:\\java-rules.xml"));
+			while (scanner.hasNextLine()) {
+				xmlCodeLineList.add(scanner.nextLine().trim());
+			}
+			scanner.close();
+			XmlMapper xmlMapper = new XmlMapper();
+			StringBuilder xml = new StringBuilder();
+			xmlCodeLineList.forEach(xml::append);
+			DiscrepancyRules rules = xmlMapper.readValue(xml.toString(), DiscrepancyRules.class);
+	        List<Import> imports = rules.getRule().getImports().getImport_tag();
+	        for(Import importItem: imports){
+	        	System.out.println(importItem);
+	        }
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
