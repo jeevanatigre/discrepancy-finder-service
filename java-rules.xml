@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<rules>
+	<rule type="missing_imports">
+		<imports>
+			<import_tag name="import java.lang.Compiler;" action="remove"/>
+		</imports>
+	</rule>
+</rules>
