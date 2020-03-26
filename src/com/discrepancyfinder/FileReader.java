@@ -66,10 +66,10 @@ public class FileReader {
 	public static void javaDiscrepancyFinder(String userInput) {
 		try {
 			List<String> result = null;
-			try (Stream<Path> walk = Files.walk(Paths.get("E:\\java-files-input"))) {
+			try (Stream<Path> walk = Files.walk(Paths.get("input-files"))) {
 				result = walk.map(x -> x.toString()).filter(f -> f.endsWith(".java")).collect(Collectors.toList());
 				for (String fileName : result) {
-					File javaFile = new File("E:\\java-files-input\\" + fileName);
+					File javaFile = new File("input-files\\" + fileName);
 					DiscrepancyFinder.findDiscrepancy(javaFile, userInput);
 				}
 			} catch (IOException e) {
@@ -84,7 +84,7 @@ public class FileReader {
 		List<String> xmlCodeLineList = new ArrayList<String>();
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("E:\\java-rules.xml"));
+			scanner = new Scanner(new File("resources\\java-rules.xml"));
 			while (scanner.hasNextLine()) {
 				xmlCodeLineList.add(scanner.nextLine().trim());
 			}

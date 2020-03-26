@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
 public class DiscrepancyFinder {
 
 	public static void findDiscrepancy(File javaFile, String userInput) {
-		File fXmlFile = new File("E:\\java-rules.xml");
+		File fXmlFile = new File("resources\\java-rules.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		List<String> codeLineList = new ArrayList<String>();
@@ -35,7 +35,7 @@ public class DiscrepancyFinder {
 			if (doc.getElementsByTagName("rule").getLength() > 0) {
 				NodeList nList = doc.getElementsByTagName("imports");
 				try {
-					Scanner scanner = new Scanner(new File("E:\\java-files-input\\" + javaFile.getName()));
+					Scanner scanner = new Scanner(new File("input-files\\" + javaFile.getName()));
 					while (scanner.hasNextLine()) {
 						codeLineList.add(scanner.nextLine().trim());
 					}
@@ -62,19 +62,19 @@ public class DiscrepancyFinder {
 					}
 				}
 				if (userInput.equalsIgnoreCase("1")) {
-					String directory = "E:\\java-files-output";
+					String directory = "discrepancy-output-files";
 					File dir = new File(directory);
 				    if (!dir.exists()) dir.mkdirs();
-					Path file = Paths.get(directory + "\\info-" + javaFile.getName() + ".txt");
+					Path file = Paths.get(directory + "\\discrepancies-" + javaFile.getName() + ".txt");
 					Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
 				} else if (userInput.equalsIgnoreCase("2")) {
-					String directory = "E:\\java-files-output-remidiator";
+					String directory = "remidiated-output-files";
 					File dir = new File(directory);
 					if (!dir.exists()) dir.mkdirs();
 					Path file = Paths.get(directory + "\\remediated-" + javaFile.getName() + ".java");
 					Files.write(file, codeLineList, StandardCharsets.UTF_8);
 
-					file = Paths.get(directory + "\\info-" + javaFile.getName() + ".txt");
+					file = Paths.get(directory + "\\discrepancies-" + javaFile.getName() + ".txt");
 					Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
 				}
 			}
