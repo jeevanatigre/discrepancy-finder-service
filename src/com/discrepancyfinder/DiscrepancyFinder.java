@@ -20,8 +20,7 @@ import org.w3c.dom.NodeList;
 
 public class DiscrepancyFinder {
 
-	public static void findDiscrepancy(File javaFile, String userInput) {
-		File fXmlFile = new File("resources\\java-rules.xml");
+	public static void findDiscrepancy(File javaFile, String userInput, File javaRulrXml) {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		List<String> codeLineList = new ArrayList<String>();
@@ -29,7 +28,7 @@ public class DiscrepancyFinder {
 
 		try {
 			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(javaRulrXml);
 			doc.getDocumentElement().normalize();
 
 			if (doc.getElementsByTagName("rule").getLength() > 0) {
@@ -53,11 +52,9 @@ public class DiscrepancyFinder {
 							Node missingImportNode = missingImportList.item(i);
 							String importName = ((Element) missingImportNode).getAttribute("name").trim();
 							if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("1")) 
-								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName));
-							else if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("2")) {
-								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName));
+								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName) + 1);
+							else if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("2"))
 								codeLineList.remove(importName);
-							}						
 						}
 					}
 				}
