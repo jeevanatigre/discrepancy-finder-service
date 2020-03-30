@@ -24,7 +24,7 @@ Program takes two arguments
 ```
 
 ## Sample output file
-![Screenshot](sample-output.png)
+![Screenshot](sample-output.png){:class="img-responsive"}
 
 # More Details
 
