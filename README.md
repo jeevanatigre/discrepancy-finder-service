@@ -34,7 +34,7 @@ Program takes two arguments
  - Find discrapencies in code based on rules and provides complexity of fixes
  - Remediates common discrapencies, saves human efforts and erronous actions
  - Assists in determining effort estimations for tech upgrades
- - Aims is to provide 'Discrepancy Rule Repository' for various tech upgrades like below
+ - Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades / migrate like below
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
