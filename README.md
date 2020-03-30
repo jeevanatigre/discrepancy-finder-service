@@ -33,10 +33,9 @@ Program takes two arguments
  - Provides application insights like types of files in application inventory
  - Find discrapencies in code based on rules and provides complexity of fixes
  - Remediates common discrapencies, saves human efforts and erronous actions
+ - Assists in determining effort estimations for tech upgrades
  - Aims at providing 'Rule Repository' for tech upgrades 
  
-See  [Rule Repo](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
-
 Planned discrapency rules
 
 
@@ -47,6 +46,8 @@ Planned discrapency rules
 | java 1.8 | Spring 4.x | Tomcat upgrade| SQL Server | RHEL 6.0 |
 | .NET 2.0 | JSP 1.x | | | 
 | .NET 3.0 | IE 1.8 | | |
+
+See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
 
 
 ## TODOs
