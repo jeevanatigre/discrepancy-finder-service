@@ -1,0 +1,23 @@
+<rules>
+	<rule type="text_finder" category = "mandatory">
+		<complexity value = "1"/>
+		<file_pattern value = "*.java"/>
+		<text_pattern value = "import java.lang.Compiler;"/>
+		<remediation recommendation = "Remove this import" action = "remove" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "optional">
+		<complexity value = "2"/>
+		<file_pattern value = "*.java"/>
+		<text_pattern value = "addItem"/>
+		<remediation recommendation = "Replace addItem for list with item" action = "replace" replace_with = "item" condition = "List" savings="2"/>
+	</rule>
+	<rule type="file_finder" category = "optional">
+		<complexity value = "10"/>
+		<file_pattern value = "*.xml"/>
+		<files>
+			<file>weblogic.xml</file>
+			<file>weblogic-application.xml</file>
+		</files>
+		<remediation recommendation = "Move to Spring based in-memory applicatiojn server" />
+	</rule>
+</rules>
