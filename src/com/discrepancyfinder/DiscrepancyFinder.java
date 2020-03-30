@@ -2,6 +2,7 @@ package com.discrepancyfinder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,64 +19,76 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.xmlobjectmapper.DiscrepancyRules;
+import com.xmlobjectmapper.Import;
+
 public class DiscrepancyFinder {
 
 	public static void findDiscrepancy(File javaFile, String userInput, File javaRulrXml) {
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
-		List<String> codeLineList = new ArrayList<String>();
+		List<String> javaCodeLineList = new ArrayList<String>();
 		List<String> discrepancyLineList = new ArrayList<String>();
 
 		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(javaRulrXml);
-			doc.getDocumentElement().normalize();
-
-			if (doc.getElementsByTagName("rule").getLength() > 0) {
-				NodeList nList = doc.getElementsByTagName("imports");
-				try {
-					Scanner scanner = new Scanner(new File("input-files\\" + javaFile.getName()));
-					while (scanner.hasNextLine()) {
-						codeLineList.add(scanner.nextLine().trim());
-					}
-					scanner.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				for (int temp = 0; temp < nList.getLength(); temp++) {
-					Node nNode = nList.item(temp);
-					System.out.println("\nCurrent Element :" + nNode.getNodeName());
-					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						NodeList missingImportList = eElement.getElementsByTagName("import_tag");
-						for(int i = 0; i < missingImportList.getLength(); i++) {
-							Node missingImportNode = missingImportList.item(i);
-							String importName = ((Element) missingImportNode).getAttribute("name").trim();
-							if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("1")) 
-								discrepancyLineList.add(importName + "  Line number: "+codeLineList.indexOf(importName) + 1);
-							else if (codeLineList.contains(importName) && userInput.equalsIgnoreCase("2"))
-								codeLineList.remove(importName);
-						}
+			List<String> xmlCodeLineList = new ArrayList<String>();
+			Scanner scanner;
+			scanner = new Scanner(javaRulrXml);
+			while (scanner.hasNextLine()) {
+				xmlCodeLineList.add(scanner.nextLine().trim());
+			}
+			scanner = new Scanner(new File("input-files\\" + javaFile.getName()));
+			while (scanner.hasNextLine()) {
+				javaCodeLineList.add(scanner.nextLine().trim());
+			}
+			scanner.close();
+			XmlMapper xmlMapper = new XmlMapper();
+			StringBuilder xml = new StringBuilder();
+			xmlCodeLineList.forEach(xml::append);
+			DiscrepancyRules rules = xmlMapper.readValue(xml.toString(), DiscrepancyRules.class);
+	        List<Import> imports = rules.getRule().getImports().getImport_tag();
+	        
+			if (imports.size() > 0) {
+				for (int temp = 0; temp < imports.size(); temp++) {
+					if (javaCodeLineList.contains(imports.get(temp).getName().trim()) && userInput.equalsIgnoreCase("1"))
+						discrepancyLineList.add(imports.get(temp).getName().trim() + "  Line number: "+ javaCodeLineList.indexOf(imports.get(temp).getName().trim()) + 1);
+					else if (javaCodeLineList.contains(imports.get(temp).getName().trim()) && userInput.equalsIgnoreCase("2")) {
+						discrepancyLineList.add(imports.get(temp).getName().trim() + "  Line number: "+ javaCodeLineList.indexOf(imports.get(temp).getName().trim()) + 1);
+						javaCodeLineList.remove(imports.get(temp).getName().trim());
 					}
 				}
+				
 				if (userInput.equalsIgnoreCase("1")) {
-					String directory = "discrepancy-output-files";
-					File dir = new File(directory);
-				    if (!dir.exists()) dir.mkdirs();
-					Path file = Paths.get(directory + "\\discrepancies-" + javaFile.getName() + ".txt");
-					Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
+					writeDiscrepancyFile(discrepancyLineList, javaFile);
 				} else if (userInput.equalsIgnoreCase("2")) {
-					String directory = "remidiated-output-files";
-					File dir = new File(directory);
-					if (!dir.exists()) dir.mkdirs();
-					Path file = Paths.get(directory + "\\remediated-" + javaFile.getName() + ".java");
-					Files.write(file, codeLineList, StandardCharsets.UTF_8);
-
-					file = Paths.get(directory + "\\discrepancies-" + javaFile.getName() + ".txt");
-					Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
+					writeDiscrepancyFile(discrepancyLineList, javaFile);
+					writeRemidiatedFile(discrepancyLineList, javaCodeLineList, javaFile);
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeDiscrepancyFile(List<String> discrepancyLineList, File javaFile) {
+		String directory = "discrepancy-output-files";
+		File dir = new File(directory);
+	    if (!dir.exists()) dir.mkdirs();
+		Path file = Paths.get(directory + "\\discrepancies-" + javaFile.getName() + ".txt");
+		try {
+			Files.write(file, discrepancyLineList, StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeRemidiatedFile(List<String> discrepancyLineList, List<String> javaCodeLineList, File javaFile) {
+		String directory = "remidiated-output-files";
+		File dir = new File(directory);
+		if (!dir.exists()) dir.mkdirs();
+		Path file = Paths.get(directory + "\\remediated-" + javaFile.getName() + ".java");
+		try {
+			Files.write(file, javaCodeLineList, StandardCharsets.UTF_8);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
