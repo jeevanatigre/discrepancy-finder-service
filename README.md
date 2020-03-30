@@ -16,8 +16,8 @@ Program takes two arguments
 ```sh
 #################################################
 #                                               #
-#	 java AppMain <rule_file> <option>           #
-#	 example : java AppMain sample-rules.xml 0   #	
+#   java AppMain <rule_file> <option>           #
+#   example : java AppMain sample-rules.xml 0   #	
 #                                               #	
 #################################################
 ```
