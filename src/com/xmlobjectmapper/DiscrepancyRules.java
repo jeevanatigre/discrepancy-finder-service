@@ -3,7 +3,6 @@ package com.xmlobjectmapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import java.util.Arrays;
 
 @JacksonXmlRootElement(localName = "discrepancy_rules")
 public class DiscrepancyRules {
