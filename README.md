@@ -44,7 +44,7 @@ Program takes two arguments
 | .NET 2.0 | JSP 1.x | | | 
 | .NET 3.0 | IE 1.8 | | |
 
-See  [Current Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
+See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
 
 
 ## TODOs
