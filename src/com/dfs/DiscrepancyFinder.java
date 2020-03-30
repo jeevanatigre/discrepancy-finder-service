@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import com.dfs.rule.DiscrepancyRules;
 import com.dfs.rule.Rule;
-import com.dfs.utl.Constants;
+import com.dfs.util.Constants;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class DiscrepancyFinder {
