@@ -24,7 +24,7 @@ Program takes two arguments
 ```
 
 ## Sample output file
-![Screenshot](sample-output.png){:height="50%" width="50%"}
+![Screenshot](sample-output.png) <!-- .element height="50%" width="50%" -->
 
 # More Details
 
