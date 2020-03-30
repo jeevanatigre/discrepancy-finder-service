@@ -1,8 +1,8 @@
 # Discrepancy-finder-service
 
-Discrepancy-finder-service is a java project which checks discrepancies present in the given xml input file and creates two types of files:
+Discrepancy-finder-service is a java project which checks discrepancies based on input rule xml and creates two types of files:
  -  Discrepancies file - with all the discrepancies found and their respective line numbers 
- -  Remediated file - with fixes discrepancies
+ -  Remediated file - with possible discrepancies fixes 
 
 
 ## Usage
@@ -14,12 +14,12 @@ Program takes two arguments
 
 
 ```sh
-#####################################################################
-#																						#
-#	 java AppMain <rule_file> <option> 										#
-#	 example : java AppMain sample-rules.xml 0 								#	
-#																						#	
-#####################################################################
+################################################
+#															 #
+#	 java AppMain <rule_file> <option> 			 #
+#	 example : java AppMain sample-rules.xml 0 	 #	
+#															 #	
+################################################
 ```
 
 ## Sample output file
