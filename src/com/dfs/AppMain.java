@@ -1,4 +1,4 @@
-package com.discrepancyfinder;
+package com.dfs;
 
 import java.io.File;
 import java.io.IOException;

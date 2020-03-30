@@ -1,8 +1,8 @@
-package com.xmlobjectmapper;
+package com.dfs.rule;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class FilePattern {
+public class Complexity {
 
     @JacksonXmlProperty(localName = "value", isAttribute = true)
     private String value;
@@ -16,6 +16,6 @@ public class FilePattern {
     }
 
     @Override public String toString() {
-        return "Import{value='" + value + '\'' +  '}';
+        return "Complexity{value='" + value + '\'' +  '}';
     }
 }

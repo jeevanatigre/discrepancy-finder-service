@@ -1,4 +1,4 @@
-package com.util;
+package com.dfs.utl;
 
 public class Constants {
 	

@@ -1,4 +1,4 @@
-package com.discrepancyfinder;
+package com.dfs;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.dfs.rule.DiscrepancyRules;
+import com.dfs.rule.Rule;
+import com.dfs.utl.Constants;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.util.Constants;
-import com.xmlobjectmapper.DiscrepancyRules;
-import com.xmlobjectmapper.Rule;
 
 public class DiscrepancyFinder {
 
