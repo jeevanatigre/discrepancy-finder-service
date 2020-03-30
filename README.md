@@ -38,9 +38,9 @@ Program takes two arguments
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
-| Java 1.6 | Spring 2.x | Weblogic | Oracle 11 | Solaris 5.1 |
-| Java 1.7 | Spring 3.x | Websphere | Oracle 12 | RHEL 5.0 |
-| java 1.8 | Spring 4.x | Tomcat upgrade| SQL Server | RHEL 6.0 |
+| Java 1.6 | Spring 2.x | Weblogic migration | Oracle 11 | Solaris 5.1 |
+| Java 1.7 | Spring 3.x | Websphere migratin | Oracle 12 | RHEL 5.0 |
+| java 1.8 | Spring 4.x | Tomcat upgrade| SQL Server 2008 | RHEL 6.0 |
 | .NET 2.0 | JSP 1.x | | | 
 | .NET 3.0 | IE 1.8 | | |
 
