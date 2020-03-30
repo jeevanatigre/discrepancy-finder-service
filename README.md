@@ -1,7 +1,7 @@
 # Discrepancy-finder-service
 
 ## Introduction
-Discrepancy-finder-service is a java application which checks discrepancies in java / .net / other source code based on input rule xml and creates two output files:
+Discrepancy-finder-service is a java application which checks discrepancies in java / .net / other source files based on input rule xml and creates two output files:
  -  Discrepancies file - list of all discrepancies found in source files (and if applicable, corresponding line numbers)
  -  Remediated file - output file with possible fix for discrepancy
 
@@ -23,10 +23,6 @@ Program takes two arguments
 #################################################
 ```
 
-## Sample Rules
-
-
-
 ## Sample output file
 ![Screenshot](sample-output.png)
 
@@ -34,18 +30,12 @@ Program takes two arguments
 
 ## Benefits
 
-**Inventory Analysis**
- - Types of files in application inventory
- - Find discrapencies in code based on rules
- - Complexity of fixes
+ - Provides application insights like types of files in application inventory
+ - Find discrapencies in code based on rules and provides complexity of fixes
+ - Remediates common discrapencies, saves human efforts and erronous actions
+ - Aims at providing 'Rule Repository' for tech upgrades 
  
-**Semi-automated remediation**
- - Remediated common discrapencies
- - Saves human efforts and erronous actions 
-
-**Rule respository for tech upgrades** 
- 
-See  [Rule Repo](https://github.com/jeevanatigre/discrepancy-finder-service/rule-repository)
+See  [Rule Repo](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
 
 Planned discrapency rules
 
