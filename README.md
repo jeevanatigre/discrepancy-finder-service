@@ -34,10 +34,7 @@ Program takes two arguments
  - Find discrapencies in code based on rules and provides complexity of fixes
  - Remediates common discrapencies, saves human efforts and erronous actions
  - Assists in determining effort estimations for tech upgrades
- - Aims at providing 'Rule Repository' for tech upgrades 
- 
-Planned discrapency rules
-
+ - Aims is to provide 'Discrepancy Rule Repository' for various tech upgrades like below
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
@@ -47,7 +44,7 @@ Planned discrapency rules
 | .NET 2.0 | JSP 1.x | | | 
 | .NET 3.0 | IE 1.8 | | |
 
-See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
+See  [Current Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
 
 
 ## TODOs
