@@ -39,12 +39,10 @@ public class AppMain {
 			case "1":
 				javaRuleXml = readJavaRuleXml();
 				javaDiscrepancyFinder(userInput, javaRuleXml);
-				generateJavaObjects(javaRuleXml);
 				break;
 			case "2":
 				javaRuleXml = readJavaRuleXml();
 				javaDiscrepancyFinder(userInput, javaRuleXml);
-				generateJavaObjects(javaRuleXml);
 				break;
 			case "3":
 				dotNetDiscrepancyFinder();
@@ -84,28 +82,6 @@ public class AppMain {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void generateJavaObjects(File javaRulrXml) throws IOException {
-		List<String> xmlCodeLineList = new ArrayList<String>();
-		Scanner scanner;
-		try {
-			scanner = new Scanner(javaRulrXml);
-			while (scanner.hasNextLine()) {
-				xmlCodeLineList.add(scanner.nextLine().trim());
-			}
-			scanner.close();
-			XmlMapper xmlMapper = new XmlMapper();
-			StringBuilder xml = new StringBuilder();
-			xmlCodeLineList.forEach(xml::append);
-			DiscrepancyRules rules = xmlMapper.readValue(xml.toString(), DiscrepancyRules.class);
-	        List<Import> imports = rules.getRule().getImports().getImport_tag();
-	        for(Import importItem: imports){
-	        	System.out.println(importItem);
-	        }
-		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
