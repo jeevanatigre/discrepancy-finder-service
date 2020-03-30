@@ -1,7 +1,7 @@
 # Discrepancy-finder-service
 
 ## Introduction
-Discrepancy-finder-service is a java application which checks discrepancies in java / .net / other source files on the basis of input rule xml and creates two output files:
+Discrepancy-finder-service is a java application which checks discrepancies in Java / .NET / other source files on the basis of input rule xml and creates two output files:
  -  discrapency-list.txt - list of all discrepancies found in source files (and if applicable, corresponding line numbers)
  -  remediated-{source-file} - output file with possible fix for discrepancy
 
