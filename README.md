@@ -30,5 +30,5 @@ Program takes two arguments
 
 ## TODOs
 
-1. Implement fules based on new sample-rule.xml
+1. Implement rules based on new sample-rule.xml
 2. Create report with Apache POI
