@@ -1,5 +1,6 @@
 <rules>
 	<rule type="text_find" category = "mandatory">
+		<complexity value = "1"/>
 		<file_pattern value = "*.java"/>
 		<text_pattern value = "import java.lang.Compiler;"/>
 		<replatform advice = "Remove this import" action = "remove"/>

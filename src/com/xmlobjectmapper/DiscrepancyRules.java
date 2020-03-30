@@ -3,25 +3,26 @@ package com.xmlobjectmapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import java.util.List;
 
 @JacksonXmlRootElement(localName = "discrepancy_rules")
 public class DiscrepancyRules {
 
     @JacksonXmlElementWrapper(localName = "rule", useWrapping = false)
-    private Rule rule;
+    private List<Rule> rule;
 
-    public Rule getRule() {
+    public List<Rule> getRule() {
         return rule;
     }
 
-    public void setRule(Rule rule) {
+    public void setRule(List<Rule> rule) {
         this.rule = rule;
     }
 
-    @Override 
+    @Override
     public String toString() {
-        return "Rules{" +
-                "Rules=" + rule +
+        return "Rule{" +
+                "Rule=" + rule +
                 '}';
     }
 }
