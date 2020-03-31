@@ -1,7 +1,7 @@
 # Discrepancy Finder Service
 
 ## Introduction
-*Discrepancy-finder-service* is a java application takes source code  like Java / .NET / other OR config files like Websphere / Weblogic config as input and creates two output files source files on the basis of specified rules. The two output files created are:
+*Discrepancy-finder-service* is a java application takes source code  like Java / .NET / other OR config files like Websphere / Weblogic config as input and creates two output files on the basis of specified rules. The two output files created are:
  -  **discrapency-list.xls** - list of all discrepancies found in source files based on rules (and if applicable, corresponding line numbers)
  -  **remediated-{source-file}** - output file with possible fix for discrepancy
 
