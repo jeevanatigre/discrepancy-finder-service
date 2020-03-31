@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,7 +50,7 @@ public class DiscrepancyFinder {
 						if(userInput.equalsIgnoreCase("1")) {
 							/*discrepancyLineList.add(ruleList.get(temp).getText_pattern().getValue().trim() + "  Line number: "+ (elementIndex + 1));*/
 						} else if (userInput.equalsIgnoreCase("2")) {
-							discrepancyLineList.add(ruleList.get(temp).getText_pattern().getValue().trim() + "  Line number: "+ (elementIndex + 1));
+							/*discrepancyLineList.add(ruleList.get(temp).getText_pattern().getValue().trim() + "  Line number: "+ (elementIndex + 1));*/
 							javaCodeLineList.remove(ruleList.get(temp).getText_pattern().getValue().trim());
 						}
 					} else if(textPattern != null && ruleList.get(temp).getFile_pattern().getValue().equalsIgnoreCase(Constants.JAVA_FILE_PATTERN) 
@@ -66,7 +68,7 @@ public class DiscrepancyFinder {
 						} else if (userInput.equalsIgnoreCase("2")) {
 							for(int lineNumber: deprecatedLineNumberList) {
 								if(javaCodeLineList.get(lineNumber).toLowerCase().trim().contains(replaceCondition.toLowerCase())) {
-									discrepancyLineList.add(ruleList.get(temp).getText_pattern().getValue().trim() + "  Line number: "+ (lineNumber + 1));
+									/*discrepancyLineList.add(ruleList.get(temp).getText_pattern().getValue().trim() + "  Line number: "+ (lineNumber + 1));*/
 									javaCodeLineList.set(lineNumber, javaCodeLineList.get(lineNumber).replaceAll(textPattern, ruleList.get(temp).getRemediation().getReplace_with().trim()));
 								}
 							}
@@ -76,7 +78,7 @@ public class DiscrepancyFinder {
 				if (userInput.equalsIgnoreCase("1")) {
 					/*writeDiscrepancyFile(discrepancyLineList, javaFile);*/
 				} else if (userInput.equalsIgnoreCase("2")) {
-					writeDiscrepancyFile(discrepancyLineList, javaFile);
+					/*writeDiscrepancyFile(discrepancyLineList, javaFile);*/
 					writeRemidiatedFile(discrepancyLineList, javaCodeLineList, javaFile);
 				}
 	        }
@@ -106,6 +108,20 @@ public class DiscrepancyFinder {
 			Files.write(file, javaCodeLineList, StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void copyFileToApplicationServer(String fileName) {
+		try {
+		   	Path destinationPath = Paths.get("application-server");
+		   	if(!Files.exists(destinationPath,
+					new LinkOption[]{ LinkOption.NOFOLLOW_LINKS})) {
+		   		destinationPath = Files.createDirectory(destinationPath);
+		   	}
+		   	destinationPath = Paths.get(destinationPath + "/" + fileName);
+		   	Files.move(Paths.get("input-files/"+fileName), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+					e.printStackTrace();
 		}
 	}
 

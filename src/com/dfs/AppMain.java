@@ -1,7 +1,11 @@
 package com.dfs;
 
-import java.io.File;
-import java.io.IOException;
+import com.dfs.rule.DiscrepancyRules;
+import com.dfs.rule.Rule;
+import com.dfs.util.Constants;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,11 +36,11 @@ public class AppMain {
 			switch (userInput) {
 			case "1":
 				javaRuleXml = readJavaRuleXml();
-				javaDiscrepancyFinder(userInput, javaRuleXml);
+				discrepancyFinder(userInput, javaRuleXml);
 				break;
 			case "2":
 				javaRuleXml = readJavaRuleXml();
-				javaDiscrepancyFinder(userInput, javaRuleXml);
+				discrepancyFinder(userInput, javaRuleXml);
 				break;
 			case "3":
 				dotNetDiscrepancyFinder();
@@ -63,15 +67,20 @@ public class AppMain {
 		return jaavaRulrXml;
 	}
 
-	public static void javaDiscrepancyFinder(String userInput, File javaRulrXml) {
+	public static void discrepancyFinder(String userInput, File javaRulrXml) {
 		try {
 			List<String> result = null;
 			try (Stream<Path> walk = Files.walk(Paths.get("input-files"))) {
-				result = walk.map(x -> x.toString()).filter(f -> f.endsWith(".java")).collect(Collectors.toList());
-				for (String fileName : result) {
-					File javaFile = new File(fileName);
-					DiscrepancyFinder.findDiscrepancy(javaFile, userInput, javaRulrXml);
-				}
+					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
+					for (String fileName : result) {
+						File file = new File("input-files\\" + fileName);
+						String fileExt = file.getName().substring(file.getName().lastIndexOf('.'));
+						if(userInput.equalsIgnoreCase("1") && fileExt.equalsIgnoreCase(Constants.XML_FILE_PATTERN)){
+							DiscrepancyFinder.copyFileToApplicationServer(file.getName());
+						}else if(fileExt.equalsIgnoreCase(".java")){
+							DiscrepancyFinder.findDiscrepancy(file, userInput, javaRulrXml);
+						}
+					}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -87,5 +96,4 @@ public class AppMain {
 	public static void tomcatDiscrepancyFinder() {
 
 	}
-
 }
