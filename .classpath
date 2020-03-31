@@ -11,5 +11,10 @@
 	<classpathentry kind="lib" path="lib/jakarta.xml.bind-api-2.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/stax2-api-4.2.jar"/>
 	<classpathentry kind="lib" path="lib/woodstox-core-6.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="lib/poi-ooxml-3.9.jar"/>
+	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-3.9.jar"/>
+	<classpathentry kind="lib" path="lib/xmlbeans-3.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
