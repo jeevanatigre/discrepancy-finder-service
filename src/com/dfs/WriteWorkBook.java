@@ -115,7 +115,7 @@ public static void readXml() throws InvalidFormatException, IOException {
 				category = ruleList.get(temp).getCategory();
 				ruleType = ruleList.get(temp).getType();
 				textPattern = (ruleList.get(temp).getText_pattern()== null) ? "": ruleList.get(temp).getText_pattern().getValue();
-				replatformAdvice = ruleList.get(temp).getReplatform().getAdvice();
+				replatformAdvice = ruleList.get(temp).getRemediation().getRecommendation();
 				addInExcel(filePatternVal,jaavaRulrXml,complexityValue
 						,category,ruleType,textPattern,replatformAdvice);
 }

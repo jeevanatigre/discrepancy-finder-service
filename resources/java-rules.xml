@@ -1,23 +1,20 @@
 <rules>
-	<rule type="text_find" category = "mandatory">
-		<complexity value = "1"/>
+	<rule type="text_finder" category = "mandatory">
 		<file_pattern value = "*.java"/>
 		<text_pattern value = "import java.lang.Compiler;"/>
-		<replatform advice = "Remove this import" action = "remove"/>
+		<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 	</rule>
-	<rule type="text_find" category = "optional">
-		<complexity value = "2"/>
+	<rule type="text_finder" category = "optional">
 		<file_pattern value = "*.java"/>
-		<text_pattern value = "addItem" condition = "List"/>
-		<replatform advice = "Replace addItem for list with item" action = "replace" replace_with = "item" condition = "List"/>
+		<text_pattern value = "addItem"/>
+		<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
 	</rule>
-	<rule type="file_find" category = "optional">
-		<complexity value = "3"/>
+	<rule type="file_finder" category = "optional">
 		<file_pattern value = "*.xml"/>
 		<files>
-			<file>jboss.xml</file>
-			<file>jboss-web.xml</file>
+			<file>weblogic.xml</file>
+			<file>weblogic-application.xml</file>
 		</files>
-		<replatform advice = "Move to tomcat" />
+		<remediation recommendation = "Move to Spring based in-memory applicatiojn server" complexity= "10" />
 	</rule>
 </rules>

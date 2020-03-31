@@ -1,11 +1,7 @@
 package com.dfs;
 
-import com.dfs.rule.DiscrepancyRules;
-import com.dfs.rule.Rule;
-import com.dfs.util.Constants;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.dfs.util.Constants;
 
 public class AppMain {
 
@@ -63,7 +61,7 @@ public class AppMain {
 	}
 	
 	public static File readJavaRuleXml() {
-		File jaavaRulrXml = new File("rule-repository\\sample-rules.xml");
+		File jaavaRulrXml = new File("resources\\java-rules.xml");
 		return jaavaRulrXml;
 	}
 
