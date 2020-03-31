@@ -31,7 +31,7 @@ Program takes two arguments
 ## Benefits
 
  - **Inventory Insights** - Provides application inventory details like number of files, types of files, DB opetations fetc 
- - **Discrapency Complexity** -  Find exact discrapencies in code on the basis on rules, provides complexity of fixes
+ - **Discrapency & Complexity** -  Find exact discrapencies in code on the basis on rules, provides complexity level for fixes
  - **Remediatation** - Remediates common discrapencies, saves human efforts and erronous actions
  - **Better Estimations** - Assists in determining effort estimations for tech upgrades
  - **Rule Repository** - Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades / migrate like below
