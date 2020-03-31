@@ -11,11 +11,17 @@ import java.util.Scanner;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.dfs.rule.DiscrepancyRules;
 import com.dfs.rule.Rule;
+import com.dfs.util.Constants;
+import org.apache.poi.ss.usermodel.Font;
+
 import java.io.FileOutputStream;
- 
+
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
 public class WriteWorkBook {
@@ -30,8 +36,8 @@ public class WriteWorkBook {
 		FileInputStream inputStream;
 		try {
 			FileInputStream myxls = new FileInputStream("resources\\sample-report.xls");
-		       HSSFWorkbook studentsSheet = new HSSFWorkbook(myxls);
-		       HSSFSheet worksheet = studentsSheet.getSheetAt(0);
+		       HSSFWorkbook workBook = new HSSFWorkbook(myxls);
+		       HSSFSheet worksheet = workBook.getSheetAt(0);
 		       int lastRow=worksheet.getLastRowNum();
 		       System.out.println(lastRow);
 		       Row row = worksheet.createRow(++lastRow);
@@ -40,7 +46,25 @@ public class WriteWorkBook {
 		       row.createCell(0).setCellValue(filePattern);
 		       row.createCell(1).setCellValue(fileName.toString());
 		       row.createCell(2).setCellValue(lineNum);
-		       row.createCell(3).setCellValue(cateGory);
+		       if(cateGory.equalsIgnoreCase(Constants.MANDATORY)) {
+		    	   CellStyle style = workBook.createCellStyle();
+		    	   style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); 
+		    	   style.setFillForegroundColor(HSSFColor.ROSE.index);
+		    	   Font font = workBook.createFont();
+		           font.setColor(HSSFColor.RED.index);
+		           style.setFont(font);
+		    	   row.createCell(3).setCellValue(cateGory);
+		    	   row.getCell(3).setCellStyle(style);
+		       }else if(cateGory.equalsIgnoreCase(Constants.OPTIONAL)) {
+		    	   CellStyle style = workBook.createCellStyle();
+		    	   style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); 
+		    	   style.setFillForegroundColor(HSSFColor.LIGHT_GREEN.index);
+		    	   Font font = workBook.createFont();
+		           font.setColor(HSSFColor.GREEN.index);
+		           style.setFont(font);
+		    	   row.createCell(3).setCellValue(cateGory);
+		    	   row.getCell(3).setCellStyle(style);
+		       }
 		       row.createCell(4).setCellValue(fileType);
 		       row.createCell(5).setCellValue(textPattern);
 		       row.createCell(6).setCellValue(getRepl);
@@ -51,7 +75,7 @@ public class WriteWorkBook {
 		       myxls.close();
 		       FileOutputStream output_file =new FileOutputStream(new File("resources\\sample-report.xls"));  
 		       //write changes
-		       studentsSheet.write(output_file);
+		       workBook.write(output_file);
 		       output_file.close();
 		       System.out.println(" is successfully written");
 		       
@@ -65,6 +89,12 @@ public static void readXml() throws InvalidFormatException, IOException {
 	File jaavaRulrXml = new File("resources\\java-rules.xml");
 	try {
 		List<String> xmlCodeLineList = new ArrayList<String>();
+		String filePatternVal = "";
+		String complexityValue = "";
+		String category = "";
+		String ruleType = "";
+		String textPattern = "";
+		String replatformAdvice = "";
 		Scanner scanner;
 		scanner = new Scanner(jaavaRulrXml);
 		while (scanner.hasNextLine()) {
@@ -78,23 +108,25 @@ public static void readXml() throws InvalidFormatException, IOException {
         
         if (ruleList.size() > 0) {
 			for (int temp = 0; temp < ruleList.size(); temp++) {
-				String filePatternVal = ruleList.get(temp).getFile_pattern().getValue();
-				ruleList.get(temp).getFile_pattern().setValue(filePatternVal.replaceAll("[*.]",""));
-				System.out.println(filePatternVal);
-				System.out.println(ruleList.get(temp).getFile_pattern().getValue());
-				System.out.println(ruleList.get(temp).getComplexity().getValue());
-				System.out.println(ruleList.get(temp).getReplatform().getAction());
-				System.out.println(ruleList.get(temp).getReplatform().getAdvice());
-				System.out.println(ruleList.get(temp).getText_pattern().getValue());
-				System.out.println(ruleList.get(temp).getCategory());
-				addInExcel(ruleList.get(temp).getFile_pattern().getValue(),jaavaRulrXml,ruleList.get(temp).getComplexity().getValue(),ruleList.get(temp).getCategory(),ruleList.get(temp).getType(),ruleList.get(temp).getText_pattern().getValue(),ruleList.get(temp).getReplatform().getAdvice());
-				
+				//Updated code for null pointer error
+				filePatternVal = ruleList.get(temp).getFile_pattern().getValue();
+				filePatternVal =  filePatternVal.replaceAll("[*.]","");
+				complexityValue = ruleList.get(temp).getComplexity().getValue();
+				category = ruleList.get(temp).getCategory();
+				ruleType = ruleList.get(temp).getType();
+				textPattern = (ruleList.get(temp).getText_pattern()== null) ? "": ruleList.get(temp).getText_pattern().getValue();
+				replatformAdvice = ruleList.get(temp).getReplatform().getAdvice();
+				addInExcel(filePatternVal,jaavaRulrXml,complexityValue
+						,category,ruleType,textPattern,replatformAdvice);
 }
-        }
+			}
 	}catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}     
+		} catch(NullPointerException e) {
+			// TODO Auto-generated catch block
+						e.printStackTrace();
+		}
 
 	}
 }
