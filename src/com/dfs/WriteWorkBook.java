@@ -35,7 +35,7 @@ public class WriteWorkBook {
 	public static void addInExcel(String filePattern, File fileName,String lineNum, String cateGory, String fileType, String textPattern, String getRepl) throws InvalidFormatException, IOException {
 		FileInputStream inputStream;
 		try {
-			FileInputStream myxls = new FileInputStream("resources\\sample-report.xls");
+			FileInputStream myxls = new FileInputStream("discrepancy-output-files\\discrepancy-list.xls");
 		       HSSFWorkbook workBook = new HSSFWorkbook(myxls);
 		       HSSFSheet worksheet = workBook.getSheetAt(0);
 		       int lastRow=worksheet.getLastRowNum();
@@ -73,7 +73,7 @@ public class WriteWorkBook {
 		       row.createCell(9).setCellValue(2);
 		       }
 		       myxls.close();
-		       FileOutputStream output_file =new FileOutputStream(new File("resources\\sample-report.xls"));  
+		       FileOutputStream output_file =new FileOutputStream(new File("discrepancy-output-files\\\\discrepancy-list.xls"));  
 		       //write changes
 		       workBook.write(output_file);
 		       output_file.close();
