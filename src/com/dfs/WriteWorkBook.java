@@ -24,6 +24,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
+@SuppressWarnings("all")
 public class WriteWorkBook {
 	public static void main(String[] args) throws IOException {
 	try {

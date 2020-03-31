@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 public class Rule {
 
     @JacksonXmlProperty(localName = "type", isAttribute = true)
@@ -60,6 +61,7 @@ public class Rule {
         this.file_pattern = file_pattern;
     }
 
+    
     public List getFile() {
         return file;
     }

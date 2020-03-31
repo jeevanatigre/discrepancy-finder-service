@@ -46,7 +46,6 @@ public class DiscrepancyFinder {
 					String textPattern = ruleList.get(temp).getText_pattern() == null ? null : ruleList.get(temp).getText_pattern().getValue().trim();
 					if(textPattern != null && ruleList.get(temp).getFile_pattern().getValue().equalsIgnoreCase(Constants.JAVA_FILE_PATTERN) 
 							&& javaCodeLineList.contains(textPattern) && ruleList.get(temp).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
-						int elementIndex = javaCodeLineList.indexOf(ruleList.get(temp).getText_pattern().getValue().trim());
 						if(userInput.equalsIgnoreCase("1")) {
 							/*discrepancyLineList.add(ruleList.get(temp).getText_pattern().getValue().trim() + "  Line number: "+ (elementIndex + 1));*/
 						} else if (userInput.equalsIgnoreCase("2")) {
