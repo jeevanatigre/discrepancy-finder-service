@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/jakarta.xml.bind-api-2.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/stax2-api-4.2.jar"/>
 	<classpathentry kind="lib" path="lib/woodstox-core-6.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

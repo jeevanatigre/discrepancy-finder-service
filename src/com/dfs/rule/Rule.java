@@ -25,8 +25,8 @@ public class Rule {
     @JacksonXmlElementWrapper(localName = "text_pattern", useWrapping = false)
     private TextPattern text_pattern;
 
-    @JacksonXmlElementWrapper(localName = "replatform", useWrapping = false)
-    private Replatform replatform;
+    @JacksonXmlElementWrapper(localName = "remediation", useWrapping = false)
+    private Remediation remediation;
 
     public String getType() {
         return type;
@@ -76,12 +76,12 @@ public class Rule {
         this.text_pattern = text_pattern;
     }
 
-    public Replatform getReplatform() {
-        return replatform;
+    public Remediation getRemediation() {
+        return remediation;
     }
 
-    public void setReplatform(Replatform replatform) {
-        this.replatform = replatform;
+    public void setRemediation(Remediation remediation) {
+        this.remediation = remediation;
     }
 
     public Rule() {
@@ -95,6 +95,6 @@ public class Rule {
     @Override public String toString() {
         return "Rule{" + "complexity='" + complexity + '\'' + "file_pattern='" + file_pattern + '\'' +
                 + '\'' + "file='" + file + '\'' +
-                "text_pattern='" + text_pattern + '\'' + "replatform='" + replatform + '\'' + '}';
+                "text_pattern='" + text_pattern + '\'' + "remediation='" + remediation + '\'' + '}';
     }
 }

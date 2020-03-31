@@ -7,7 +7,7 @@
 	<rule type="text_finder" category = "optional">
 		<file_pattern value = "*.java"/>
 		<text_pattern value = "addItem"/>
-		<remediation recommendation = "Replace addItem for list with item" complexity= "2" action = "replace" replace_with = "item" condition = "List" savings="2"/>
+		<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
 	</rule>
 	<rule type="file_finder" category = "optional">
 		<file_pattern value = "*.xml"/>

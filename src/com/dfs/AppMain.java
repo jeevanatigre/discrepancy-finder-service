@@ -59,7 +59,7 @@ public class AppMain {
 	}
 	
 	public static File readJavaRuleXml() {
-		File jaavaRulrXml = new File("resources\\java-rules.xml");
+		File jaavaRulrXml = new File("rule-repository\\sample-rules.xml");
 		return jaavaRulrXml;
 	}
 
@@ -69,7 +69,7 @@ public class AppMain {
 			try (Stream<Path> walk = Files.walk(Paths.get("input-files"))) {
 				result = walk.map(x -> x.toString()).filter(f -> f.endsWith(".java")).collect(Collectors.toList());
 				for (String fileName : result) {
-					File javaFile = new File("input-files\\" + fileName);
+					File javaFile = new File(fileName);
 					DiscrepancyFinder.findDiscrepancy(javaFile, userInput, javaRulrXml);
 				}
 			} catch (IOException e) {
