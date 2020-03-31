@@ -10,8 +10,8 @@ Discrepancy-finder-service is a java application which checks discrepancies in J
 
 Program takes two arguments
 
- - ***1st arg - Rule xml file***
- - ***2nd arg -  0 for find and 1 for find-and-replace***
+ - ***1st arg*** - Rule xml file
+ - ***2nd arg*** -  0 for find and 1 for find-and-replace***
 
 
 ```sh
@@ -30,11 +30,11 @@ Program takes two arguments
 
 ## Benefits
 
- - ***Inventory insights*** Provides application inventory details like number of files, types of files, DB opetations fetc 
- - ***Complexity*** Find exact discrapencies in code on the basis on rules, provides complexity of fixes
- - ***Remediatation*** Remediates common discrapencies, saves human efforts and erronous actions
- - ***Better Estimations*** Assists in determining effort estimations for tech upgrades
- - ***Rule Repository*** Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades / migrate like below
+ - ***Inventory insights*** - Provides application inventory details like number of files, types of files, DB opetations fetc 
+ - ***Discrapency Complexity*** -  Find exact discrapencies in code on the basis on rules, provides complexity of fixes
+ - ***Remediatation*** - Remediates common discrapencies, saves human efforts and erronous actions
+ - ***Better Estimations*** - Assists in determining effort estimations for tech upgrades
+ - ***Rule Repository*** - Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades / migrate like below
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
