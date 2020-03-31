@@ -12,9 +12,9 @@
 	<rule type="file_finder" category = "optional">
 		<file_pattern value = "*.xml"/>
 		<files>
-			<file>weblogic.xml</file>
-			<file>weblogic-application.xml</file>
+			<file>spring.xml</file>
+			<file>applicationContext.xml</file>
 		</files>
-		<remediation recommendation = "Move to Spring based in-memory applicatiojn server" complexity= "10" />
+		<remediation recommendation = "Move from xml based to annotation based configuration" complexity= "10" />
 	</rule>
 </rules>
