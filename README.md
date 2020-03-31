@@ -11,7 +11,7 @@
 Program takes two arguments
 
  - **1st arg** - Rule xml file
- - **2nd arg** -  0 for find and 1 for find-and-replace***
+ - **2nd arg** -  0 for find and 1 for find-and-replace
 
 
 ```sh
