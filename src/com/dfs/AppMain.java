@@ -39,7 +39,7 @@ public class AppMain {
 		AppMain appmain = new AppMain();
 		appmain.startWork(args);
 		File ruleXml = appmain.readJavaRuleXml();
-		appmain.discrepancyFinder(ruleXml);
+		appmain.discrepancyFinder(ruleXml, args);
 		System.out.println("##################### Discrapency Finder Service Stopped #####################");
 		
 	}
@@ -64,7 +64,7 @@ public class AppMain {
 		return jaavaRulrXml;
 	}
 
-	public void discrepancyFinder(File javaRulrXml) {
+	public void discrepancyFinder(File javaRulrXml, String[] args) {
 		try {
 			List<String> result = null;
 			List<Discrepancy> descrepancyDetailsList = new ArrayList<Discrepancy>();
@@ -73,7 +73,7 @@ public class AppMain {
 					for (String fileName : result) {
 						File file = new File(fileName);
 						String fileExt = file.getName().substring(file.getName().lastIndexOf('.'));
-						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation));
+						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation, args));
 					}
 					DiscrepancyFinder.writeDiscrepancyFile( descrepancyDetailsList, targetLocation);
 			} catch (IOException e) {

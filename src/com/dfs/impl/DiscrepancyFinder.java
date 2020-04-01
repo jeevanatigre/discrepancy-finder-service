@@ -24,7 +24,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 public class DiscrepancyFinder {
 
 	public static List<Discrepancy> findDiscrepancy(File file, String findOrRemediateMode, File javaRulrXml,
-			String targetLocation) throws IOException {
+			String targetLocation, String[] args) throws IOException {
 		List<String> discrepancyLineList = new ArrayList<String>();
 		List<String> codeLineList = new ArrayList<String>();
 		List<Discrepancy> discrepancyDetailsList = new ArrayList<Discrepancy>();
@@ -55,7 +55,7 @@ public class DiscrepancyFinder {
 					if (textPattern != null && ruleList.get(ruleIndex).getFile_pattern().getValue().equalsIgnoreCase(Constants.JAVA_FILE_PATTERN) && codeLineList.contains(textPattern)
 							&& ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
 						int discrepancyLineNumber = codeLineList.indexOf(ruleList.get(ruleIndex).getText_pattern().getValue().trim()) + 1;
-						discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, discrepancyLineNumber, file));
+						discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, discrepancyLineNumber, file, args));
 						if (findOrRemediateMode.equalsIgnoreCase("0")) {
 							discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: " + (discrepancyLineNumber));
 						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
@@ -77,7 +77,7 @@ public class DiscrepancyFinder {
 						}
 						if (findOrRemediateMode.equalsIgnoreCase("0")) {
 							for (int lineNumber : deprecatedLineNumberList) {
-								discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, lineNumber, file));
+								discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, lineNumber, file, args));
 								discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: " + (lineNumber + 1));
 							}
 						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
@@ -85,7 +85,7 @@ public class DiscrepancyFinder {
 								if (codeLineList.get(lineNumber).toLowerCase().trim().contains
 
 								(replaceCondition.toLowerCase())) {
-									discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, lineNumber,file));
+									discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, lineNumber,file, args));
 									discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: " + (lineNumber + 1));
 									codeLineList.set(lineNumber, codeLineList.get(lineNumber).replaceAll(textPattern, ruleList.get(ruleIndex).getRemediation().getReplace_with().trim()));
 								}
@@ -95,7 +95,7 @@ public class DiscrepancyFinder {
 							.equalsIgnoreCase(Constants.XML_FILE_PATTERN)) {
 						if (ruleList.get(ruleIndex).getFile().contains(file.getName())) {
 							discrepancyLineList.add("Deprecated xml file: " + file.getName());
-							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file));
+							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
 						}
 					}
 				}
@@ -115,7 +115,7 @@ public class DiscrepancyFinder {
 	}
 
 	public static Discrepancy setDiscrepancyData(List<Rule> ruleList, int ruleIndex, int discrepancyLineNumber,
-			File file) {
+			File file, String[] args) {
 		Discrepancy discrepancy = new Discrepancy();
 		try {
 			discrepancy.setFileName(file.getName());
@@ -133,7 +133,7 @@ public class DiscrepancyFinder {
 			discrepancy.setAutoRemediation("Yes");
 			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? ""
 					: ruleList.get(ruleIndex).getRemediation().getSavings());
-			/*WriteWorkBook.addInExcel(discrepancy, args);*/
+			WriteWorkBook.addInExcel(discrepancy, args);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
