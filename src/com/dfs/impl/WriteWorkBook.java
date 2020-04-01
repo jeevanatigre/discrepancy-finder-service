@@ -32,7 +32,7 @@ public class WriteWorkBook {
 	public static void main(String[] args) throws IOException {
 		Discrepancy discrepancy = new Discrepancy();
 	try {
-		copyFile();
+		copyFile(args);
 		addInExcel(discrepancy);
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -110,16 +110,17 @@ public class WriteWorkBook {
 		}
 	}
         
-public static void copyFile() throws InvalidFormatException, IOException {
-	String directory = "discrepancy-output-files";
+public static void copyFile(String[] args) throws InvalidFormatException, IOException {
+	//String directory = "discrepancy-output-files";
 	try {
-			File dir = new File(directory);
+		    File dir = new File(args[2]);
+			//File dir = new File(directory);
 			if (!dir.exists()) {
 				dir.mkdirs();
 				System.out.println("Directory created");
 			}
-			File from = new File("resources\\sample-report.xls"); 
-			File to = new File("discrepancy-output-files\\discrepancy-list.xls");
+			File from = new File(args[4]+"\\sample-report.xls"); 
+			File to = new File(args[2]+"\\discrepancy-list.xls");
 			if(!to.exists()) {
 			FileUtils.copyFile(from, to);
 			System.out.println("file copied");
