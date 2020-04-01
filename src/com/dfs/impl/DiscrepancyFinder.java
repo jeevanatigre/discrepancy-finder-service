@@ -23,7 +23,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class DiscrepancyFinder {
 
-	public static List<Discrepancy> findDiscrepancy(File javaFile, String[] args, File javaRulrXml) throws IOException {
+	public static List<Discrepancy> findDiscrepancy(File javaFile, String findOrRemediateMode, File javaRulrXml, String targetLocation) throws IOException {
 		List<String> discrepancyLineList = new ArrayList<String>();
 		List<String> javaCodeLineList = new ArrayList<String>();
 		List<Discrepancy> discrepancyDetailsList = new ArrayList<Discrepancy>();
@@ -54,9 +54,9 @@ public class DiscrepancyFinder {
 							&& javaCodeLineList.contains(textPattern) && ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
 						int discrepancyLineNumber = javaCodeLineList.indexOf(ruleList.get(ruleIndex).getText_pattern().getValue().trim()) + 1;
 						discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, discrepancyLineNumber, javaFile));
-						if(args[3].equalsIgnoreCase("0")) {
+						if(findOrRemediateMode.equalsIgnoreCase("0")) {
 							discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: "+ (discrepancyLineNumber));
-						} else if (args[3].equalsIgnoreCase("1")) {
+						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
 							discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: "+ (discrepancyLineNumber));
 							/*javaCodeLineList.remove(ruleList.get(ruleIndex).getText_pattern().getValue().trim());*/
 							removeDiscrepancyList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim());
@@ -69,12 +69,12 @@ public class DiscrepancyFinder {
 					    	if (javaCodeLineList.get(lineCounter).contains(textPattern)) 
 				            	deprecatedLineNumberList.add(lineCounter);
 					    }
-						if(args[3].equalsIgnoreCase("0")) {
+						if(findOrRemediateMode.equalsIgnoreCase("0")) {
 							for(int lineNumber: deprecatedLineNumberList) {
 								discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, lineNumber, javaFile));
 								discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: "+ (lineNumber + 1));
 							}
-						} else if (args[3].equalsIgnoreCase("1")) {
+						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
 							for(int lineNumber: deprecatedLineNumberList) {
 								if(javaCodeLineList.get(lineNumber).toLowerCase().trim().contains(replaceCondition.toLowerCase())) {
 									discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, lineNumber, javaFile));
@@ -87,11 +87,11 @@ public class DiscrepancyFinder {
 				}
 				for(String discrepancy: removeDiscrepancyList) 
 					javaCodeLineList.removeAll(Collections.singleton(discrepancy));
-				if (args[3].equalsIgnoreCase("0")) {
-					writeDiscrepancyFile(discrepancyLineList, javaFile, args);
-				} else if (args[3].equalsIgnoreCase("1")) {
-					writeDiscrepancyFile(discrepancyLineList, javaFile, args);
-					writeRemidiatedFile(discrepancyLineList, javaCodeLineList, javaFile, args);
+				if (findOrRemediateMode.equalsIgnoreCase("0")) {
+					writeDiscrepancyFile(discrepancyLineList, javaFile);
+				} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
+					writeDiscrepancyFile(discrepancyLineList, javaFile);
+					writeRemidiatedFile(discrepancyLineList, javaCodeLineList, javaFile, targetLocation);
 				}
 	        }
 		} catch (Exception e) {
@@ -120,7 +120,7 @@ public class DiscrepancyFinder {
 		return discrepancy;
 	}
 	
-	public static void writeDiscrepancyFile(List<String> discrepancyLineList, File javaFile, String[] args) {
+	public static void writeDiscrepancyFile(List<String> discrepancyLineList, File javaFile) {
 		String directory = "discrepancy-output-files";
 		File dir = new File(directory);
 	    if (!dir.exists()) dir.mkdirs();
@@ -132,11 +132,11 @@ public class DiscrepancyFinder {
 		}
 	}
 	
-	public static void writeRemidiatedFile(List<String> discrepancyLineList, List<String> javaCodeLineList, File javaFile, String[] args) {
+	public static void writeRemidiatedFile(List<String> discrepancyLineList, List<String> javaCodeLineList, File javaFile, String targetLocation) {
 		/*String directory = "remidiated-output-files";*/
-		File dir = new File(args[2]);
+		File dir = new File(targetLocation);
 		if (!dir.exists()) dir.mkdirs();
-		Path file = Paths.get(args[2] + "\\" + javaFile.getName());
+		Path file = Paths.get(targetLocation + "\\" + javaFile.getName());
 		try {
 			Files.write(file, javaCodeLineList, StandardCharsets.UTF_8);
 		} catch (IOException e) {
@@ -144,7 +144,7 @@ public class DiscrepancyFinder {
 		}
 	}
 	
-	public static void copyFileToApplicationServer(String fileName, String[] args) {
+	public static void copyFileToApplicationServer(String fileName,  String findOrRemediateMode, String sourceLocation) {
 		try {
 		   	Path destinationPath = Paths.get("application-server");
 		   	if(!Files.exists(destinationPath,
@@ -152,7 +152,7 @@ public class DiscrepancyFinder {
 		   		destinationPath = Files.createDirectory(destinationPath);
 		   	}
 		   	destinationPath = Paths.get(destinationPath + "/" + fileName);
-		   	Files.move(Paths.get(args[1]+"/"+fileName), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+		   	Files.move(Paths.get(sourceLocation+"/"+fileName), destinationPath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 					e.printStackTrace();
 		}
