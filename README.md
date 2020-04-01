@@ -20,7 +20,8 @@ Program takes four arguments
 ##############################################################################
 #                                                                            #
 #   <rule_file> <source_location> <target_location> <find_remediate_mode>    #
-#   example : discrapency-rules.xml C:/input C:/output 0                     #       #                                                                            #	
+#   example : discrapency-rules.xml C:/input C:/output 0                     #
+#                                                                            #
 ##############################################################################
 ```
 
