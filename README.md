@@ -10,9 +10,9 @@
 
 Program takes four arguments
 
- - **1st arg** - Discrapncy rule xml file
- - **2nd arg** - Source location
- - **3rd arg** - Target location
+ - **1st arg** - Discrapency rule xml file
+ - **2nd arg** - Source / Input location
+ - **3rd arg** - Target / Output location
  - **4th arg** - Mode - 0 for find and 1 for find-and-replace
 
 
