@@ -20,10 +20,11 @@ public class AppMain {
 	private String sourceLocation;
 	private String targetLocation;
 	private String findOrRemediateMode;
+	private String resourcesLocation;
 
 	public static void main(String[] args) throws IOException {
 
-		if (null != args && 4 != args.length) {
+		if (null != args && 5 != args.length) {
 			System.err.println("Invalid inputs, please provide inputs based on below usage example");
 			System.err.println("###########################################################################################");
 			System.err.println("#                                                                                         #");
@@ -48,9 +49,11 @@ public class AppMain {
 		sourceLocation = args [1];
 		targetLocation = args [2];
 		findOrRemediateMode = args [3];
+		resourcesLocation = args[4];
 		System.out.println("Discrapency Rule File = '" + discrapencyRuleFile + "'");
 		System.out.println("Source Location = '" + sourceLocation + "'");
 		System.out.println("Target Location = '" + targetLocation + "'");
+		System.out.println("Resources Location = '" + resourcesLocation + "'");
 		System.out.println("Mode - ( 0 for Find & 1 for Find + Remediate) = '" + findOrRemediateMode + "'");
 		
 
