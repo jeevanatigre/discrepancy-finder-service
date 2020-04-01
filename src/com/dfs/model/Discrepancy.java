@@ -103,5 +103,12 @@ public class Discrepancy {
 	public void setTimeSavingsInMin(String timeSavingsInMin) {
 		this.timeSavingsInMin = timeSavingsInMin;
 	}
-	
+
+	@Override
+	public String toString() {
+		return fileType + ", " + fileName + ", " + lineNo + ", "
+				+ category + ", " + ruleType + ", " + pattern + ", " + recommendation
+				+ ", " + complexity + ", " + autoRemediation + ", "
+				+ timeSavingsInMin;
+	}
 }

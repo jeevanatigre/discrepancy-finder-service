@@ -68,14 +68,11 @@ public class AppMain {
 			try (Stream<Path> walk = Files.walk(Paths.get(sourceLocation))) {
 					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
 					for (String fileName : result) {
-						File file = new File(targetLocation +"\\" + fileName);
+						File file = new File(fileName);
 						String fileExt = file.getName().substring(file.getName().lastIndexOf('.'));
-						if(findOrRemediateMode.equalsIgnoreCase("1") && fileExt.equalsIgnoreCase(Constants.XML_FILE_PATTERN)){
-							DiscrepancyFinder.copyFileToApplicationServer(file.getName(), findOrRemediateMode, sourceLocation);
-						}else if(fileExt.equalsIgnoreCase(".java")){
-							descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation));
-						}
+						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation));
 					}
+					DiscrepancyFinder.writeDiscrepancyFile( descrepancyDetailsList, targetLocation);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
