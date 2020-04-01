@@ -29,19 +29,11 @@ import org.apache.poi.ss.usermodel.Row;
 
 @SuppressWarnings("all")
 public class WriteWorkBook {
-	public static void main(String[] args) throws IOException {
-		Discrepancy discrepancy = new Discrepancy();
-	try {
-		copyFile(args);
-		addInExcel(discrepancy);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	}
 	
-	public static void addInExcel(Discrepancy discrepancy) throws InvalidFormatException, IOException {
+	public static void addInExcel(Discrepancy discrepancy, String[] args) throws InvalidFormatException, IOException {
+		copyFile(args);
 		FileInputStream inputStream;
-		FileInputStream myxls = new FileInputStream("discrepancy-output-files\\discrepancy-list.xls");
+		FileInputStream myxls = new FileInputStream(args[2]+"\\discrepancy-list.xls");
 	    HSSFWorkbook workBook = new HSSFWorkbook(myxls);
 	    String  lineNo ="";
 	    String category = "";
@@ -98,7 +90,7 @@ public class WriteWorkBook {
 		       row.createCell(8).setCellValue(autoRemediation);
 		       row.createCell(9).setCellValue(timeSavingsInMin);
 		       myxls.close();
-		       FileOutputStream output_file =new FileOutputStream(new File("discrepancy-output-files\\\\discrepancy-list.xls"));  
+		       FileOutputStream output_file =new FileOutputStream(new File(args[2]+"\\discrepancy-list.xls"));  
 		       //write changes
 		       workBook.write(output_file);
 		       output_file.close();

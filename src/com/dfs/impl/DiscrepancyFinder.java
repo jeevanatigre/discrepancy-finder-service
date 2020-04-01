@@ -23,7 +23,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class DiscrepancyFinder {
 
-	public static List<Discrepancy> findDiscrepancy(File javaFile, String findOrRemediateMode, File javaRulrXml, String targetLocation) throws IOException {
+	public static List<Discrepancy> findDiscrepancy(File javaFile, String findOrRemediateMode, File javaRulrXml, String targetLocation, String[] args) throws IOException {
 		List<String> discrepancyLineList = new ArrayList<String>();
 		List<String> javaCodeLineList = new ArrayList<String>();
 		List<Discrepancy> discrepancyDetailsList = new ArrayList<Discrepancy>();
@@ -53,7 +53,7 @@ public class DiscrepancyFinder {
 					if(textPattern != null && ruleList.get(ruleIndex).getFile_pattern().getValue().equalsIgnoreCase(Constants.JAVA_FILE_PATTERN) 
 							&& javaCodeLineList.contains(textPattern) && ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
 						int discrepancyLineNumber = javaCodeLineList.indexOf(ruleList.get(ruleIndex).getText_pattern().getValue().trim()) + 1;
-						discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, discrepancyLineNumber, javaFile));
+						discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, discrepancyLineNumber, javaFile,args));
 						if(findOrRemediateMode.equalsIgnoreCase("0")) {
 							discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: "+ (discrepancyLineNumber));
 						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
@@ -71,13 +71,13 @@ public class DiscrepancyFinder {
 					    }
 						if(findOrRemediateMode.equalsIgnoreCase("0")) {
 							for(int lineNumber: deprecatedLineNumberList) {
-								discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, lineNumber, javaFile));
+								discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, lineNumber, javaFile, args));
 								discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: "+ (lineNumber + 1));
 							}
 						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
 							for(int lineNumber: deprecatedLineNumberList) {
 								if(javaCodeLineList.get(lineNumber).toLowerCase().trim().contains(replaceCondition.toLowerCase())) {
-									discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, lineNumber, javaFile));
+									discrepancyDetailsList.add(setDiscrepancyData(javaCodeLineList, ruleList, ruleIndex, lineNumber, javaFile, args));
 									discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: "+ (lineNumber + 1));
 									javaCodeLineList.set(lineNumber, javaCodeLineList.get(lineNumber).replaceAll(textPattern, ruleList.get(ruleIndex).getRemediation().getReplace_with().trim()));
 								}
@@ -100,7 +100,7 @@ public class DiscrepancyFinder {
 		return discrepancyDetailsList;
 	}
 	
-	public static Discrepancy setDiscrepancyData(List<String> javaCodeLineList, List<Rule> ruleList, int ruleIndex, int discrepancyLineNumber, File file) {
+	public static Discrepancy setDiscrepancyData(List<String> javaCodeLineList, List<Rule> ruleList, int ruleIndex, int discrepancyLineNumber, File file, String[] args) {
 		Discrepancy discrepancy = new Discrepancy();
 		try {
 			discrepancy.setFileName(file.getName());
@@ -113,7 +113,7 @@ public class DiscrepancyFinder {
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getComplexity() == null ? "" : ruleList.get(ruleIndex).getComplexity().getValue());
 			discrepancy.setAutoRemediation("Yes");
 			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? "" : ruleList.get(ruleIndex).getRemediation().getSavings());
-			
+			WriteWorkBook.addInExcel(discrepancy, args);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
