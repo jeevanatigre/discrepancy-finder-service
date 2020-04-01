@@ -8,19 +8,20 @@
 
 ## Usage Example
 
-Program takes two arguments
+Program takes four arguments
 
- - **1st arg** - Rule xml file
- - **2nd arg** -  0 for find and 1 for find-and-replace
+ - **1st arg** - Discrapncy rule xml file
+ - **2nd arg** - Source location
+ - **3rd arg** - Target location
+ - **4th arg** - Mode - 0 for find and 1 for find-and-replace
 
 
 ```sh
-#################################################
-#                                               #
-#   java AppMain <rule_file> <option>           #
-#   example : java AppMain sample-rules.xml 0   #	
-#                                               #	
-#################################################
+##############################################################################
+#                                                                            #
+#   <rule_file> <source_location> <target_location> <find_remediate_mode>    #
+#   example : discrapency-rules.xml C:/input C:/output 0                     #       #                                                                            #	
+##############################################################################
 ```
 
 ## Sample Output File

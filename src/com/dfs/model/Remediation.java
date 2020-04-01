@@ -1,4 +1,4 @@
-package com.dfs.rule;
+package com.dfs.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 

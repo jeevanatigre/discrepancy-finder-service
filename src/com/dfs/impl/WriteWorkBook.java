@@ -1,4 +1,4 @@
-package com.dfs;
+package com.dfs.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.dfs.rule.DiscrepancyRules;
-import com.dfs.rule.Rule;
+import com.dfs.model.DiscrepancyRules;
+import com.dfs.model.Rule;
 import com.dfs.util.Constants;
 import org.apache.poi.ss.usermodel.Font;
 
