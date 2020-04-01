@@ -110,13 +110,14 @@ public static void readXml() throws InvalidFormatException, IOException {
         if (ruleList.size() > 0) {
 			for (int temp = 0; temp < ruleList.size(); temp++) {
 				//Updated code for null pointer error
+				complexityValue = (ruleList.get(temp).getComplexity()== null) ? "": ruleList.get(temp).getComplexity().getValue();
+				filePatternVal = (ruleList.get(temp).getFile_pattern()== null) ? "" :ruleList.get(temp).getFile_pattern().getValue();
 				filePatternVal = ruleList.get(temp).getFile_pattern().getValue();
 				filePatternVal =  filePatternVal.replaceAll("[*.]","");
-				complexityValue = ruleList.get(temp).getComplexity().getValue();
-				category = ruleList.get(temp).getCategory();
-				ruleType = ruleList.get(temp).getType();
+				category = (ruleList.get(temp).getCategory()== null) ? "" :ruleList.get(temp).getCategory();
+				ruleType = (ruleList.get(temp).getType()== null) ? "" :ruleList.get(temp).getType();
 				textPattern = (ruleList.get(temp).getText_pattern()== null) ? "": ruleList.get(temp).getText_pattern().getValue();
-				replatformAdvice = ruleList.get(temp).getRemediation().getRecommendation();
+				replatformAdvice = (ruleList.get(temp).getRemediation()== null) ? "":ruleList.get(temp).getRemediation().getRecommendation();
 				addInExcel(filePatternVal,jaavaRulrXml,complexityValue
 						,category,ruleType,textPattern,replatformAdvice);
 }
