@@ -5,79 +5,72 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.dfs.impl.DiscrepancyFinder;
+import com.dfs.model.Discrepancy;
 import com.dfs.util.Constants;
 
 public class AppMain {
+	
+	private String discrapencyRuleFile;
+	private String sourceLocation;
+	private String targetLocation;
+	private String findOrRemediateMode;
 
 	public static void main(String[] args) throws IOException {
-		String userInput;
-		Scanner sn = new Scanner(System.in);
-
-		while (true) {
-			System.out.println("*****Discrepancy finder and remediator*****");
-			System.out.println("Press 1 for Java: Find");
-			System.out.println("Press 2 for Java: Find and remidiate");
-			System.out.println("Press 3 for .Net: Find");
-			System.out.println("Press 4 for .Net: Find and remidiate");
-			System.out.println("Press 5 for Tomcat: Find");
-			System.out.println("Press 6 for Tomcat: Find and remidiate");
-			System.out.println("Press 7 to exit");
-			System.out.println("Enter your choice:");
-
-			userInput = sn.next();
-			File javaRuleXml;
-			switch (userInput) {
-			case "1":
-				javaRuleXml = readJavaRuleXml();
-				discrepancyFinder(userInput, javaRuleXml);
-				break;
-			case "2":
-				javaRuleXml = readJavaRuleXml();
-				discrepancyFinder(userInput, javaRuleXml);
-				break;
-			case "3":
-				dotNetDiscrepancyFinder();
-				break;
-			case "4":
-				break;
-			case "5":
-				tomcatDiscrepancyFinder();
-				break;
-			case "6":
-				break;
-			case "7":
-				System.out.println("Exited");
-				sn.close();
-				System.exit(0);
-			default:
-				System.out.println("Invalid choice. Read the options carefully...");
-			}
+		if (null != args && 4 != args.length) {
+			System.err.println("Invalid inputs, please provide inputs based on below usage example");
+			System.err.println("###########################################################################################");
+			System.err.println("#                                                                                         #");
+			System.err.println("#   java AppMain <rule_file> <source_location> <target_location> <find_remediate_mode>    #");
+			System.err.println("#   example : java AppMain discrapency-rules.xml C:/input C:/output 0                     #");	
+			System.err.println("#                                                                                         #");
+			System.err.println("###########################################################################################");
+			System.exit(0);
 		}
+		
+		new AppMainNew().startWork(args);
+		File ruleXml = readJavaRuleXml(args);
+		discrepancyFinder(args, ruleXml);
+		
 	}
 	
-	public static File readJavaRuleXml() {
-		File jaavaRulrXml = new File("resources\\java-rules.xml");
+	public void startWork(String args[]) {
+		discrapencyRuleFile = args [0];
+		sourceLocation = args [1];
+		targetLocation = args [2];
+		findOrRemediateMode = args [3];
+		System.out.println("Discrapency Rule File = '" + discrapencyRuleFile + "'");
+		System.out.println("Source Location = '" + sourceLocation + "'");
+		System.out.println("Target Location = '" + targetLocation + "'");
+		System.out.println("Mode - ( 0 for Find & 1 for Find + Remediate) = '" + findOrRemediateMode + "'");
+		System.out.println("Continue work");
+		
+
+	}
+	
+	public static File readJavaRuleXml(String[] args) {
+		File jaavaRulrXml = new File(args[0]);
 		return jaavaRulrXml;
 	}
 
-	public static void discrepancyFinder(String userInput, File javaRulrXml) {
+	public static void discrepancyFinder(String[] args, File javaRulrXml) {
 		try {
 			List<String> result = null;
-			try (Stream<Path> walk = Files.walk(Paths.get("input-files"))) {
+			List<Discrepancy> descrepancyDetailsList = new ArrayList<Discrepancy>();
+			try (Stream<Path> walk = Files.walk(Paths.get(args[1]))) {
 					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
 					for (String fileName : result) {
-						File file = new File("input-files\\" + fileName);
+						File file = new File(args[3]+"\\" + fileName);
 						String fileExt = file.getName().substring(file.getName().lastIndexOf('.'));
-						if(userInput.equalsIgnoreCase("1") && fileExt.equalsIgnoreCase(Constants.XML_FILE_PATTERN)){
-							DiscrepancyFinder.copyFileToApplicationServer(file.getName());
+						if(args[3].equalsIgnoreCase("1") && fileExt.equalsIgnoreCase(Constants.XML_FILE_PATTERN)){
+							DiscrepancyFinder.copyFileToApplicationServer(file.getName(), args);
 						}else if(fileExt.equalsIgnoreCase(".java")){
-							DiscrepancyFinder.findDiscrepancy(file, userInput, javaRulrXml);
+							descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, args, javaRulrXml));
 						}
 					}
 			} catch (IOException e) {
