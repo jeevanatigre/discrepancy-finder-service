@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import com.dfs.impl.DiscrepancyFinder;
 import com.dfs.model.Discrepancy;
-import com.dfs.util.Constants;
 
 public class AppMain {
 	
@@ -69,7 +68,6 @@ public class AppMain {
 					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
 					for (String fileName : result) {
 						File file = new File(fileName);
-						String fileExt = file.getName().substring(file.getName().lastIndexOf('.'));
 						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation, args));
 					}
 					DiscrepancyFinder.writeDiscrepancyFile( descrepancyDetailsList, targetLocation);

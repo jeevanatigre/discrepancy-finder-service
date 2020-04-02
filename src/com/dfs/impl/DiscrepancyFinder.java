@@ -13,8 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.commons.io.FilenameUtils;
-
 import com.dfs.model.Discrepancy;
 import com.dfs.model.DiscrepancyRules;
 import com.dfs.model.Rule;
@@ -128,11 +126,11 @@ public class DiscrepancyFinder {
 					: ruleList.get(ruleIndex).getText_pattern().getValue().trim());
 			discrepancy.setRecommendation(ruleList.get(ruleIndex).getRemediation() == null ? ""
 					: ruleList.get(ruleIndex).getRemediation().getRecommendation());
-			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? ""
-					: ruleList.get(ruleIndex).getRemediation().getComplexity());
+			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
+					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
 			discrepancy.setAutoRemediation("Yes");
-			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? ""
-					: ruleList.get(ruleIndex).getRemediation().getSavings());
+			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? 0
+					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
 			WriteWorkBook.addInExcel(discrepancy, args);
 		} catch (Exception e) {
 			e.printStackTrace();

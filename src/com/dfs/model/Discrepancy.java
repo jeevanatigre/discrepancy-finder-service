@@ -8,7 +8,7 @@ public class Discrepancy {
 	
 	private String fileName;
 	
-	private Integer lineNo;
+	private int lineNo;
 	
 	private String category;
 	
@@ -18,11 +18,11 @@ public class Discrepancy {
 	
 	private String recommendation;
 	
-	private String complexity;
+	private int complexity;
 	
 	private String autoRemediation;
 	
-	private String timeSavingsInMin;
+	private int timeSavingsInMin;
 
 	public String getFileType() {
 		return fileType;
@@ -40,11 +40,11 @@ public class Discrepancy {
 		this.fileName = fileName;
 	}
 
-	public Integer getLineNo() {
+	public int getLineNo() {
 		return lineNo;
 	}
 
-	public void setLineNo(Integer lineNo) {
+	public void setLineNo(int lineNo) {
 		this.lineNo = lineNo;
 	}
 
@@ -80,11 +80,11 @@ public class Discrepancy {
 		this.recommendation = recommendation;
 	}
 
-	public String getComplexity() {
+	public int getComplexity() {
 		return complexity;
 	}
 
-	public void setComplexity(String complexity) {
+	public void setComplexity(int complexity) {
 		this.complexity = complexity;
 	}
 
@@ -96,11 +96,11 @@ public class Discrepancy {
 		this.autoRemediation = autoRemediation;
 	}
 
-	public String getTimeSavingsInMin() {
+	public int getTimeSavingsInMin() {
 		return timeSavingsInMin;
 	}
 
-	public void setTimeSavingsInMin(String timeSavingsInMin) {
+	public void setTimeSavingsInMin(int timeSavingsInMin) {
 		this.timeSavingsInMin = timeSavingsInMin;
 	}
 

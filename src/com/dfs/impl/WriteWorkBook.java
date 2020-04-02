@@ -35,15 +35,15 @@ public class WriteWorkBook {
 		FileInputStream inputStream;
 		FileInputStream myxls = new FileInputStream(args[2]+"\\discrepancy-list.xls");
 	    HSSFWorkbook workBook = new HSSFWorkbook(myxls);
-	    String  lineNo ="";
+	    int  lineNo=0;
 	    String category = "";
 	    String pattern = "";
 	    String fileType = "";
-		String complexityValue = "";
+		int complexityValue;
 		String ruleType = "";
 		String recommendation = "";
 		String autoRemediation = "";
-		String timeSavingsInMin = "";
+		int timeSavingsInMin;
 		try {
 			
 		       HSSFSheet worksheet = workBook.getSheetAt(0);
@@ -54,12 +54,13 @@ public class WriteWorkBook {
 		       fileType = (discrepancy.getFileType()== null) ? "": discrepancy.getFileType();
 		       ruleType = (discrepancy.getRuleType()== null) ? "": discrepancy.getRuleType();
 		       recommendation = (discrepancy.getRecommendation()== null) ? "": discrepancy.getRecommendation();
-		       complexityValue = (discrepancy.getComplexity()== null) ? "": discrepancy.getComplexity();
+		       complexityValue = discrepancy.getComplexity();
 		       autoRemediation = (discrepancy.getAutoRemediation()== null) ? "": discrepancy.getAutoRemediation();
-		       timeSavingsInMin = (discrepancy.getTimeSavingsInMin()== null) ? "": discrepancy.getTimeSavingsInMin();
+		       timeSavingsInMin =  discrepancy.getTimeSavingsInMin();
 		       //fileName = 
-		       if(null != discrepancy.getLineNo()) {
-		      lineNo = Integer.toString(discrepancy.getLineNo());} 
+		       if(0 != discrepancy.getLineNo()) {
+		    	   lineNo = discrepancy.getLineNo();
+		      } 
 		       row.createCell(0).setCellValue(fileType);
 		       row.createCell(1).setCellValue(discrepancy.getFileName());
 		       row.createCell(2).setCellValue(lineNo);
