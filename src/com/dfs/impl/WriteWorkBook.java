@@ -45,7 +45,6 @@ public class WriteWorkBook {
 		String autoRemediation = "";
 		int timeSavingsInMin;
 		try {
-			
 		       HSSFSheet worksheet = workBook.getSheetAt(0);
 		       int lastRow=worksheet.getLastRowNum();
 		       System.out.println(lastRow);
@@ -56,34 +55,15 @@ public class WriteWorkBook {
 		       recommendation = (discrepancy.getRecommendation()== null) ? "": discrepancy.getRecommendation();
 		       complexityValue = discrepancy.getComplexity();
 		       autoRemediation = (discrepancy.getAutoRemediation()== null) ? "": discrepancy.getAutoRemediation();
+		       category = (discrepancy.getCategory()== null) ? "" :discrepancy.getCategory();
 		       timeSavingsInMin =  discrepancy.getTimeSavingsInMin();
-		       //fileName = 
 		       if(0 != discrepancy.getLineNo()) {
 		    	   lineNo = discrepancy.getLineNo();
 		      } 
 		       row.createCell(0).setCellValue(fileType);
 		       row.createCell(1).setCellValue(discrepancy.getFileName());
 		       row.createCell(2).setCellValue(lineNo);
-		       category = (discrepancy.getCategory()== null) ? "" :discrepancy.getCategory();
-		       if(category.equalsIgnoreCase(Constants.MANDATORY)) {
-		    	   CellStyle style = workBook.createCellStyle();
-		    	   style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); 
-		    	   style.setFillForegroundColor(HSSFColor.ROSE.index);
-		    	   Font font = workBook.createFont();
-		           font.setColor(HSSFColor.RED.index);
-		           style.setFont(font);
-		    	   row.createCell(3).setCellValue(category);
-		    	   row.getCell(3).setCellStyle(style);
-		       }else if(category.equalsIgnoreCase(Constants.OPTIONAL)) {
-		    	   CellStyle style = workBook.createCellStyle();
-		    	   style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); 
-		    	   style.setFillForegroundColor(HSSFColor.LIGHT_GREEN.index);
-		    	   Font font = workBook.createFont();
-		           font.setColor(HSSFColor.GREEN.index);
-		           style.setFont(font);
-		    	   row.createCell(3).setCellValue(category);
-		    	   row.getCell(3).setCellStyle(style);
-		       }
+		       row.createCell(3).setCellValue(category);
 		       row.createCell(4).setCellValue(ruleType);
 		       row.createCell(5).setCellValue(pattern);
 		       row.createCell(6).setCellValue(recommendation);
@@ -92,7 +72,6 @@ public class WriteWorkBook {
 		       row.createCell(9).setCellValue(timeSavingsInMin);
 		       myxls.close();
 		       FileOutputStream output_file =new FileOutputStream(new File(args[2]+"\\discrepancy-list.xls"));  
-		       //write changes
 		       workBook.write(output_file);
 		       output_file.close();
 		       System.out.println(" is successfully written");
@@ -106,7 +85,6 @@ public class WriteWorkBook {
 public static void copyFile(String[] args) throws InvalidFormatException, IOException {
 	try {
 		    File dir = new File(args[2]);
-			//File dir = new File(directory);
 			if (!dir.exists()) {
 				dir.mkdirs();
 				System.out.println("Directory created");
