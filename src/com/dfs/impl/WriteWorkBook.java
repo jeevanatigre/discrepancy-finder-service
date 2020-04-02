@@ -60,7 +60,7 @@ public class WriteWorkBook {
 		       //fileName = 
 		       if(null != discrepancy.getLineNo()) {
 		      lineNo = Integer.toString(discrepancy.getLineNo());} 
-		       row.createCell(0).setCellValue(pattern);
+		       row.createCell(0).setCellValue(fileType);
 		       row.createCell(1).setCellValue(discrepancy.getFileName());
 		       row.createCell(2).setCellValue(lineNo);
 		       category = (discrepancy.getCategory()== null) ? "" :discrepancy.getCategory();
@@ -83,8 +83,8 @@ public class WriteWorkBook {
 		    	   row.createCell(3).setCellValue(category);
 		    	   row.getCell(3).setCellStyle(style);
 		       }
-		       row.createCell(4).setCellValue(fileType);
-		       row.createCell(5).setCellValue(ruleType);
+		       row.createCell(4).setCellValue(ruleType);
+		       row.createCell(5).setCellValue(pattern);
 		       row.createCell(6).setCellValue(recommendation);
 		       row.createCell(7).setCellValue(complexityValue);
 		       row.createCell(8).setCellValue(autoRemediation);
@@ -103,7 +103,6 @@ public class WriteWorkBook {
 	}
         
 public static void copyFile(String[] args) throws InvalidFormatException, IOException {
-	//String directory = "discrepancy-output-files";
 	try {
 		    File dir = new File(args[2]);
 			//File dir = new File(directory);
@@ -111,7 +110,7 @@ public static void copyFile(String[] args) throws InvalidFormatException, IOExce
 				dir.mkdirs();
 				System.out.println("Directory created");
 			}
-			File from = new File(args[4]+"\\sample-report.xls"); 
+			File from = new File("resources\\sample-report.xls"); 
 			File to = new File(args[2]+"\\discrepancy-list.xls");
 			if(!to.exists()) {
 			FileUtils.copyFile(from, to);

@@ -128,8 +128,8 @@ public class DiscrepancyFinder {
 					: ruleList.get(ruleIndex).getText_pattern().getValue().trim());
 			discrepancy.setRecommendation(ruleList.get(ruleIndex).getRemediation() == null ? ""
 					: ruleList.get(ruleIndex).getRemediation().getRecommendation());
-			discrepancy.setComplexity(ruleList.get(ruleIndex).getComplexity() == null ? ""
-					: ruleList.get(ruleIndex).getComplexity().getValue());
+			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? ""
+					: ruleList.get(ruleIndex).getRemediation().getComplexity());
 			discrepancy.setAutoRemediation("Yes");
 			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? ""
 					: ruleList.get(ruleIndex).getRemediation().getSavings());
