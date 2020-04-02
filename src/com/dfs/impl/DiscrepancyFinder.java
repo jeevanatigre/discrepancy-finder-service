@@ -128,7 +128,7 @@ public class DiscrepancyFinder {
 					: ruleList.get(ruleIndex).getRemediation().getRecommendation());
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
-			discrepancy.setAutoRemediation("Yes");
+			discrepancy.setAutoRemediation(ruleList.get(ruleIndex).getRemediation().getAction() != null ?  "Yes" : "No");
 			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
 			WriteWorkBook.addInExcel(discrepancy, args);
