@@ -21,7 +21,7 @@ public class Rule {
     private FilePattern file_pattern;
 
     @JacksonXmlElementWrapper(localName = "files")
-    private List file;
+    private List<String> file;
 
     @JacksonXmlElementWrapper(localName = "text_pattern", useWrapping = false)
     private TextPattern text_pattern;
@@ -61,16 +61,15 @@ public class Rule {
         this.file_pattern = file_pattern;
     }
 
-    
-    public List getFile() {
-        return file;
-    }
+    public List<String> getFile() {
+		return file;
+	}
 
-    public void setFile(List file) {
-        this.file = file;
-    }
+	public void setFile(List<String> file) {
+		this.file = file;
+	}
 
-    public TextPattern getText_pattern() {
+	public TextPattern getText_pattern() {
         return text_pattern;
     }
 

@@ -91,7 +91,7 @@ public class DiscrepancyFinder {
 						}
 					} else if (ruleList.get(ruleIndex).getFile_pattern().getValue()
 							.equalsIgnoreCase(Constants.XML_FILE_PATTERN)) {
-						if (ruleList.get(ruleIndex).getFile().contains(file.getName())) {
+						if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
 							discrepancyLineList.add("Deprecated xml file: " + file.getName());
 							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
 						}
@@ -129,7 +129,7 @@ public class DiscrepancyFinder {
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
 			discrepancy.setAutoRemediation("Yes");
-			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? 0
+			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
 			WriteWorkBook.addInExcel(discrepancy, args);
 		} catch (Exception e) {
