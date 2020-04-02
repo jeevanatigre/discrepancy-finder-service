@@ -70,7 +70,7 @@ public class AppMain {
 					for (String fileName : result) {
 						File file = new File(fileName);
 						System.out.println("Processing file: " + file.getName());
-						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation, args));
+						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, sourceLocation, targetLocation, args));
 						System.out.println("Completed processing file: " + file.getName());
 					}
 					WriteWorkBook.addInExcel(descrepancyDetailsList, targetLocation);

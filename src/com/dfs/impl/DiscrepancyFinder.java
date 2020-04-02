@@ -4,16 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.dfs.model.Discrepancy;
 import com.dfs.model.DiscrepancyRules;
@@ -24,7 +20,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 public class DiscrepancyFinder {
 
 	public static List<Discrepancy> findDiscrepancy(File file, String findOrRemediateMode, File javaRulrXml,
-			String targetLocation, String[] args) throws IOException {
+			String sourceLocation, String targetLocation, String[] args) throws IOException {
 		List<String> discrepancyLineList = new ArrayList<String>();
 		List<String> codeLineList = new ArrayList<String>();
 		List<Discrepancy> discrepancyDetailsList = new ArrayList<Discrepancy>();
@@ -36,7 +32,7 @@ public class DiscrepancyFinder {
 			while (scanner.hasNextLine()) {
 				xmlCodeLineList.add(scanner.nextLine().trim());
 			}
-			scanner = new Scanner(new File("input-files\\" + file.getName()));
+			scanner = new Scanner(new File(sourceLocation + "\\" + file.getName()));
 			while (scanner.hasNextLine()) {
 				codeLineList.add(scanner.nextLine().trim());
 			}
@@ -178,18 +174,5 @@ public class DiscrepancyFinder {
 		}
 	}
 
-	public static void copyFileToApplicationServer(String fileName, String findOrRemediateMode, String sourceLocation) {
-		try {
-			Path destinationPath = Paths.get("application-server");
-			if (!Files.exists(destinationPath, new LinkOption[] { LinkOption.NOFOLLOW_LINKS })) {
-				destinationPath = Files.createDirectory(destinationPath);
-			}
-			destinationPath = Paths.get(destinationPath + "/" + fileName);
-			Files.move(Paths.get(sourceLocation + "/" + fileName), destinationPath,
-					StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 }
