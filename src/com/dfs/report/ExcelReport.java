@@ -1,4 +1,4 @@
-package com.dfs.impl;
+package com.dfs.report;
 
 import java.io.File;
 
@@ -32,11 +32,11 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
 @SuppressWarnings("all")
-public class WriteWorkBook {
+public class ExcelReport implements IReport {
 	
-	public static void addInExcel(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
+	public void createReport(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
 		System.out.println("Creating xls report at given target location");
-		WriteWorkBook.copyFile(targetLocation);
+		ExcelReport.copyFile(targetLocation);
 		FileInputStream inputStream;
 		FileInputStream myxls = new FileInputStream(targetLocation+"\\discrepancy-list.xls");
 	    HSSFWorkbook workBook = new HSSFWorkbook(myxls);

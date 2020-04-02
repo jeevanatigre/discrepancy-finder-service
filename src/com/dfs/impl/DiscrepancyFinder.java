@@ -121,7 +121,7 @@ public class DiscrepancyFinder {
 					: ruleList.get(ruleIndex).getRemediation().getRecommendation());
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
-			discrepancy.setAutoRemediation(ruleList.get(ruleIndex).getRemediation().getAction() != null ?  "Yes" : "No");
+			discrepancy.setAutoRemediation(((ruleList.get(ruleIndex).getRemediation().getSavings() == null) || (ruleList.get(ruleIndex).getRemediation().getSavings().equalsIgnoreCase("0")) ?  "No" : "Yes"));
 			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
 		} catch (Exception e) {
