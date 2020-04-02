@@ -34,9 +34,9 @@ Program takes four arguments
 
  - **Inventory Insights** - Provides application inventory details like number of files, types of files, files with DB interactions, etc 
  - **Discrapency & Complexity** -  Find exact discrapencies in code on the basis on rules, provides complexity level for fixes
- - **Remediatation** - Remediates common discrapencies, saves human efforts and erronous actions
+ - **Remediatation** - Auto-Remediate common discrapencies and save human efforts 
  - **Better Estimations** - Assists in determining effort estimations for tech upgrades
- - **Rule Repository** - Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades / migrate like below
+ - **Rule Repository** - Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades like below
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
@@ -51,6 +51,5 @@ See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-servic
 
 ## TODOs
 
- - Implement rules based on new sample-rule.xml
- - Create report with Apache POI
+ - Populate 'Discrepancy Rule Repository' for various tech upgrades
 
