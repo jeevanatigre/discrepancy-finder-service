@@ -13,8 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-
 import com.dfs.model.Discrepancy;
 import com.dfs.model.DiscrepancyRules;
 import com.dfs.model.Rule;
