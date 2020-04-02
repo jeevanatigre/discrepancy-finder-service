@@ -52,4 +52,3 @@ See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-servic
 ## TODOs
 
  - Populate 'Discrepancy Rule Repository' for various tech upgrades
-
