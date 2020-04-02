@@ -52,8 +52,7 @@ public class DiscrepancyFinder {
 				for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
 					String textPattern = ruleList.get(ruleIndex).getText_pattern() == null ? null
 							: ruleList.get(ruleIndex).getText_pattern().getValue().trim();
-					if (textPattern != null && ruleList.get(ruleIndex).getFile_pattern().getValue().equalsIgnoreCase(Constants.JAVA_FILE_PATTERN) && codeLineList.contains(textPattern)
-							&& ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
+					if (textPattern != null && codeLineList.contains(textPattern) && ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
 						int discrepancyLineNumber = codeLineList.indexOf(ruleList.get(ruleIndex).getText_pattern().getValue().trim()) + 1;
 						discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, discrepancyLineNumber, file, args));
 						if (findOrRemediateMode.equalsIgnoreCase("0")) {
@@ -66,9 +65,7 @@ public class DiscrepancyFinder {
 							 */
 							removeDiscrepancyList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim());
 						}
-					} else if (textPattern != null
-							&& ruleList.get(ruleIndex).getFile_pattern().getValue().equalsIgnoreCase(Constants.JAVA_FILE_PATTERN)
-							&& ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.replace.toString())) {
+					} else if (textPattern != null && ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.replace.toString())) {
 						String replaceCondition = ruleList.get(ruleIndex).getRemediation().getCondition().toLowerCase().trim();
 						List<Integer> deprecatedLineNumberList = new ArrayList<Integer>();
 						for (int lineCounter = 0; lineCounter < codeLineList.size(); lineCounter++) {
@@ -91,10 +88,8 @@ public class DiscrepancyFinder {
 								}
 							}
 						}
-					} else if (ruleList.get(ruleIndex).getFile_pattern().getValue()
-							.equalsIgnoreCase(Constants.XML_FILE_PATTERN)) {
+					} else if (ruleList.get(ruleIndex).getFile() != null && ruleList.get(ruleIndex).getFile().size() > 0) {
 						if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
-							discrepancyLineList.add("Deprecated xml file: " + file.getName());
 							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
 						}
 					}
@@ -148,7 +143,7 @@ public class DiscrepancyFinder {
 		 * { Files.write(file, discrepancyLineList, StandardCharsets.UTF_8); }
 		 * catch (IOException e) { e.printStackTrace(); }
 		 */
-
+		System.out.println("Creating txt report at given target location");
 		File dir = new File(targetLocation);
 		if (!dir.exists())
 			dir.mkdirs();
@@ -158,22 +153,27 @@ public class DiscrepancyFinder {
 			discrepancyList.add(discrepancy.toString());
 		try {
 			Files.write(file, discrepancyList, StandardCharsets.UTF_8);
+			System.out.println("Created txt report at given target location successfully");
 		} catch (IOException e) {
+			System.out.println("Failed creating discrepancy txt file at given target location");
 			e.printStackTrace();
 		}
 	}
 
 	public static void writeRemidiatedFile(List<String> discrepancyLineList, List<String> codeLineList, File inputFile,
 			String targetLocation) {
-		/* String directory = "remidiated-output-files"; */
 		File dir = new File(targetLocation);
 		if (!dir.exists())
 			dir.mkdirs();
 		Path file = Paths.get(targetLocation + "\\" + inputFile.getName());
 		try {
-			if (!inputFile.getName().substring(inputFile.getName().lastIndexOf('.')).equalsIgnoreCase(".xml"))
+			if (!inputFile.getName().substring(inputFile.getName().lastIndexOf('.')).equalsIgnoreCase(".xml")) {
+				System.out.println("Creating remediated:" + inputFile.getName() + " at given target location");
 				Files.write(file, codeLineList, StandardCharsets.UTF_8);
+				System.out.println("Created remediated:" + inputFile.getName() + "at given target location successfully");
+			}
 		} catch (IOException e) {
+			System.out.println("Failed creating remediated:" + inputFile.getName() + "at given target location");
 			e.printStackTrace();
 		}
 	}

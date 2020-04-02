@@ -35,6 +35,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class WriteWorkBook {
 	
 	public static void addInExcel(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
+		System.out.println("Creating xls report at given target location");
 		WriteWorkBook.copyFile(targetLocation);
 		FileInputStream inputStream;
 		FileInputStream myxls = new FileInputStream(targetLocation+"\\discrepancy-list.xls");
@@ -81,8 +82,9 @@ public class WriteWorkBook {
 		       FileOutputStream output_file =new FileOutputStream(new File(targetLocation+"\\discrepancy-list.xls"));  
 		       workBook.write(output_file);
 		       output_file.close();
+		       System.out.println("Created xls report at given target location successfully");
 		}catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Failed to Create xls report at given target location");
 			e.printStackTrace();
 		}
 	}
