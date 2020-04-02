@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import com.dfs.model.Discrepancy;
 import com.dfs.model.DiscrepancyRules;
 import com.dfs.model.Rule;
@@ -129,9 +131,8 @@ public class DiscrepancyFinder {
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
 			discrepancy.setAutoRemediation("Yes");
-			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? 0
-					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
-			WriteWorkBook.addInExcel(discrepancy, args);
+			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? "" 
+					: ruleList.get(ruleIndex).getRemediation().getSavings());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

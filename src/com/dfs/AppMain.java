@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.dfs.impl.DiscrepancyFinder;
+import com.dfs.impl.WriteWorkBook;
 import com.dfs.model.Discrepancy;
 
 public class AppMain {
@@ -70,6 +71,7 @@ public class AppMain {
 						File file = new File(fileName);
 						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation, args));
 					}
+					WriteWorkBook.addInExcel(descrepancyDetailsList, targetLocation);
 					DiscrepancyFinder.writeDiscrepancyFile( descrepancyDetailsList, targetLocation);
 			} catch (IOException e) {
 				e.printStackTrace();

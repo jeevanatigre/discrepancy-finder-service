@@ -22,7 +22,7 @@ public class Discrepancy {
 	
 	private String autoRemediation;
 	
-	private int timeSavingsInMin;
+	private String timeSavingsInMin;
 
 	public String getFileType() {
 		return fileType;
@@ -96,11 +96,12 @@ public class Discrepancy {
 		this.autoRemediation = autoRemediation;
 	}
 
-	public int getTimeSavingsInMin() {
+
+	public String getTimeSavingsInMin() {
 		return timeSavingsInMin;
 	}
 
-	public void setTimeSavingsInMin(int timeSavingsInMin) {
+	public void setTimeSavingsInMin(String timeSavingsInMin) {
 		this.timeSavingsInMin = timeSavingsInMin;
 	}
 
