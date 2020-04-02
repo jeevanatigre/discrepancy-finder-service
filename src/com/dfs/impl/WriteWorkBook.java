@@ -47,7 +47,7 @@ public class WriteWorkBook {
 		String ruleType = "";
 		String recommendation = "";
 		String autoRemediation = "";
-		String timeSavingsInMin = "";
+		int timeSavingsInMin;
 		try {
 			HSSFSheet worksheet = workBook.getSheetAt(0);
 		    	   int lastRow=worksheet.getLastRowNum();
