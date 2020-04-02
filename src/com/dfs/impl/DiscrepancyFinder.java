@@ -55,10 +55,7 @@ public class DiscrepancyFinder {
 							discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: " + (discrepancyLineNumber));
 						} else if (findOrRemediateMode.equalsIgnoreCase("1")) {
 							discrepancyLineList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim() + "  Line number: " + (discrepancyLineNumber));
-							/*
-							 * javaCodeLineList.remove(ruleList.get(ruleIndex).
-							 * getText_pattern().getValue().trim());
-							 */
+							 /*javaCodeLineList.remove(ruleList.get(ruleIndex).getText_pattern().getValue().trim());*/
 							removeDiscrepancyList.add(ruleList.get(ruleIndex).getText_pattern().getValue().trim());
 						}
 					} else if (textPattern != null && ruleList.get(ruleIndex).getRemediation().getAction().trim().equalsIgnoreCase(Constants.ACTION_ENUM.replace.toString())) {
@@ -84,10 +81,11 @@ public class DiscrepancyFinder {
 								}
 							}
 						}
-					} else if (ruleList.get(ruleIndex).getFile() != null && ruleList.get(ruleIndex).getFile().size() > 0) {
-						if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
+					} else if (ruleList.get(ruleIndex).getFile_pattern().getValue().equalsIgnoreCase(Constants.XML_FILE_PATTERN)) {
+						discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
+						/*if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
 							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
-						}
+						}*/
 					}
 				}
 				for (String discrepancy : removeDiscrepancyList)
@@ -131,14 +129,6 @@ public class DiscrepancyFinder {
 	}
 
 	public static void writeDiscrepancyFile(List<Discrepancy> descrepancyDetailsList, String targetLocation){
-		/*
-		 * String directory = "discrepancy-output-files"; File dir = new
-		 * File(directory); if (!dir.exists()) dir.mkdirs(); Path file =
-		 * Paths.get(directory + "\\" + "discrepancy-
-		 * " + FilenameUtils.removeExtension(inputFile.getName()) +".txt"); try
-		 * { Files.write(file, discrepancyLineList, StandardCharsets.UTF_8); }
-		 * catch (IOException e) { e.printStackTrace(); }
-		 */
 		System.out.println("Creating txt report at given target location");
 		File dir = new File(targetLocation);
 		if (!dir.exists())
