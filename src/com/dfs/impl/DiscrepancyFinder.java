@@ -93,7 +93,7 @@ public class DiscrepancyFinder {
 						}
 					} else if (ruleList.get(ruleIndex).getFile_pattern().getValue()
 							.equalsIgnoreCase(Constants.XML_FILE_PATTERN)) {
-						if (ruleList.get(ruleIndex).getFile().contains(file.getName())) {
+						if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
 							discrepancyLineList.add("Deprecated xml file: " + file.getName());
 							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
 						}
@@ -130,16 +130,16 @@ public class DiscrepancyFinder {
 					: ruleList.get(ruleIndex).getRemediation().getRecommendation());
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
-			discrepancy.setAutoRemediation("Yes");
-			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? "" 
-					: ruleList.get(ruleIndex).getRemediation().getSavings());
+			discrepancy.setAutoRemediation(ruleList.get(ruleIndex).getRemediation().getAction() != null ?  "Yes" : "No");
+			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? 0
+					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return discrepancy;
 	}
 
-	public static void writeDiscrepancyFile(List<Discrepancy> descrepancyDetailsList, String targetLocation) {
+	public static void writeDiscrepancyFile(List<Discrepancy> descrepancyDetailsList, String targetLocation){
 		/*
 		 * String directory = "discrepancy-output-files"; File dir = new
 		 * File(directory); if (!dir.exists()) dir.mkdirs(); Path file =
