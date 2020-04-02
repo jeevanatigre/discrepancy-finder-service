@@ -129,8 +129,7 @@ public class DiscrepancyFinder {
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
 			discrepancy.setAutoRemediation("Yes");
-			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation() == null ? 0
-					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
+			discrepancy.setTimeSavingsInMin((ruleList.get(ruleIndex).getRemediation() != null) && (ruleList.get(ruleIndex).getRemediation().getSavings() != null ) ? Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()) : 0);
 			WriteWorkBook.addInExcel(discrepancy, args);
 		} catch (Exception e) {
 			e.printStackTrace();
