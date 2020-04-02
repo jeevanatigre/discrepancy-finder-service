@@ -23,7 +23,7 @@ public class AppMain {
 
 	public static void main(String[] args) throws IOException {
 
-		if (null != args && 5 != args.length) {
+		if (null != args && 4 != args.length) {
 			System.err.println("Invalid inputs, please provide inputs based on below usage example");
 			System.err.println("###########################################################################################");
 			System.err.println("#                                                                                         #");
