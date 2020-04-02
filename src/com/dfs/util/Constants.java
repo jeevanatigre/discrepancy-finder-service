@@ -6,7 +6,5 @@ public class Constants {
 	public static enum ACTION_ENUM { remove, replace };
 	public static final String JAVA_FILE_PATTERN = "*.java";
 	public static final String XML_FILE_PATTERN = "*.xml";
-	public static final String MANDATORY = "mandatory";
-	public static final String OPTIONAL = "optional";
 
 }

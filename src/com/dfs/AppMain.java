@@ -69,7 +69,7 @@ public class AppMain {
 					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
 					for (String fileName : result) {
 						File file = new File(fileName);
-						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, targetLocation, args));
+						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, sourceLocation, targetLocation, args));
 					}
 					WriteWorkBook.addInExcel(descrepancyDetailsList, targetLocation);
 					DiscrepancyFinder.writeDiscrepancyFile( descrepancyDetailsList, targetLocation);
