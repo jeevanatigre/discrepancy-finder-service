@@ -35,7 +35,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class ExcelReport implements IReport {
 	
 	public void createReport(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
-		System.out.println("Creating xls report at given target location");
+		System.out.println("Creating discrepency report 'discrepancy-list.xls'");
 		ExcelReport.copyFile(targetLocation);
 		FileInputStream inputStream;
 		FileInputStream myxls = new FileInputStream(targetLocation+"\\discrepancy-list.xls");
@@ -47,7 +47,7 @@ public class ExcelReport implements IReport {
 		int complexityValue;
 		String ruleType = "";
 		String recommendation = "";
-		String autoRemediation = "";
+		int autoRemediation;
 		int timeSavingsInMin;
 		try {
 			HSSFSheet worksheet = workBook.getSheetAt(0);
@@ -61,7 +61,7 @@ public class ExcelReport implements IReport {
 			       ruleType = (discrepancy.getRuleType()== null) ? "": discrepancy.getRuleType();
 			       recommendation = (discrepancy.getRecommendation()== null) ? "": discrepancy.getRecommendation();
 			       complexityValue = discrepancy.getComplexity();
-			       autoRemediation = (discrepancy.getAutoRemediation()== null) ? "": discrepancy.getAutoRemediation();
+			       autoRemediation = discrepancy.getAutoRemediation();
 			       category = (discrepancy.getCategory()== null) ? "" :discrepancy.getCategory();
 			       timeSavingsInMin =  discrepancy.getTimeSavingsInMin();
 			       if(0 != discrepancy.getLineNo()) {
@@ -82,9 +82,9 @@ public class ExcelReport implements IReport {
 		       FileOutputStream output_file =new FileOutputStream(new File(targetLocation+"\\discrepancy-list.xls"));  
 		       workBook.write(output_file);
 		       output_file.close();
-		       System.out.println("Created xls report at given target location successfully");
+		       System.out.println("Created discrepency report 'discrepancy-list.xls'" );
 		}catch (FileNotFoundException e) {
-			System.out.println("Failed to Create xls report at given target location");
+			System.out.println("Failed to Create discrepency report");
 			e.printStackTrace();
 		}
 	}

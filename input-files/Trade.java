@@ -1,4 +1,3 @@
-import java.lang.Compiler; 
 import java.lang.defr;
 public class NewClass 
 { 
@@ -9,19 +8,19 @@ public class NewClass
 
         Class c = geek.getClass(); 
         System.out.println(c); 
-        discrepancyLineList.addItem("add this item");
+        discrepancyLineList.item("add this item");
         Object g = Compiler.command("javac CompilerClass"); 
         System.out.println("Value : " + g); 
   
         // Use of compileClass : 
         // Since it is not a subclass so there is no compiler for it 
         boolean check = Compiler.compileClass(c); 
-        discrepancyLineList.addItem("add this item");
+        discrepancyLineList.item("add this item");
         System.out.println("\nIs compilation successful ? : " + check); 
   
         String str = "CompilerClass"; 
         boolean check1 = Compiler.compileClasses(str); 
-        discrepancyLineList.addItem("add this item");  
+        discrepancyLineList.item("add this item");  
         System.out.println("\nIs compilation successful using str ? : " + check1); 
   
         Compiler.disable(); 

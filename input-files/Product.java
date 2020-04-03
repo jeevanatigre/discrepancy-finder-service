@@ -1,6 +1,6 @@
 import java.lang.Compiler; 
 import java.lang.defr;
-public class NewClass 
+public class Product 
 { 
     public static void main(String[] args) 
     { 

@@ -1,6 +1,6 @@
 import java.lang.Compiler; 
 import java.lang.defr;
-public class NewClass 
+public class Ticker 
 { 
     public static void main(String[] args) 
     { 
@@ -21,7 +21,7 @@ public class NewClass
   
         String str = "CompilerClass"; 
         boolean check1 = Compiler.compileClasses(str); 
-        discrepancyLineList.addItem("add this item");  
+        discrepancyLineList.item("add this item");  
         System.out.println("\nIs compilation successful using str ? : " + check1); 
   
         Compiler.disable(); 

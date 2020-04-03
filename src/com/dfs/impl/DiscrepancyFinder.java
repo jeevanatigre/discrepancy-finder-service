@@ -119,7 +119,7 @@ public class DiscrepancyFinder {
 					: ruleList.get(ruleIndex).getRemediation().getRecommendation());
 			discrepancy.setComplexity(ruleList.get(ruleIndex).getRemediation().getComplexity() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getComplexity()));
-			discrepancy.setAutoRemediation(((ruleList.get(ruleIndex).getRemediation().getSavings() == null) || (ruleList.get(ruleIndex).getRemediation().getSavings().equalsIgnoreCase("0")) ?  "No" : "Yes"));
+			discrepancy.setAutoRemediation(((ruleList.get(ruleIndex).getRemediation().getSavings() == null) || (ruleList.get(ruleIndex).getRemediation().getSavings().equalsIgnoreCase("0")) ?  0 : 1));
 			discrepancy.setTimeSavingsInMin(ruleList.get(ruleIndex).getRemediation().getSavings() == null ? 0
 					: Integer.parseInt(ruleList.get(ruleIndex).getRemediation().getSavings()));
 		} catch (Exception e) {
@@ -129,7 +129,7 @@ public class DiscrepancyFinder {
 	}
 
 	public static void writeDiscrepancyFile(List<Discrepancy> descrepancyDetailsList, String targetLocation){
-		System.out.println("Creating txt report at given target location");
+		// System.out.println("Creating txt report at given target location");
 		File dir = new File(targetLocation);
 		if (!dir.exists())
 			dir.mkdirs();
@@ -139,7 +139,7 @@ public class DiscrepancyFinder {
 			discrepancyList.add(discrepancy.toString());
 		try {
 			Files.write(file, discrepancyList, StandardCharsets.UTF_8);
-			System.out.println("Created txt report at given target location successfully");
+			// System.out.println("Created txt report at given target location successfully");
 		} catch (IOException e) {
 			System.out.println("Failed creating discrepancy txt file at given target location");
 			e.printStackTrace();
@@ -154,12 +154,12 @@ public class DiscrepancyFinder {
 		Path file = Paths.get(targetLocation + "\\remediated-" + inputFile.getName());
 		try {
 			if (!inputFile.getName().substring(inputFile.getName().lastIndexOf('.')).equalsIgnoreCase(".xml")) {
-				System.out.println("Creating remediated:" + inputFile.getName() + " at given target location");
+				System.out.println("Creating remediated file '" + inputFile.getName() + "'");
 				Files.write(file, codeLineList, StandardCharsets.UTF_8);
-				System.out.println("Created remediated:" + inputFile.getName() + "at given target location successfully");
+				System.out.println("Created remediated file '" + inputFile.getName() + "'");
 			}
 		} catch (IOException e) {
-			System.out.println("Failed creating remediated:" + inputFile.getName() + "at given target location");
+			System.out.println("Failed creating remediated '" + inputFile.getName() + "'");
 			e.printStackTrace();
 		}
 	}

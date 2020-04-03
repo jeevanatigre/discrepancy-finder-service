@@ -20,7 +20,7 @@ public class Discrepancy {
 	
 	private int complexity;
 	
-	private String autoRemediation;
+	private int autoRemediation;
 	
 	private int timeSavingsInMin;
 
@@ -88,11 +88,11 @@ public class Discrepancy {
 		this.complexity = complexity;
 	}
 
-	public String getAutoRemediation() {
+	public int getAutoRemediation() {
 		return autoRemediation;
 	}
 
-	public void setAutoRemediation(String autoRemediation) {
+	public void setAutoRemediation(int autoRemediation) {
 		this.autoRemediation = autoRemediation;
 	}
 

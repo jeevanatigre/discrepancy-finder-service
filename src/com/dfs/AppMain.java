@@ -69,9 +69,9 @@ public class AppMain {
 					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
 					for (String fileName : result) {
 						File file = new File(fileName);
-						System.out.println("Processing file: " + file.getName());
+						System.out.println("Processing file '" + file.getName() + "'");
 						descrepancyDetailsList.addAll(DiscrepancyFinder.findDiscrepancy(file, findOrRemediateMode, javaRulrXml, sourceLocation, targetLocation, args));
-						System.out.println("Completed processing file: " + file.getName());
+						System.out.println("Completed processing file '" + file.getName() + "'");
 					}
 					new ExcelReport().createReport(descrepancyDetailsList, targetLocation);
 					DiscrepancyFinder.writeDiscrepancyFile( descrepancyDetailsList, targetLocation);
