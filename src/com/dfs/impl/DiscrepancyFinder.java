@@ -82,10 +82,10 @@ public class DiscrepancyFinder {
 							}
 						}
 					} else if (ruleList.get(ruleIndex).getFile() != null && ruleList.get(ruleIndex).getFile().size() > 0) {
-						discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
-						/*if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
+						//discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
+						if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
 							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
-						}*/
+						}
 					}
 				}
 				for (String discrepancy : removeDiscrepancyList)
@@ -151,7 +151,7 @@ public class DiscrepancyFinder {
 		File dir = new File(targetLocation);
 		if (!dir.exists())
 			dir.mkdirs();
-		Path file = Paths.get(targetLocation + "\\" + inputFile.getName());
+		Path file = Paths.get(targetLocation + "\\remediated-" + inputFile.getName());
 		try {
 			if (!inputFile.getName().substring(inputFile.getName().lastIndexOf('.')).equalsIgnoreCase(".xml")) {
 				System.out.println("Creating remediated:" + inputFile.getName() + " at given target location");
