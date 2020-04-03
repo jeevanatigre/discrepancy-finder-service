@@ -81,7 +81,7 @@ public class DiscrepancyFinder {
 								}
 							}
 						}
-					} else if (ruleList.get(ruleIndex).getFile_pattern().getValue().equalsIgnoreCase(Constants.XML_FILE_PATTERN)) {
+					} else if (ruleList.get(ruleIndex).getFile() != null && ruleList.get(ruleIndex).getFile().size() > 0) {
 						discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
 						/*if (ruleList.get(ruleIndex).getFile().stream().anyMatch(file.getName()::equalsIgnoreCase)) {
 							discrepancyDetailsList.add(setDiscrepancyData(ruleList, ruleIndex, 0, file, args));
