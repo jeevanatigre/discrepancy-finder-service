@@ -9,7 +9,14 @@
 		<text_pattern value = "addItem"/>
 		<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
 	</rule>
-	<rule type="file_finder" category = "Information">
+	<!-- 
+	<rule type="text_finder" category = "Information">
+		<file_pattern value = "*.java"/>
+		<text_pattern value = "import java.lang.Compiler;"/>
+		<remediation recommendation = "File has SQL imports, might be impacted by PostgreSQL migration" complexity= "0" action = "remove" savings="0"/>
+	</rule>
+	 -->
+	<rule type="file_finder" category = "Optional">
 		<file_pattern value = "*.xml"/>
 		<files>
 			<file>spring.xml</file>

@@ -1,3 +1,4 @@
+import java.sql.Statement;
 import java.lang.Compiler; 
 import java.lang.defr;
 public class Product 
@@ -21,7 +22,6 @@ public class Product
   
         String str = "CompilerClass"; 
         boolean check1 = Compiler.compileClasses(str); 
-        discrepancyLineList.addItem("add this item");  
         System.out.println("\nIs compilation successful using str ? : " + check1); 
   
         Compiler.disable(); 
