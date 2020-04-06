@@ -36,13 +36,14 @@ public class ExcelReport implements IReport {
 	
 	public void createReport(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
 		System.out.println("Creating discrepency report 'discrepancy-list.xls'");
-		ExcelReport.copyFile(targetLocation);
+		String discrepancyReportFileName = "discrepancy-list.xls";
+		ExcelReport.copyFileAtOutputLocation(targetLocation);
 		FileInputStream inputStream;
-		FileInputStream myxls = new FileInputStream(targetLocation+"\\discrepancy-list.xls");
+		FileInputStream myxls = new FileInputStream(targetLocation + "\\" +discrepancyReportFileName);
 	    HSSFWorkbook workBook = new HSSFWorkbook(myxls);
 	    int  lineNo=0;
 	    String category = "";
-	    String pattern = "";
+	    String filePattern = "";
 	    String fileType = "";
 		int complexityValue;
 		String ruleType = "";
@@ -56,7 +57,7 @@ public class ExcelReport implements IReport {
 		   		for (Discrepancy discrepancy : descrepancyDetailsList)
 		   		{
 		    	   Row row = worksheet.createRow(++lastRow);
-		    	   pattern = (discrepancy.getPattern()== null) ? "": discrepancy.getPattern();
+		    	   filePattern = (discrepancy.getPattern()== null) ? "": discrepancy.getPattern();
 			       fileType = (discrepancy.getFileType()== null) ? "": discrepancy.getFileType();
 			       ruleType = (discrepancy.getRuleType()== null) ? "": discrepancy.getRuleType();
 			       recommendation = (discrepancy.getRecommendation()== null) ? "": discrepancy.getRecommendation();
@@ -72,38 +73,40 @@ public class ExcelReport implements IReport {
 		       row.createCell(2).setCellValue(lineNo);
 		       row.createCell(3).setCellValue(category);
 		       row.createCell(4).setCellValue(ruleType);
-		       row.createCell(5).setCellValue(pattern);
+		       row.createCell(5).setCellValue(filePattern);
 		       row.createCell(6).setCellValue(recommendation);
 		       row.createCell(7).setCellValue(complexityValue);
 		       row.createCell(8).setCellValue(autoRemediation);
 		       row.createCell(9).setCellValue(timeSavingsInMin);
 		   		}
 		       myxls.close();
-		       FileOutputStream output_file =new FileOutputStream(new File(targetLocation+"\\discrepancy-list.xls"));  
+		       FileOutputStream output_file =new FileOutputStream(new File(targetLocation + "\\" +discrepancyReportFileName));  
 		       workBook.write(output_file);
 		       output_file.close();
 		       System.out.println("Created discrepency report 'discrepancy-list.xls'" );
-		}catch (FileNotFoundException e) {
+		}catch (FileNotFoundException ex) {
 			System.out.println("Failed to Create discrepency report");
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 	}
         
-public static void copyFile(String targetLocation) throws InvalidFormatException, IOException {
+public static void copyFileAtOutputLocation(String targetLocation) throws IOException {
+	       String discrepancyReportFileName = "discrepancy-list.xls";
+	       String resourcesFileLocation = "resources\\\\sample-report.xls";
 	try {
-		    Files.deleteIfExists(Paths.get(targetLocation+"\\discrepancy-list.xls")); 
+		    Files.deleteIfExists(Paths.get(targetLocation+ "\\" +discrepancyReportFileName)); 
 		    File dir = new File(targetLocation);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			File from = new File("resources\\sample-report.xls"); 
-			File to = new File(targetLocation+"\\discrepancy-list.xls");
+			File from = new File(resourcesFileLocation); 
+			File to = new File(targetLocation + "\\" + discrepancyReportFileName);
 			if(!to.exists()) {
 			FileUtils.copyFile(from, to);
 			}
-	}catch (Exception e) {
+	}catch (IOException ex) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+		   ex.printStackTrace();
 
 	}
 }
