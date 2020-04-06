@@ -7,5 +7,7 @@ public class Constants {
 	public static String XML_FILE_PATTERN = "*.xml";
 	public static final String MANDATORY = "mandatory";
 	public static final String OPTIONAL = "optional";
+	public static enum FILE_OPERATION { batch, individual };
+	public static enum REQUIRED_LISTS { codeLineList, discrepancyDetailsList, removeDiscrepancyList };
 
 }
