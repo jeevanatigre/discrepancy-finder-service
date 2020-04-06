@@ -1,4 +1,0 @@
-.xml, applicationContext.xml, 0, Optional, file_finder, , Move from xml based to annotation based configuration, 10, 0, 0
-.java, Product.java, 2, Mandatory, text_finder, import java.lang.Compiler;, Remove this import, 1, 1, 1
-.xml, Spring.xml, 0, Optional, file_finder, , Move from xml based to annotation based configuration, 10, 0, 0
-.java, Ticker.java, 2, Mandatory, text_finder, import java.lang.Compiler;, Remove this import, 1, 1, 1
