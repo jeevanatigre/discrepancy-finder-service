@@ -34,55 +34,52 @@ import org.apache.poi.ss.usermodel.Row;
 @SuppressWarnings("all")
 public class ExcelReport implements IReport {
 	
-	public void createReport(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
+	public void createReport(List<Object> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
 		System.out.println("Creating discrepency report 'discrepancy-list.xls'");
 		String discrepancyReportFileName = "discrepancy-list.xls";
 		ExcelReport.copyFileAtOutputLocation(targetLocation);
 		FileInputStream inputStream;
+		FileOutputStream output_file;
 		FileInputStream myxls = new FileInputStream(targetLocation + "\\" +discrepancyReportFileName);
 	    HSSFWorkbook workBook = new HSSFWorkbook(myxls);
 	    int  lineNo=0;
 	    String category = "";
 	    String filePattern = "";
 	    String fileType = "";
-		int complexityValue;
+		int complexityValue=0;
 		String ruleType = "";
 		String recommendation = "";
-		int autoRemediation;
-		int timeSavingsInMin;
+		int autoRemediation=0;
+		int timeSavingsInMin=0;
 		try {
 			HSSFSheet worksheet = workBook.getSheetAt(0);
 		    	   int lastRow=worksheet.getLastRowNum();
-		    	   List<String> discrepancyList = new ArrayList<String>();
-		   		for (Discrepancy discrepancy : descrepancyDetailsList)
-		   		{
 		    	   Row row = worksheet.createRow(++lastRow);
-		    	   filePattern = (discrepancy.getPattern()== null) ? "": discrepancy.getPattern();
-			       fileType = (discrepancy.getFileType()== null) ? "": discrepancy.getFileType();
-			       ruleType = (discrepancy.getRuleType()== null) ? "": discrepancy.getRuleType();
-			       recommendation = (discrepancy.getRecommendation()== null) ? "": discrepancy.getRecommendation();
-			       complexityValue = discrepancy.getComplexity();
-			       autoRemediation = discrepancy.getAutoRemediation();
-			       category = (discrepancy.getCategory()== null) ? "" :discrepancy.getCategory();
-			       timeSavingsInMin =  discrepancy.getTimeSavingsInMin();
-			       if(0 != discrepancy.getLineNo()) {
-			    	   lineNo = discrepancy.getLineNo();
-			       }
-		       row.createCell(0).setCellValue(fileType);
-		       row.createCell(1).setCellValue(discrepancy.getFileName());
-		       row.createCell(2).setCellValue(lineNo);
-		       row.createCell(3).setCellValue(category);
-		       row.createCell(4).setCellValue(ruleType);
-		       row.createCell(5).setCellValue(filePattern);
-		       row.createCell(6).setCellValue(recommendation);
-		       row.createCell(7).setCellValue(complexityValue);
-		       row.createCell(8).setCellValue(autoRemediation);
-		       row.createCell(9).setCellValue(timeSavingsInMin);
-		   		}
-		       myxls.close();
-		       FileOutputStream output_file =new FileOutputStream(new File(targetLocation + "\\" +discrepancyReportFileName));  
-		       workBook.write(output_file);
-		       output_file.close();
+		    	   List<Discrepancy> discrepancyy = new ArrayList<>();
+		    	   discrepancyy.forEach(discrepancy -> System.out.println("filenmae"+discrepancy.getFileType()));
+		    	   discrepancyy.forEach(System.out::println);
+		    	   Iterator<Object> iterator = descrepancyDetailsList.iterator();
+		    	   Discrepancy discrepancy ;
+		    	   while (iterator.hasNext()) {
+		    		   discrepancy = (Discrepancy) iterator.next();
+		    	       System.out.println("name"+discrepancy);
+		    	       row.createCell(0).setCellValue(discrepancy.getFileType());
+				       row.createCell(1).setCellValue(discrepancy.getFileName());
+				       row.createCell(2).setCellValue(discrepancy.getLineNo());
+				       row.createCell(3).setCellValue(discrepancy.getCategory());
+				       row.createCell(4).setCellValue(discrepancy.getRuleType());
+				       row.createCell(5).setCellValue(discrepancy.getPattern());
+				       row.createCell(6).setCellValue(discrepancy.getRecommendation());
+				       row.createCell(7).setCellValue(discrepancy.getComplexity());
+				       row.createCell(8).setCellValue(discrepancy.getAutoRemediation());
+				       row.createCell(9).setCellValue(discrepancy.getTimeSavingsInMin());
+				       row = worksheet.createRow(++lastRow);
+				       System.out.println("row"+row.getRowNum());
+		    	   }
+			       output_file =new FileOutputStream(new File(targetLocation + "\\" +discrepancyReportFileName));  
+			       workBook.write(output_file);
+			       output_file.close();
+		    	   myxls.close();
 		       System.out.println("Created discrepency report 'discrepancy-list.xls'" );
 		}catch (FileNotFoundException ex) {
 			System.out.println("Failed to Create discrepency report");
@@ -106,6 +103,7 @@ public static void copyFileAtOutputLocation(String targetLocation) throws IOExce
 			}
 	}catch (IOException ex) {
 			// TODO Auto-generated catch block
+		   System.out.println("Failed creating discrepancy excel file at given target location");
 		   ex.printStackTrace();
 
 	}

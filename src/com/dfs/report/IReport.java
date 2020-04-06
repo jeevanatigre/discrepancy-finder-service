@@ -9,5 +9,5 @@ import com.dfs.model.Discrepancy;
 
 public interface IReport {
 
-	public void createReport(List<Discrepancy> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException;
+	public void createReport(List<Object> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException;
 }

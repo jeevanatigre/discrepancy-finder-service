@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 import com.dfs.impl.DiscrepancyFinder;
 import com.dfs.model.DiscrepancyRules;
 import com.dfs.model.Rule;
+import com.dfs.report.ExcelReport;
 import com.dfs.util.Constants;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
@@ -110,7 +111,7 @@ public class AppMain {
 							DiscrepancyFinder.writeRemidiatedFile(codeLineList, file, targetLocation);
 						System.out.println("Completed processing file '" + file.getName() + "'");
 					}
-					/*new ExcelReport().createReport(descrepancyDetailsList, targetLocation);*/
+					new ExcelReport().createReport(descrepancyDetailsList, targetLocation);
 					DiscrepancyFinder.writeDiscrepancyFile(descrepancyDetailsList, targetLocation);
 				} catch (IOException e) {
 					e.printStackTrace();
