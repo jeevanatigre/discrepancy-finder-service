@@ -40,11 +40,11 @@ Program takes four arguments
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
-| Java 6 | Spring 2.x | Weblogic migrate | Oracle 11 | Solaris 5.1 |
-| Java 7 | Spring 3.x | Websphere migrate | Oracle 12 | RHEL 5.0 |
-| Java 8 | Spring 4.x | Tomcat upgrade| SQL Server 2008 | RHEL 6.0 |
-| .NET 2.0 | JSP 1.x | | | 
-| .NET 3.0 | IE 1.8 | | |
+| Java 6 to 11 | Spring 2.x to 5.0 | Weblogic migrate | Oracle 11 | Solaris 5.1 |
+| Java 7 to 11| Spring 3.x to 5.0 | Websphere migrate | Oracle 12 | RHEL 5.0 |
+| Java 8 to 11 | Spring 4.x to 5.0 | Tomcat upgrade| SQL Server 2008 | RHEL 6.0 |
+| .NET 2.0  to 4.0| JSP 1.x to 2.0| | | 
+| .NET 3.0 to 4.0 | IE 1.8 to IE 11| | |
 
 See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-service/tree/master/rule-repository)
 
