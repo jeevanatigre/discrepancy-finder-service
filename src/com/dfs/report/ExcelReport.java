@@ -55,14 +55,10 @@ public class ExcelReport implements IReport {
 			HSSFSheet worksheet = workBook.getSheetAt(0);
 		    	   int lastRow=worksheet.getLastRowNum();
 		    	   Row row = worksheet.createRow(++lastRow);
-		    	   List<Discrepancy> discrepancyy = new ArrayList<>();
-		    	   discrepancyy.forEach(discrepancy -> System.out.println("filenmae"+discrepancy.getFileType()));
-		    	   discrepancyy.forEach(System.out::println);
 		    	   Iterator<Object> iterator = descrepancyDetailsList.iterator();
 		    	   Discrepancy discrepancy ;
 		    	   while (iterator.hasNext()) {
 		    		   discrepancy = (Discrepancy) iterator.next();
-		    	       System.out.println("name"+discrepancy);
 		    	       row.createCell(0).setCellValue(discrepancy.getFileType());
 				       row.createCell(1).setCellValue(discrepancy.getFileName());
 				       row.createCell(2).setCellValue(discrepancy.getLineNo());
@@ -74,7 +70,6 @@ public class ExcelReport implements IReport {
 				       row.createCell(8).setCellValue(discrepancy.getAutoRemediation());
 				       row.createCell(9).setCellValue(discrepancy.getTimeSavingsInMin());
 				       row = worksheet.createRow(++lastRow);
-				       System.out.println("row"+row.getRowNum());
 		    	   }
 			       output_file =new FileOutputStream(new File(targetLocation + "\\" +discrepancyReportFileName));  
 			       workBook.write(output_file);
