@@ -1,10 +1,12 @@
 <rules>
 	<rule type="text_finder" category = "Mandatory">
+		<file_operation_type value = "individual"/>
 		<file_pattern value = "*.java"/>
 		<text_pattern value = "import java.lang.Compiler;"/>
 		<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 	</rule>
 	<rule type="text_finder" category = "Optional">
+		<file_operation_type value = "individual"/>
 		<file_pattern value = "*.java"/>
 		<text_pattern value = "addItem"/>
 		<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
@@ -17,10 +19,10 @@
 	</rule>
 	 -->
 	<rule type="file_finder" category = "Optional">
+		<file_operation_type value = "batch"/>
 		<file_pattern value = "*.xml"/>
 		<files>
-			<file>spring.xml</file>
-			<file>applicationContext.xml</file>
+			<file>*.xml</file>
 		</files>
 		<remediation recommendation = "Move from xml based to annotation based configuration" complexity= "10" />
 	</rule>

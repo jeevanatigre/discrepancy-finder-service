@@ -28,6 +28,9 @@ public class Rule {
 
     @JacksonXmlElementWrapper(localName = "remediation", useWrapping = false)
     private Remediation remediation;
+    
+    @JacksonXmlElementWrapper(localName = "file_operation_type", useWrapping = false)
+    private FileOperationType file_operation_type;
 
     public String getType() {
         return type;
@@ -85,7 +88,15 @@ public class Rule {
         this.remediation = remediation;
     }
 
-    public Rule() {
+	public FileOperationType getFile_operation_type() {
+		return file_operation_type;
+	}
+
+	public void setFile_operation_type(FileOperationType file_operation_type) {
+		this.file_operation_type = file_operation_type;
+	}
+
+	public Rule() {
     }
 
     public Rule(String type, String  category) {
@@ -95,7 +106,7 @@ public class Rule {
 
     @Override public String toString() {
         return "Rule{" + "complexity='" + complexity + '\'' + "file_pattern='" + file_pattern + '\'' +
-                + '\'' + "file='" + file + '\'' +
+                + '\'' + "file='" + file + '\'' + "file_operation_type=" + file_operation_type +
                 "text_pattern='" + text_pattern + '\'' + "remediation='" + remediation + '\'' + '}';
     }
 }
