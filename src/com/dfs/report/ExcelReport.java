@@ -56,19 +56,18 @@ public class ExcelReport implements IReport {
 		    	   int lastRow=worksheet.getLastRowNum();
 		    	   Row row = worksheet.createRow(++lastRow);
 		    	   Iterator<Object> iterator = descrepancyDetailsList.iterator();
-		    	   Discrepancy discrepancy ;
 		    	   while (iterator.hasNext()) {
-		    		   discrepancy = (Discrepancy) iterator.next();
-		    	       row.createCell(0).setCellValue(discrepancy.getFileType());
-				       row.createCell(1).setCellValue(discrepancy.getFileName());
-				       row.createCell(2).setCellValue(discrepancy.getLineNo());
-				       row.createCell(3).setCellValue(discrepancy.getCategory());
-				       row.createCell(4).setCellValue(discrepancy.getRuleType());
-				       row.createCell(5).setCellValue(discrepancy.getPattern());
-				       row.createCell(6).setCellValue(discrepancy.getRecommendation());
-				       row.createCell(7).setCellValue(discrepancy.getComplexity());
-				       row.createCell(8).setCellValue(discrepancy.getAutoRemediation());
-				       row.createCell(9).setCellValue(discrepancy.getTimeSavingsInMin());
+		    		   Object discrepancy = iterator.next();
+		    	       row.createCell(0).setCellValue(((Discrepancy) discrepancy).getFileType());
+				       row.createCell(1).setCellValue(((Discrepancy) discrepancy).getFileName());
+				       row.createCell(2).setCellValue(((Discrepancy) discrepancy).getLineNo());
+				       row.createCell(3).setCellValue(((Discrepancy) discrepancy).getCategory());
+				       row.createCell(4).setCellValue(((Discrepancy) discrepancy).getRuleType());
+				       row.createCell(5).setCellValue(((Discrepancy) discrepancy).getPattern());
+				       row.createCell(6).setCellValue(((Discrepancy) discrepancy).getRecommendation());
+				       row.createCell(7).setCellValue(((Discrepancy) discrepancy).getComplexity());
+				       row.createCell(8).setCellValue(((Discrepancy) discrepancy).getAutoRemediation());
+				       row.createCell(9).setCellValue(((Discrepancy) discrepancy).getTimeSavingsInMin());
 				       row = worksheet.createRow(++lastRow);
 		    	   }
 			       output_file =new FileOutputStream(new File(targetLocation + "\\" +discrepancyReportFileName));  
