@@ -92,7 +92,6 @@ public class DiscrepancyFinder implements DiscrepancyFinderService{
 	}
 
 	public void writeDiscrepancyFile(List<Object> descrepancyDetailsList, String targetLocation) {
-		// System.out.println("Creating txt report at given target location");
 		File dir = new File(targetLocation);
 		if (!dir.exists())
 			dir.mkdirs();
@@ -102,8 +101,6 @@ public class DiscrepancyFinder implements DiscrepancyFinderService{
 			discrepancyList.add(discrepancy.toString());
 		try {
 			Files.write(file, discrepancyList, StandardCharsets.UTF_8);
-			// System.out.println("Created txt report at given target location
-			// successfully");
 		} catch (IOException e) {
 			System.out.println("Failed creating discrepancy txt file at given target location");
 			e.printStackTrace();
