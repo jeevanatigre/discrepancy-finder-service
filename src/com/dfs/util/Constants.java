@@ -9,5 +9,6 @@ public class Constants {
 	public static final String OPTIONAL = "optional";
 	public static enum FILE_OPERATION { batch, individual };
 	public static enum REQUIRED_LISTS { codeLineList, discrepancyDetailsList, removeDiscrepancyList };
+	public static enum REMIDIATION_ENUM { import_statement, method_pattern, batch_operation };
 
 }
