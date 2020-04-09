@@ -85,10 +85,10 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 
 	private void ruleInfo(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
 			List<Object> discrepancyDetailsList, List<Object> removeDiscrepancyList,
-			RemidiationPattern remidiationPattern) {
+			RemidiationPattern remidiationPattern){
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
 			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-			if (textValue != null ){
+			if (textValue != null && file.getName().matches("pom.xml")){
 				int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
 				discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
 						discrepancyLineNumber, file, args));
