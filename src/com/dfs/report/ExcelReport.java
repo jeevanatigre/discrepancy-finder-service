@@ -37,7 +37,7 @@ public class ExcelReport implements IReport {
 	public void createReport(List<Object> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
 		System.out.println("Creating discrepency report 'discrepancy-list.xls'");
 		String discrepancyReportFileName = "discrepancy-list.xls";
-		ExcelReport.copyFile(targetLocation);
+		copyFile(targetLocation);
 		FileInputStream inputStream;
 		FileOutputStream output_file;
 		FileInputStream myxls = new FileInputStream(targetLocation + "\\" +discrepancyReportFileName);
@@ -85,9 +85,10 @@ public class ExcelReport implements IReport {
 			   }
 	}
         
-public static void copyFile(String targetLocation) throws IOException {
+public void copyFile(String targetLocation) throws IOException {
 	       String discrepancyReportFileName = "discrepancy-list.xls";
-	       String resourcesFileLocation = "resources\\\\sample-report.xls";
+	       // String resourcesFileLocation = "resources\\\\sample-report.xls";
+	       String resourcesFileLocation = this.getClass().getClassLoader().getResource("sample-report.xls").getFile();
 	try {
 		    Files.deleteIfExists(Paths.get(targetLocation+ "\\" +discrepancyReportFileName)); 
 		    File dir = new File(targetLocation);
