@@ -2,9 +2,9 @@ import java.sql.Statement;
 import org.apache.xmlbeans.Filer;
 import java.lang.Compiler; 
 import java.lang.defr;
-import java.rmi.registry.RegistryHandler
-import java.rmi.server.LoaderHandler
-import java.rmi.server.RemoteCall
+import java.rmi.registry.RegistryHandler;
+import java.rmi.server.LoaderHandler;
+import java.rmi.server.RemoteCall;
 import java.rmi.server.ServerRef;
 import java.rmi.server.Skeleton;
 import javax.security.auth.Policy;

@@ -112,7 +112,7 @@ public class AppMain {
 				}
 				System.out.println("Processing file '" + file.getName() + "'");
 				for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
-					if(ruleList.get(ruleIndex).getFile_operation_type().getValue().equalsIgnoreCase(Constants.FILE_OPERATION.individual.toString())) {
+					if(ruleList.get(ruleIndex).getType().equalsIgnoreCase(Constants.FILE_OPERATION.text_finder.toString())) {
 						listDetailsMap = new DiscrepancyFinder().findDiscrepancy(file, findOrRemediateMode, ruleList.get(ruleIndex), sourceLocation, targetLocation, args, codeLineList);
 						descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
 						removeDiscrepancyList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.removeDiscrepancyList.toString()));
@@ -126,7 +126,7 @@ public class AppMain {
 				System.out.println("Completed processing file '" + file.getName() + "'");
 			}
 			for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
-				if (ruleList.get(ruleIndex).getFile_operation_type().getValue().equalsIgnoreCase(Constants.FILE_OPERATION.batch.toString())) {
+				if (ruleList.get(ruleIndex).getType().equalsIgnoreCase(Constants.FILE_OPERATION.file_finder.toString())) {
 					listDetailsMap = new DiscrepancyFinder().fileBatchOperation(findOrRemediateMode, ruleList.get(ruleIndex), sourceLocation, targetLocation, args);
 					descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
 				}
