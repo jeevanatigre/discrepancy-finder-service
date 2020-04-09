@@ -33,46 +33,16 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			for (RemidiationPattern remidiationPattern : rule.getRemidiation_pattern()) {
 				if (remidiationPattern.getValue()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.import_statement.toString())) {
-					for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
-						String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-						if (textValue != null && codeLineList.contains(textValue)
-								&& remidiationPattern.getRemediation().getAction().trim()
-										.equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
-							int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
-							discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
-									discrepancyLineNumber, file, args));
-							if (findOrRemediateMode.equalsIgnoreCase("1")) {
-								removeDiscrepancyList.add(textValue);
-							}
-						}
-					}
-				} else if (remidiationPattern.getValue()
+					ruleImport(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
+							removeDiscrepancyList, remidiationPattern);
+				}else if (remidiationPattern.getValue()
+						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.information.toString())) {
+					ruleInfo(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
+							removeDiscrepancyList, remidiationPattern);
+				}else if (remidiationPattern.getValue()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.method_pattern.toString())) {
-					for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
-						String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-						if (textPattern != null && remidiationPattern.getRemediation().getAction().trim()
-								.equalsIgnoreCase(Constants.ACTION_ENUM.replace.toString())) {
-							String replaceCondition = remidiationPattern.getRemediation().getCondition().toLowerCase()
-									.trim();
-							List<Integer> deprecatedLineNumberList = new ArrayList<Integer>();
-							for (int lineCounter = 0; lineCounter < codeLineList.size(); lineCounter++) {
-								if (codeLineList.get(lineCounter).toString().contains(textValue))
-									deprecatedLineNumberList.add(lineCounter);
-							}
-							for (int lineNumber : deprecatedLineNumberList)
-								discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
-										lineNumber, file, args));
-							if (findOrRemediateMode.equalsIgnoreCase("1")) {
-								for (int lineNumber : deprecatedLineNumberList) {
-									if (codeLineList.get(lineNumber).toString().toLowerCase().trim()
-											.contains(replaceCondition.toLowerCase()))
-										codeLineList.set(lineNumber,
-												codeLineList.get(lineNumber).toString().replaceAll(textValue,
-														remidiationPattern.getRemediation().getReplace_with().trim()));
-								}
-							}
-						}
-					}
+					ruleMethod(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
+							remidiationPattern);
 				}
 			}
 			listDetailsMap.put(Constants.REQUIRED_LISTS.codeLineList.toString(), codeLineList);
@@ -84,30 +54,98 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		return listDetailsMap;
 	}
 
+	private void ruleMethod(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
+			List<Object> discrepancyDetailsList, RemidiationPattern remidiationPattern) {
+		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
+			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
+			if (textPattern != null && remidiationPattern.getRemediation().getAction().trim()
+					.equalsIgnoreCase(Constants.ACTION_ENUM.replace.toString())) {
+				String replaceCondition = remidiationPattern.getRemediation().getCondition().toLowerCase()
+						.trim();
+				List<Integer> deprecatedLineNumberList = new ArrayList<Integer>();
+				for (int lineCounter = 0; lineCounter < codeLineList.size(); lineCounter++) {
+					if (codeLineList.get(lineCounter).toString().contains(textValue))
+						deprecatedLineNumberList.add(lineCounter);
+				}
+				for (int lineNumber : deprecatedLineNumberList)
+					discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
+							lineNumber, file, args));
+				if (findOrRemediateMode.equalsIgnoreCase("1")) {
+					for (int lineNumber : deprecatedLineNumberList) {
+						if (codeLineList.get(lineNumber).toString().toLowerCase().trim()
+								.contains(replaceCondition.toLowerCase()))
+							codeLineList.set(lineNumber,
+									codeLineList.get(lineNumber).toString().replaceAll(textValue,
+											remidiationPattern.getRemediation().getReplace_with().trim()));
+					}
+				}
+			}
+		}
+	}
+
+	private void ruleInfo(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
+			List<Object> discrepancyDetailsList, List<Object> removeDiscrepancyList,
+			RemidiationPattern remidiationPattern) {
+		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
+			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
+			if (textValue != null ){
+				int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
+				discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
+						discrepancyLineNumber, file, args));
+				if (findOrRemediateMode.equalsIgnoreCase("1")) {
+					removeDiscrepancyList.add(textValue);
+				}
+			}
+		}
+	}
+
+	private void ruleImport(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
+			List<Object> discrepancyDetailsList, List<Object> removeDiscrepancyList,
+			RemidiationPattern remidiationPattern) {
+		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
+			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
+			if (textValue != null && codeLineList.contains(textValue)
+					&& remidiationPattern.getRemediation().getAction().trim()
+							.equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
+				int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
+				discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
+						discrepancyLineNumber, file, args));
+				if (findOrRemediateMode.equalsIgnoreCase("1")) {
+					removeDiscrepancyList.add(textValue);
+				}
+			}
+		}
+	}
+
 	public Discrepancy setDiscrepancyData(Rule rule, RemidiationPattern remidiationPattern, TextPattern textPattern,
 			int discrepancyLineNumber, File file, String[] args) {
 		Discrepancy discrepancy = new Discrepancy();
 		try {
-			discrepancy.setFileName(file.getName());
-			discrepancy.setFileType(file.getName().substring(file.getName().lastIndexOf('.')));
-			discrepancy.setLineNo(discrepancyLineNumber);
-			discrepancy.setCategory(rule.getCategory() == null ? "" : rule.getCategory());
-			discrepancy.setRuleType(rule.getType() == null ? "" : rule.getType());
-			if (rule.getFile_operation_type().getValue()
-					.equalsIgnoreCase(Constants.FILE_OPERATION.individual.toString()))
-				discrepancy.setPattern(textPattern.getValue() == null ? "" : textPattern.getValue().trim());
-			discrepancy.setRecommendation(remidiationPattern.getRemediation() == null ? ""
-					: remidiationPattern.getRemediation().getRecommendation());
-			discrepancy.setComplexity(remidiationPattern.getRemediation().getComplexity() == null ? 0
-					: Integer.parseInt(remidiationPattern.getRemediation().getComplexity()));
-			discrepancy.setAutoRemediation(((remidiationPattern.getRemediation().getSavings() == null)
-					|| (remidiationPattern.getRemediation().getSavings().equalsIgnoreCase("0")) ? 0 : 1));
-			discrepancy.setTimeSavingsInMin(remidiationPattern.getRemediation().getSavings() == null ? 0
-					: Integer.parseInt(remidiationPattern.getRemediation().getSavings()));
+			addData(rule, remidiationPattern, textPattern, discrepancyLineNumber, file, discrepancy);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return discrepancy;
+	}
+
+	private void addData(Rule rule, RemidiationPattern remidiationPattern, TextPattern textPattern,
+			int discrepancyLineNumber, File file, Discrepancy discrepancy) {
+		discrepancy.setFileName(file.getName());
+		discrepancy.setFileType(file.getName().substring(file.getName().lastIndexOf('.')));
+		discrepancy.setLineNo(discrepancyLineNumber);
+		discrepancy.setCategory(rule.getCategory() == null ? "" : rule.getCategory());
+		discrepancy.setRuleType(rule.getType() == null ? "" : rule.getType());
+		if (rule.getFile_operation_type().getValue()
+				.equalsIgnoreCase(Constants.FILE_OPERATION.individual.toString()))
+			discrepancy.setPattern(textPattern.getValue() == null ? "" : textPattern.getValue().trim());
+		discrepancy.setRecommendation(remidiationPattern.getRemediation() == null ? ""
+				: remidiationPattern.getRemediation().getRecommendation());
+		discrepancy.setComplexity(remidiationPattern.getRemediation().getComplexity() == null ? 0
+				: Integer.parseInt(remidiationPattern.getRemediation().getComplexity()));
+		discrepancy.setAutoRemediation(((remidiationPattern.getRemediation().getSavings() == null)
+				|| (remidiationPattern.getRemediation().getSavings().equalsIgnoreCase("0")) ? 0 : 1));
+		discrepancy.setTimeSavingsInMin(remidiationPattern.getRemediation().getSavings() == null ? 0
+				: Integer.parseInt(remidiationPattern.getRemediation().getSavings()));
 	}
 
 	public void writeDiscrepancyFile(List<Object> descrepancyDetailsList, String targetLocation) {

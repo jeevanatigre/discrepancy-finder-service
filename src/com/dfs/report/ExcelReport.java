@@ -37,7 +37,7 @@ public class ExcelReport implements IReport {
 	public void createReport(List<Object> descrepancyDetailsList , String targetLocation) throws InvalidFormatException, IOException {
 		System.out.println("Creating discrepency report 'discrepancy-list.xls'");
 		String discrepancyReportFileName = "discrepancy-list.xls";
-		ExcelReport.copyFileAtOutputLocation(targetLocation);
+		ExcelReport.copyFile(targetLocation);
 		FileInputStream inputStream;
 		FileOutputStream output_file;
 		FileInputStream myxls = new FileInputStream(targetLocation + "\\" +discrepancyReportFileName);
@@ -52,24 +52,7 @@ public class ExcelReport implements IReport {
 		int autoRemediation=0;
 		int timeSavingsInMin=0;
 		try {
-			HSSFSheet worksheet = workBook.getSheetAt(0);
-		    	   int lastRow=worksheet.getLastRowNum();
-		    	   Row row = worksheet.createRow(++lastRow);
-		    	   Iterator<Object> iterator = descrepancyDetailsList.iterator();
-		    	   while (iterator.hasNext()) {
-		    		   Object discrepancy = iterator.next();
-		    	       row.createCell(0).setCellValue(((Discrepancy) discrepancy).getFileType());
-				       row.createCell(1).setCellValue(((Discrepancy) discrepancy).getFileName());
-				       row.createCell(2).setCellValue(((Discrepancy) discrepancy).getLineNo());
-				       row.createCell(3).setCellValue(((Discrepancy) discrepancy).getCategory());
-				       row.createCell(4).setCellValue(((Discrepancy) discrepancy).getRuleType());
-				       row.createCell(5).setCellValue(((Discrepancy) discrepancy).getPattern());
-				       row.createCell(6).setCellValue(((Discrepancy) discrepancy).getRecommendation());
-				       row.createCell(7).setCellValue(((Discrepancy) discrepancy).getComplexity());
-				       row.createCell(8).setCellValue(((Discrepancy) discrepancy).getAutoRemediation());
-				       row.createCell(9).setCellValue(((Discrepancy) discrepancy).getTimeSavingsInMin());
-				       row = worksheet.createRow(++lastRow);
-		    	   }
+			addData(descrepancyDetailsList, workBook);
 			       output_file =new FileOutputStream(new File(targetLocation + "\\" +discrepancyReportFileName));  
 			       workBook.write(output_file);
 			       output_file.close();
@@ -80,8 +63,29 @@ public class ExcelReport implements IReport {
 			ex.printStackTrace();
 		}
 	}
+
+	private void addData(List<Object> descrepancyDetailsList, HSSFWorkbook workBook) {
+		HSSFSheet worksheet = workBook.getSheetAt(0);
+			   int lastRow=worksheet.getLastRowNum();
+			   Row row = worksheet.createRow(++lastRow);
+			   Iterator<Object> iterator = descrepancyDetailsList.iterator();
+			   while (iterator.hasNext()) {
+				   Object discrepancy = iterator.next();
+			       row.createCell(0).setCellValue(((Discrepancy) discrepancy).getFileType());
+			       row.createCell(1).setCellValue(((Discrepancy) discrepancy).getFileName());
+			       row.createCell(2).setCellValue(((Discrepancy) discrepancy).getLineNo());
+			       row.createCell(3).setCellValue(((Discrepancy) discrepancy).getCategory());
+			       row.createCell(4).setCellValue(((Discrepancy) discrepancy).getRuleType());
+			       row.createCell(5).setCellValue(((Discrepancy) discrepancy).getPattern());
+			       row.createCell(6).setCellValue(((Discrepancy) discrepancy).getRecommendation());
+			       row.createCell(7).setCellValue(((Discrepancy) discrepancy).getComplexity());
+			       row.createCell(8).setCellValue(((Discrepancy) discrepancy).getAutoRemediation());
+			       row.createCell(9).setCellValue(((Discrepancy) discrepancy).getTimeSavingsInMin());
+			       row = worksheet.createRow(++lastRow);
+			   }
+	}
         
-public static void copyFileAtOutputLocation(String targetLocation) throws IOException {
+public static void copyFile(String targetLocation) throws IOException {
 	       String discrepancyReportFileName = "discrepancy-list.xls";
 	       String resourcesFileLocation = "resources\\\\sample-report.xls";
 	try {
