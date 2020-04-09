@@ -17,7 +17,9 @@
 		<file_pattern value = "*.xml"/>
 		<remidiation_pattern value = "batch_operation">
 			<files>
-				<file>*.xml</file>
+				<file>applicationContext.xml</file>
+				<!-- <file>*.xml</file> -->
+				<file>spring.xml</file>
 			</files>
 			<remediation recommendation = "Move from xml based to annotation based configuration" complexity= "10" />
 		</remidiation_pattern>

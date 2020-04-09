@@ -151,11 +151,20 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		try {
 			for (RemidiationPattern remidiationPattern : rule.getRemidiation_pattern()) {
 				for (String fileExtension : remidiationPattern.getFile()) {
-					DirectoryStream<Path> files = Files.newDirectoryStream(Paths.get(sourceLocation),
-							path -> path.toString().endsWith(fileExtension.substring(fileExtension.lastIndexOf('.'))));
-					for (Path file : files) {
-						discrepancyDetailsList
-								.add(setDiscrepancyData(rule, remidiationPattern, null, 0, file.toFile(), args));
+					if(fileExtension.contains("*.")) {
+						DirectoryStream<Path> files = Files.newDirectoryStream(Paths.get(sourceLocation),
+								path -> path.toString().endsWith(fileExtension.substring(fileExtension.lastIndexOf('.'))));
+						for (Path file : files) {
+							discrepancyDetailsList
+									.add(setDiscrepancyData(rule, remidiationPattern, null, 0, file.toFile(), args));
+						}
+					} else {
+						DirectoryStream<Path> files = Files.newDirectoryStream(Paths.get(sourceLocation),
+								path -> path.toString().toLowerCase().contains(fileExtension.toLowerCase()));
+						for (Path file : files) {
+							discrepancyDetailsList
+									.add(setDiscrepancyData(rule, remidiationPattern, null, 0, file.toFile(), args));
+						}
 					}
 				}
 			}
