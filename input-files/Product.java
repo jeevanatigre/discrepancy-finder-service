@@ -2,6 +2,19 @@ import java.sql.Statement;
 import org.apache.xmlbeans.Filer;
 import java.lang.Compiler; 
 import java.lang.defr;
+import java.rmi.registry.RegistryHandler
+import java.rmi.server.LoaderHandler
+import java.rmi.server.RemoteCall
+import java.rmi.server.ServerRef;
+import java.rmi.server.Skeleton;
+import javax.security.auth.Policy;
+import java.xml.ws;
+import java.xml.bind;
+import java.activation;
+import java.xml.ws.annotation;
+import com.sun.javadoc.AnnotatedType;
+import com.sun.javadoc.AnnotationDesc;
+import com.sun.javadoc.LanguageVersion;
 public class Product 
 { 
     public static void main(String[] args) 

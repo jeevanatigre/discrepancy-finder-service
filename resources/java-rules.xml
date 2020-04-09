@@ -2,14 +2,18 @@
 	<rule type="text_finder" category = "Mandatory">
 		<file_operation_type value = "individual"/>
 		<file_pattern value = "*.java"/>
-		<remidiation_pattern value = "import_statement">
+		<remidiation_pattern value = "remove">
 			<text_pattern value = "import java.lang.Compiler;"/>
 			<text_pattern value = "import javax.management.AttributeNotFoundException;"/>
 			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 		</remidiation_pattern>
-		<remidiation_pattern value = "method_pattern">
+		<remidiation_pattern value = "replace">
 			<text_pattern value = "addItem"/>
 			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
+		</remidiation_pattern>
+		<remidiation_pattern value = "replace">
+			<text_pattern value = "import com.sun.javadoc.AnnotatedType;"/>
+			<remediation recommendation = "Replace this import with import javax.lang.model.type.Type;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.type.Type;" condition = "import" savings="2"/>
 		</remidiation_pattern>
 	</rule>
 	<rule type="file_finder" category = "Optional">

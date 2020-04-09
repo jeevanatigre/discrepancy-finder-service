@@ -1,4 +1,13 @@
 import java.lang.defr;
+import mail.mime.charset;
+import saaj.mime.optimization;
+import saaj.lazy.contentlength;
+import saaj.lazy.contentlength;
+import saaj.lazy.mime.optimization;
+import jdk.xml.bind;
+import com.sun.javadoc.AnnotationDesc;
+import com.sun.javadoc.ExecutableMemberDoc;
+import com.sun.javadoc.LanguageVersion;
 public class NewClass 
 { 
     public static void main(String[] args) 

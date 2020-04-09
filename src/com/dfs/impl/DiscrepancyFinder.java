@@ -32,16 +32,16 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			List<Object> removeDiscrepancyList = new ArrayList<Object>();
 			for (RemidiationPattern remidiationPattern : rule.getRemidiation_pattern()) {
 				if (remidiationPattern.getValue()
-						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.import_statement.toString())) {
-					ruleImport(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
+						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.remove.toString())) {
+					ruleRemove(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
 							removeDiscrepancyList, remidiationPattern);
 				}else if (remidiationPattern.getValue()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.information.toString())) {
 					ruleInfo(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
 							removeDiscrepancyList, remidiationPattern);
 				}else if (remidiationPattern.getValue()
-						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.method_pattern.toString())) {
-					ruleMethod(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
+						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.replace.toString())) {
+					ruleReplace(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
 							remidiationPattern);
 				}
 			}
@@ -54,7 +54,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		return listDetailsMap;
 	}
 
-	private void ruleMethod(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
+	private void ruleReplace(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
 			List<Object> discrepancyDetailsList, RemidiationPattern remidiationPattern) {
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
 			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
@@ -99,7 +99,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		}
 	}
 
-	private void ruleImport(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
+	private void ruleRemove(File file, String findOrRemediateMode, Rule rule, String[] args, List<Object> codeLineList,
 			List<Object> discrepancyDetailsList, List<Object> removeDiscrepancyList,
 			RemidiationPattern remidiationPattern) {
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
