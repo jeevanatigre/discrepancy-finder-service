@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import com.dfs.impl.DiscrepancyFinder;
 import com.dfs.model.DiscrepancyRules;
 import com.dfs.model.Rule;
@@ -70,9 +72,7 @@ public class AppMain {
 
 	public void discrepancyFinder(File javaRulrXml, String[] args) {
 		try {
-			List<String> result = null;
 			List<Object> descrepancyDetailsList = new ArrayList<Object>();
-			List<Object> codeLineList;
 			List<String> xmlCodeLineList = new ArrayList<String>();
 			Scanner scanner;
 			scanner = new Scanner(javaRulrXml);
@@ -85,47 +85,55 @@ public class AppMain {
 			xmlCodeLineList.forEach(xml::append);
 			DiscrepancyRules discrepancyRules = xmlMapper.readValue(xml.toString(), DiscrepancyRules.class);
 			List<Rule> ruleList = discrepancyRules.getRule();
-			Map<String, List<Object>> listDetailsMap = new HashMap<String, List<Object>>();
-			List<Object> removeDiscrepancyList;
 			if (ruleList.size() > 0) {
-				try (Stream<Path> walk = Files.walk(Paths.get(sourceLocation))) {
-					result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
-					for (String fileName : result) {
-						codeLineList = new ArrayList<Object>();
-						removeDiscrepancyList = new ArrayList<Object>();
-						File file = new File(fileName);
-						scanner = new Scanner(new File(sourceLocation + "\\" + file.getName()));
-						while (scanner.hasNextLine()) {
-							codeLineList.add(scanner.nextLine().trim());
-						}
-						System.out.println("Processing file '" + file.getName() + "'");
-						for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
-							if(ruleList.get(ruleIndex).getFile_operation_type().getValue().equalsIgnoreCase(Constants.FILE_OPERATION.individual.toString())) {
-								listDetailsMap = new DiscrepancyFinder().findDiscrepancy(file, findOrRemediateMode, ruleList.get(ruleIndex), sourceLocation, targetLocation, args, codeLineList);
-								descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
-								removeDiscrepancyList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.removeDiscrepancyList.toString()));
-								codeLineList = listDetailsMap.get(Constants.REQUIRED_LISTS.codeLineList.toString());
-								for (Object discrepancy : removeDiscrepancyList)
-									codeLineList.removeAll(Collections.singleton(discrepancy.toString()));
-							}
-						}
-						if (findOrRemediateMode.equalsIgnoreCase("1")) 
-							new DiscrepancyFinder().writeRemidiatedFile(codeLineList, file, targetLocation);
-						System.out.println("Completed processing file '" + file.getName() + "'");
-					}
-					for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
-						if (ruleList.get(ruleIndex).getFile_operation_type().getValue().equalsIgnoreCase(Constants.FILE_OPERATION.batch.toString())) {
-							listDetailsMap = new DiscrepancyFinder().fileBatchOperation(findOrRemediateMode, ruleList.get(ruleIndex), sourceLocation, targetLocation, args);
-							descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
-						}
-					}
-					new ExcelReport().createReport(descrepancyDetailsList, targetLocation);
-					new DiscrepancyFinder().writeDiscrepancyFile(descrepancyDetailsList, targetLocation);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				readInputFile(args, descrepancyDetailsList, ruleList);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void readInputFile(String[] args, List<Object> descrepancyDetailsList, List<Rule> ruleList)
+			throws InvalidFormatException {
+		Map<String, List<Object>> listDetailsMap = new HashMap<String, List<Object>>();
+		List<Object> removeDiscrepancyList;
+		List<String> result;
+		List<Object> codeLineList;
+		Scanner scanner;
+		try (Stream<Path> walk = Files.walk(Paths.get(sourceLocation))) {
+			result = walk.filter(Files::isRegularFile).map(x -> x.toString()).collect(Collectors.toList());
+			for (String fileName : result) {
+				codeLineList = new ArrayList<Object>();
+				removeDiscrepancyList = new ArrayList<Object>();
+				File file = new File(fileName);
+				scanner = new Scanner(new File(sourceLocation + "\\" + file.getName()));
+				while (scanner.hasNextLine()) {
+					codeLineList.add(scanner.nextLine().trim());
+				}
+				System.out.println("Processing file '" + file.getName() + "'");
+				for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
+					if(ruleList.get(ruleIndex).getFile_operation_type().getValue().equalsIgnoreCase(Constants.FILE_OPERATION.individual.toString())) {
+						listDetailsMap = new DiscrepancyFinder().findDiscrepancy(file, findOrRemediateMode, ruleList.get(ruleIndex), sourceLocation, targetLocation, args, codeLineList);
+						descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
+						removeDiscrepancyList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.removeDiscrepancyList.toString()));
+						codeLineList = listDetailsMap.get(Constants.REQUIRED_LISTS.codeLineList.toString());
+						for (Object discrepancy : removeDiscrepancyList)
+							codeLineList.removeAll(Collections.singleton(discrepancy.toString()));
+					}
+				}
+				if (findOrRemediateMode.equalsIgnoreCase("1")) 
+					new DiscrepancyFinder().writeRemidiatedFile(codeLineList, file, targetLocation);
+				System.out.println("Completed processing file '" + file.getName() + "'");
+			}
+			for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
+				if (ruleList.get(ruleIndex).getFile_operation_type().getValue().equalsIgnoreCase(Constants.FILE_OPERATION.batch.toString())) {
+					listDetailsMap = new DiscrepancyFinder().fileBatchOperation(findOrRemediateMode, ruleList.get(ruleIndex), sourceLocation, targetLocation, args);
+					descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
+				}
+			}
+			new ExcelReport().createReport(descrepancyDetailsList, targetLocation);
+			new DiscrepancyFinder().writeDiscrepancyFile(descrepancyDetailsList, targetLocation);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
