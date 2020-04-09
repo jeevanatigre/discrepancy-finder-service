@@ -1,0 +1,45 @@
+<rules>
+	<rule type="text_finder" category = "Mandatory">
+		<file_operation_type value = "individual"/>
+		<file_pattern value = "*.java"/>
+		<remidiation_pattern value = "import_statement">
+			<text_pattern value = "import java.rmi.registry.RegistryHandler;"/>
+			<text_pattern value = "import java.rmi.server.LoaderHandler;"/>
+			<text_pattern value = "import java.rmi.server.RemoteCall;"/>
+			<text_pattern value = "import java.rmi.server.ServerRef;"/>
+			<text_pattern value = "import java.rmi.server.Skeleton;"/>
+			<text_pattern value = "import javax.security.auth.Policy;"/>
+			<text_pattern value = "import java.xml.ws;"/>
+			<text_pattern value = "import java.xml.bind;"/>
+			<text_pattern value = "import java.activation;"/>
+			<text_pattern value = "import java.xml.ws.annotation;"/>
+			<text_pattern value = "import java.corba;"/>
+			<text_pattern value = "import java.transaction;"/>
+			<text_pattern value = "import java.se.ee;"/>
+			<text_pattern value = "import sun.locale.formatasdefault;"/>
+			<text_pattern value = "import jdk.xml.ws;"/>
+			<text_pattern value = "import com.sun.xml.internal.ws.client.ContentNegotiation;"/>
+			<text_pattern value = "import com.sun.xml.internal.ws.legacyWebMethod;"/>
+			<text_pattern value = "import javax.xml.bind.context.factory;"/>
+			<text_pattern value = "import javax.xml.bind.JAXBContext;"/>
+			<text_pattern value = "import javax.xml.soap.MetaFactory;"/>
+			<text_pattern value = "import javax.xml.ws.spi.Provider;"/>
+			<text_pattern value = "import jaxb.fragment;"/>
+			<text_pattern value = "import jaxb.noNamespaceSchemaLocation;"/>
+			<text_pattern value = "import jaxb.schemaLocation;"/>
+			<text_pattern value = "import jaxb.formatted.output;"/>
+			<text_pattern value = "import jaxb.encoding;"/>
+			<text_pattern value = "import mail.mime.decodetext.strict;"/>
+			<text_pattern value = "import mail.mime.encodeeol.strict;"/>
+			<text_pattern value = "import mail.mime.foldencodedwords;"/>
+			<text_pattern value = "import mail.mime.foldtext;"/>
+			<text_pattern value = "import mail.mime.charset;"/>
+			<text_pattern value = "import saaj.mime.optimization;"/>
+			<text_pattern value = "import saaj.lazy.contentlength;"/>
+			<text_pattern value = "import saaj.lazy.contentlength;"/>
+			<text_pattern value = "import saaj.lazy.mime.optimization;"/>
+			<text_pattern value = "import jdk.xml.bind;"/>
+			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
+		</remidiation_pattern>
+	</rule>
+</rules>
