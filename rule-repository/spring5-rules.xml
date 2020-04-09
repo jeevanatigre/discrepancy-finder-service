@@ -1,0 +1,38 @@
+<rules>
+<rule type="text_finder" category = "Mandatory">
+		<file_operation_type value = "individual"/>
+		<file_pattern value = "*.java"/>
+		<remidiation_pattern value = "import_statement">
+			<text_pattern value = "import org.apache.xmlbeans.Filer;"/>
+			<text_pattern value = "import javax.portlet;"/>
+			<text_pattern value = "import com.liferay.portal.kernel.util;"/>
+			<text_pattern value = "import org.apache.velocity;"/>
+			<text_pattern value = "import net.sf.jasperreports;"/>
+			<text_pattern value = "import javax.xml.namespace;"/>
+			<text_pattern value = "import org.apache.xmlbeans;"/>
+			<text_pattern value = "import org.apache.xmlbeans.soap;"/>
+			<text_pattern value = "import import javax.jdo;"/>
+			<text_pattern value = "import com.google.common.annotations;"/>
+			<text_pattern value = "import com.google.common.base;"/>
+			<text_pattern value = "import com.google.common.collect;"/>
+			<text_pattern value = "import com.google.common.io;"/>
+			<text_pattern value = "import com.google.common.primitives;"/>
+			<text_pattern value = "import com.google.common.util.concurrent;"/>
+			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
+		</remidiation_pattern>
+		<remidiation_pattern value = "method_pattern">
+			<text_pattern value = "addItem"/>
+			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
+		</remidiation_pattern>
+		</rule>
+		<rule type="file_finder" category = "Optional">
+		<file_operation_type value = "batch"/>
+		<file_pattern value = "*.xml"/>
+		<remidiation_pattern value = "batch_operation">
+			<files>
+				<file>*.xml</file>
+			</files>
+			<remediation recommendation = "Move from xml based to annotation based configuration" complexity= "10" />
+		</remidiation_pattern>
+	</rule>
+</rules>
