@@ -88,7 +88,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			RemidiationPattern remidiationPattern){
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
 			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-			if (textValue != null && file.getName().matches("pom.xml")){
+			if (textValue != null && file.getName().matches(Constants.FILE_TYPE)){
 				int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
 				discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
 						discrepancyLineNumber, file, args));
