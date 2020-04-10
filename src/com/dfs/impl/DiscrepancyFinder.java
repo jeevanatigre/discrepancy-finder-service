@@ -30,7 +30,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 
 		try {
 			List<Object> removeDiscrepancyList = new ArrayList<Object>();
-			for (RemidiationPattern remidiationPattern : rule.getRemidiation_pattern()) {
+			for (RemidiationPattern remidiationPattern : rule.getPattern_list()) {
 				if (remidiationPattern.getValue()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.remove.toString())) {
 					ruleRemove(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
@@ -184,7 +184,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		Map<String, List<Object>> listDetailsMap = new HashMap<String, List<Object>>();
 		List<Object> discrepancyDetailsList = new ArrayList<Object>();
 		try {
-			for (RemidiationPattern remidiationPattern : rule.getRemidiation_pattern()) {
+			for (RemidiationPattern remidiationPattern : rule.getPattern_list()) {
 				for (String fileExtension : remidiationPattern.getFile()) {
 					if(fileExtension.contains("*.")) {
 						DirectoryStream<Path> files = Files.newDirectoryStream(Paths.get(sourceLocation),

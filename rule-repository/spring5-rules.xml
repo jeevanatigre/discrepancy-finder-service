@@ -1,7 +1,7 @@
 <rules>
 <rule type="text_finder" category = "Mandatory">
 		<file_pattern value = "*.java"/>
-		<remidiation_pattern value = "remove">
+		<pattern_list value = "remove">
 			<text_pattern value = "import org.apache.xmlbeans;"/>
 			<text_pattern value = "import org.apache.xmlbeans.Filer;"/>
 			<text_pattern value = "import org.apache.xmlbeans.impl.common;"/>
@@ -66,19 +66,19 @@
 			<text_pattern value = "import com.google.common.primitives;"/>
 			<text_pattern value = "import com.google.common.util.concurrent;"/>
 			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
-		</remidiation_pattern>
-		<remidiation_pattern value = "method_pattern">
+		</pattern_list>
+		<pattern_list value = "method_pattern">
 			<text_pattern value = "addItem"/>
 			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
-		</remidiation_pattern>
+		</pattern_list>
 		</rule>
 		<rule type="text_finder" category = "Optional">
 		<file_pattern value = "pom.xml"/>
-		<remidiation_pattern value = "information">
+		<pattern_list value = "information">
 			<text_pattern value = "jms-api"/>
 			<text_pattern value = "hibernate-jpa-1.1-api"/>
 			<text_pattern value = "javax.servlet-api"/>
 			<remediation recommendation = "Update jar version as per recommendation" complexity= "1" savings="1"/>
-		</remidiation_pattern>
+		</pattern_list>
 		</rule>
 </rules>

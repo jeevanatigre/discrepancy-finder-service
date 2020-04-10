@@ -1,7 +1,7 @@
 <rules>
 	<rule type="text_finder" category = "Mandatory">
 		<file_pattern value = "*.java"/>
-		<remidiation_pattern value = "remove">
+		<pattern_list value = "remove">
 			<text_pattern value = "import java.rmi.registry.RegistryHandler;"/>
 			<text_pattern value = "import java.rmi.server.LoaderHandler;"/>
 			<text_pattern value = "import java.rmi.server.RemoteCall;"/>
@@ -39,22 +39,22 @@
 			<text_pattern value = "import saaj.lazy.mime.optimization;"/>
 			<text_pattern value = "import jdk.xml.bind;"/>
 			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
-		</remidiation_pattern>
-		<remidiation_pattern value = "replace">
+		</pattern_list>
+		<pattern_list value = "replace">
 			<text_pattern value = "import com.sun.javadoc.AnnotatedType;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.type.Type;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.type.Type;" condition = "import" savings="2"/>
-		</remidiation_pattern>
-		<remidiation_pattern value = "replace">
+		</pattern_list>
+		<pattern_list value = "replace">
 			<text_pattern value = "import com.sun.javadoc.AnnotationDesc;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.element.AnnotationMirror;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.element.AnnotationMirror;" condition = "import" savings="2"/>
-		</remidiation_pattern>
-		<remidiation_pattern value = "replace">
+		</pattern_list>
+		<pattern_list value = "replace">
 			<text_pattern value = "import com.sun.javadoc.ExecutableMemberDoc;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.element.ExecutableElement;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.element.ExecutableElement;" condition = "import" savings="2"/>
-		</remidiation_pattern>
-		<remidiation_pattern value = "replace">
+		</pattern_list>
+		<pattern_list value = "replace">
 			<text_pattern value = "import com.sun.javadoc.LanguageVersion;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.SourceVersion;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.SourceVersion;" condition = "import" savings="2"/>
-		</remidiation_pattern>
+		</pattern_list>
 	</rule>
 </rules>
