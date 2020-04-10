@@ -170,12 +170,10 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			dir.mkdirs();
 		Path file = Paths.get(targetLocation + "\\remediated-" + inputFile.getName());
 		try {
-			if (!inputFile.getName().substring(inputFile.getName().lastIndexOf('.')).equalsIgnoreCase(".xml")) {
-				System.out.println("Creating remediated file '" + inputFile.getName() + "'");
-				Files.write(file, codeLineList.stream().map(object -> Objects.toString(object, null))
-						.collect(Collectors.toList()), StandardCharsets.UTF_8);
-				System.out.println("Created remediated file '" + inputFile.getName() + "'");
-			}
+			System.out.println("Creating remediated file '" + inputFile.getName() + "'");
+			Files.write(file, codeLineList.stream().map(object -> Objects.toString(object, null))
+					.collect(Collectors.toList()), StandardCharsets.UTF_8);
+			System.out.println("Created remediated file '" + inputFile.getName() + "'");
 		} catch (IOException e) {
 			System.out.println("Failed creating remediated '" + inputFile.getName() + "'");
 			e.printStackTrace();

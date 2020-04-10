@@ -96,6 +96,7 @@ public class AppMain {
 	private void readInputFile(String[] args, List<Object> descrepancyDetailsList, List<Rule> ruleList)
 			throws InvalidFormatException {
 		Map<String, List<Object>> listDetailsMap = new HashMap<String, List<Object>>();
+		boolean writeRemediatedFile = false;
 		List<Object> removeDiscrepancyList;
 		List<String> result;
 		List<Object> codeLineList;
@@ -105,11 +106,13 @@ public class AppMain {
 			for (String fileName : result) {
 				codeLineList = new ArrayList<Object>();
 				removeDiscrepancyList = new ArrayList<Object>();
+				writeRemediatedFile = false;
 				File file = new File(fileName);
 				scanner = new Scanner(new File(sourceLocation + "\\" + file.getName()));
 				while (scanner.hasNextLine()) {
 					codeLineList.add(scanner.nextLine().trim());
 				}
+				scanner.close();
 				System.out.println("Processing file '" + file.getName() + "'");
 				for (int ruleIndex = 0; ruleIndex < ruleList.size(); ruleIndex++) {
 					if(ruleList.get(ruleIndex).getType().equalsIgnoreCase(Constants.FILE_OPERATION.text_finder.toString())) {
@@ -117,11 +120,13 @@ public class AppMain {
 						descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
 						removeDiscrepancyList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.removeDiscrepancyList.toString()));
 						codeLineList = listDetailsMap.get(Constants.REQUIRED_LISTS.codeLineList.toString());
+						if(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()).size() > 0)
+							writeRemediatedFile = true;
 						for (Object discrepancy : removeDiscrepancyList)
 							codeLineList.removeAll(Collections.singleton(discrepancy.toString()));
 					}
 				}
-				if (findOrRemediateMode.equalsIgnoreCase("1")) 
+				if (findOrRemediateMode.equalsIgnoreCase("1") && writeRemediatedFile) 
 					new DiscrepancyFinder().writeRemidiatedFile(codeLineList, file, targetLocation);
 				System.out.println("Completed processing file '" + file.getName() + "'");
 			}
