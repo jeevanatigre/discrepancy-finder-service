@@ -6,4 +6,5 @@ public class Constants {
 	public static enum FILE_OPERATION { text_finder, file_finder };
 	public static enum REQUIRED_LISTS { codeLineList, discrepancyDetailsList, removeDiscrepancyList };
 	public static enum REMIDIATION_ENUM { remove, replace, batch_operation ,information};
+	public static String FILE_TYPE= "pom.xml";
 }

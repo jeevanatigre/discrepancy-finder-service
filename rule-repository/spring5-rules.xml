@@ -1,6 +1,5 @@
 <rules>
 <rule type="text_finder" category = "Mandatory">
-		<file_operation_type value = "individual"/>
 		<file_pattern value = "*.java"/>
 		<remidiation_pattern value = "remove">
 			<text_pattern value = "import org.apache.xmlbeans;"/>
@@ -74,7 +73,6 @@
 		</remidiation_pattern>
 		</rule>
 		<rule type="text_finder" category = "Optional">
-		<file_operation_type value = "individual"/>
 		<file_pattern value = "pom.xml"/>
 		<remidiation_pattern value = "information">
 			<text_pattern value = "jms-api"/>
@@ -83,15 +81,4 @@
 			<remediation recommendation = "Update jar version as per recommendation" complexity= "1" savings="1"/>
 		</remidiation_pattern>
 		</rule>
-		<rule type="file_finder" category = "Optional">
-		<file_operation_type value = "batch"/>
-		<file_pattern value = "*.xml"/>
-		<remidiation_pattern value = "batch_operation">
-			<files>
-				<file>*.xml</file>
-			</files>
-			<remediation recommendation = "Move from xml based to annotation based configuration" complexity= "10" />
-		</remidiation_pattern>
-	</rule>
-	
 </rules>
