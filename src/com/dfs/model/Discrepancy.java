@@ -18,6 +18,8 @@ public class Discrepancy {
 	
 	private String recommendation;
 	
+	private String action;
+	
 	private int complexity;
 	
 	private int autoRemediation;
@@ -78,6 +80,14 @@ public class Discrepancy {
 
 	public void setRecommendation(String recommendation) {
 		this.recommendation = recommendation;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 
 	public int getComplexity() {

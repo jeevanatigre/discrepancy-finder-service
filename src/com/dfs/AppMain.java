@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.dfs.impl.DiscrepancyFinder;
+import com.dfs.model.Discrepancy;
 import com.dfs.model.DiscrepancyRules;
 import com.dfs.model.Rule;
 import com.dfs.report.ExcelReport;
@@ -120,8 +122,14 @@ public class AppMain {
 						descrepancyDetailsList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()));
 						removeDiscrepancyList.addAll(listDetailsMap.get(Constants.REQUIRED_LISTS.removeDiscrepancyList.toString()));
 						codeLineList = listDetailsMap.get(Constants.REQUIRED_LISTS.codeLineList.toString());
-						if(listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()).size() > 0)
-							writeRemediatedFile = true;
+						
+						Iterator<Object> iterator = listDetailsMap.get(Constants.REQUIRED_LISTS.discrepancyDetailsList.toString()).iterator();
+						while (iterator.hasNext()) {
+							Object discrepancy = iterator.next();
+							if (!((Discrepancy) discrepancy).getAction()
+									.equalsIgnoreCase(Constants.REMIDIATION_ENUM.information.toString()))
+								writeRemediatedFile = true;
+						}
 						for (Object discrepancy : removeDiscrepancyList)
 							codeLineList.removeAll(Collections.singleton(discrepancy.toString()));
 					}

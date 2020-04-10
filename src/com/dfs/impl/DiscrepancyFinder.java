@@ -31,15 +31,15 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		try {
 			List<Object> removeDiscrepancyList = new ArrayList<Object>();
 			for (RemidiationPattern remidiationPattern : rule.getPattern_list()) {
-				if (remidiationPattern.getValue()
+				if (remidiationPattern.getRemediation().getAction() != null && remidiationPattern.getRemediation().getAction().trim()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.remove.toString())) {
 					ruleRemove(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
 							removeDiscrepancyList, remidiationPattern);
-				}else if (remidiationPattern.getValue()
+				}else if (remidiationPattern.getRemediation().getAction() != null && remidiationPattern.getRemediation().getAction().trim()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.information.toString())) {
 					ruleInfo(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
 							removeDiscrepancyList, remidiationPattern);
-				}else if (remidiationPattern.getValue()
+				}else if (remidiationPattern.getRemediation().getAction() != null && remidiationPattern.getRemediation().getAction().trim()
 						.equalsIgnoreCase(Constants.REMIDIATION_ENUM.replace.toString())) {
 					ruleReplace(file, findOrRemediateMode, rule, args, codeLineList, discrepancyDetailsList,
 							remidiationPattern);
@@ -58,8 +58,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			List<Object> discrepancyDetailsList, RemidiationPattern remidiationPattern) {
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
 			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-			if (textPattern != null && remidiationPattern.getRemediation().getAction().trim()
-					.equalsIgnoreCase(Constants.ACTION_ENUM.replace.toString())) {
+			if (textPattern != null) {
 				String replaceCondition = remidiationPattern.getRemediation().getCondition().toLowerCase()
 						.trim();
 				List<Integer> deprecatedLineNumberList = new ArrayList<Integer>();
@@ -88,12 +87,14 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			RemidiationPattern remidiationPattern){
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
 			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-			if (textValue != null && file.getName().matches(Constants.FILE_TYPE)){
-				int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
-				discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
-						discrepancyLineNumber, file, args));
-				if (findOrRemediateMode.equalsIgnoreCase("1")) {
-					removeDiscrepancyList.add(textValue);
+			if (textValue != null){
+				int discrepancyLineNumber = 0;
+				for (int lineCounter = 0; lineCounter < codeLineList.size(); lineCounter++) {
+					if (codeLineList.get(lineCounter).toString().contains(textValue)) {
+						discrepancyLineNumber = lineCounter;
+						discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
+								discrepancyLineNumber, file, args));
+					}
 				}
 			}
 		}
@@ -104,9 +105,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			RemidiationPattern remidiationPattern) {
 		for (TextPattern textPattern : remidiationPattern.getText_pattern()) {
 			String textValue = textPattern.getValue() == null ? null : textPattern.getValue().trim();
-			if (textValue != null && codeLineList.contains(textValue)
-					&& remidiationPattern.getRemediation().getAction().trim()
-							.equalsIgnoreCase(Constants.ACTION_ENUM.remove.toString())) {
+			if (textValue != null && codeLineList.contains(textValue)) {
 				int discrepancyLineNumber = codeLineList.indexOf(textValue) + 1;
 				discrepancyDetailsList.add(setDiscrepancyData(rule, remidiationPattern, textPattern,
 						discrepancyLineNumber, file, args));
@@ -139,6 +138,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 			discrepancy.setPattern(textPattern.getValue() == null ? "" : textPattern.getValue().trim());
 		discrepancy.setRecommendation(remidiationPattern.getRemediation() == null ? ""
 				: remidiationPattern.getRemediation().getRecommendation());
+		discrepancy.setAction(remidiationPattern.getRemediation().getAction());
 		discrepancy.setComplexity(remidiationPattern.getRemediation().getComplexity() == null ? 0
 				: Integer.parseInt(remidiationPattern.getRemediation().getComplexity()));
 		discrepancy.setAutoRemediation(((remidiationPattern.getRemediation().getSavings() == null)

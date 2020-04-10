@@ -19,6 +19,7 @@ public class Ticker
     { 
         CompilerClass geek = new CompilerClass(); 
         Compiler.enable(); 
+        runFinalizersOnExit();
 
         Class c = geek.getClass(); 
         System.out.println(c); 

@@ -1,7 +1,6 @@
 <rules>
 	<rule type="text_finder" category = "Mandatory">
-		<file_pattern value = "*.java"/>
-		<pattern_list value = "remove">
+		<pattern_list>
 			<text_pattern value = "import java.rmi.registry.RegistryHandler;"/>
 			<text_pattern value = "import java.rmi.server.LoaderHandler;"/>
 			<text_pattern value = "import java.rmi.server.RemoteCall;"/>
@@ -40,21 +39,25 @@
 			<text_pattern value = "import jdk.xml.bind;"/>
 			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 		</pattern_list>
-		<pattern_list value = "replace">
+		<pattern_list>
 			<text_pattern value = "import com.sun.javadoc.AnnotatedType;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.type.Type;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.type.Type;" condition = "import" savings="2"/>
 		</pattern_list>
-		<pattern_list value = "replace">
+		<pattern_list>
 			<text_pattern value = "import com.sun.javadoc.AnnotationDesc;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.element.AnnotationMirror;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.element.AnnotationMirror;" condition = "import" savings="2"/>
 		</pattern_list>
-		<pattern_list value = "replace">
+		<pattern_list>
 			<text_pattern value = "import com.sun.javadoc.ExecutableMemberDoc;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.element.ExecutableElement;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.element.ExecutableElement;" condition = "import" savings="2"/>
 		</pattern_list>
-		<pattern_list value = "replace">
+		<pattern_list>
 			<text_pattern value = "import com.sun.javadoc.LanguageVersion;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.SourceVersion;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.SourceVersion;" condition = "import" savings="2"/>
+		</pattern_list>
+		<pattern_list>
+			<text_pattern value = "runFinalizersOnExit"/>
+			<remediation recommendation = "This method is removed in jdk 11" complexity= "2" action = "information" savings="2"/>
 		</pattern_list>
 	</rule>
 </rules>
