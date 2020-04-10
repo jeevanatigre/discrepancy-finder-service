@@ -1,6 +1,5 @@
 <rules>
 	<rule type="text_finder" category = "Mandatory">
-		<file_operation_type value = "individual"/>
 		<file_pattern value = "*.java"/>
 		<remidiation_pattern value = "remove">
 			<text_pattern value = "import java.lang.Compiler;"/>
@@ -17,7 +16,6 @@
 		</remidiation_pattern>
 	</rule>
 	<rule type="file_finder" category = "Optional">
-		<file_operation_type value = "batch"/>
 		<file_pattern value = "*.xml"/>
 		<remidiation_pattern value = "batch_operation">
 			<files>

@@ -135,8 +135,7 @@ public class DiscrepancyFinder implements DiscrepancyFinderService {
 		discrepancy.setLineNo(discrepancyLineNumber);
 		discrepancy.setCategory(rule.getCategory() == null ? "" : rule.getCategory());
 		discrepancy.setRuleType(rule.getType() == null ? "" : rule.getType());
-		if (rule.getFile_operation_type().getValue()
-				.equalsIgnoreCase(Constants.FILE_OPERATION.text_finder.toString()))
+		if (rule.getType().equalsIgnoreCase(Constants.FILE_OPERATION.text_finder.toString()))
 			discrepancy.setPattern(textPattern.getValue() == null ? "" : textPattern.getValue().trim());
 		discrepancy.setRecommendation(remidiationPattern.getRemediation() == null ? ""
 				: remidiationPattern.getRemediation().getRecommendation());
