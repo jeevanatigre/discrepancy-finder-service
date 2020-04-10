@@ -65,11 +65,59 @@
 			<text_pattern value = "import com.google.common.io;"/>
 			<text_pattern value = "import com.google.common.primitives;"/>
 			<text_pattern value = "import com.google.common.util.concurrent;"/>
+			<text_pattern value = "import org.springframework.core.enums" />
+			<text_pattern value = "import org.springframework.ejb.support" />
+			<text_pattern value = "import org.springframework.instrument.classloading.oc4j" />
+			<text_pattern value = "import org.springframework.orm.ibatis" />
+			<text_pattern value = "import org.springframework.orm.ibatis.support" />
+			<text_pattern value = "import org.springframework.remoting.jaxrpc" />
+			<text_pattern value = "import org.springframework.scheduling.backportconcurrent" />
+			<text_pattern value = "import org.springframework.scheduling.timer" />
+			<text_pattern value = "import org.springframework.test.context.junit38" />
+			<text_pattern value = "import org.springframework.test.jpa" />
+			<text_pattern value = "import org.springframework.web.servlet.view.tiles" />
+			<text_pattern value = "import org.springframework.web.struts" />
 			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 		</pattern_list>
 		<pattern_list value = "method_pattern">
 			<text_pattern value = "addItem"/>
 			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "method_pattern">
+			<text_pattern value = "jmsPollable"/>
+			<remediation recommendation = "Replace jmsPollable for list with Jms.pollableChannel" complexity= "2" action = "replace" replace_with = "Jms.pollableChannel" condition = "List" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "method_pattern">
+			<text_pattern value = "fileToString"/>
+			<remediation recommendation = "Replace fileToString for list with Files.toStringTransformer" complexity= "2" action = "replace" replace_with = "Files.toStringTransformer" condition = "List" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "method_pattern">
+			<text_pattern value = "addItem"/>
+			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "replace">
+			<text_pattern value = "import org.springframework.integration.dsl.core;"/>
+			<remediation recommendation = "Replace this import with import org.springframework.integration.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.dsl;" condition = "import" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "replace">
+			<text_pattern value = "import org.springframework.integration.dsl.config;"/>
+			<remediation recommendation = "Replace this import with import org.springframework.integration.config.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.config.dsl;" condition = "import" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "replace">
+			<text_pattern value = "import org.springframework.integration.dsl.transaction;"/>
+			<remediation recommendation = "Replace this import with import org.springframework.integration.transaction;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.transaction;" condition = "import" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "replace">
+			<text_pattern value = "import org.springframework.integration.dsl.mail;"/>
+			<remediation recommendation = "Replace this import with import org.springframework.integration.mail.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.mail.dsl;" condition = "import" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "replace">
+			<text_pattern value = "import org.springframework.integration.dsl.kafka;"/>
+			<remediation recommendation = "Replace this import with import org.springframework.integration.kafka.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.kafka.dsl;" condition = "import" savings="2"/>
+		</pattern_list>
+		<pattern_list value = "replace">
+			<text_pattern value = "Reactor2TcpStompSessionManager"/>
+			<remediation recommendation = "Replace this Reactor2TcpStompSessionManager with ReactorNettyTcpStompSessionManager;" complexity= "2" action = "replace" replace_with = "ReactorNettyTcpStompSessionManager" condition = "import" savings="2"/>
 		</pattern_list>
 		</rule>
 		<rule type="text_finder" category = "Optional">
@@ -78,6 +126,9 @@
 			<text_pattern value = "jms-api"/>
 			<text_pattern value = "hibernate-jpa-1.1-api"/>
 			<text_pattern value = "javax.servlet-api"/>
+			<text_pattern value = "jsf-api" />
+			<text_pattern value = "jcache" />
+			<text_pattern value = "jdo-api" />
 			<remediation recommendation = "Update jar version as per recommendation" complexity= "1" savings="1"/>
 		</pattern_list>
 		</rule>
