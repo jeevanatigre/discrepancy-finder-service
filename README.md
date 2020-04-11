@@ -30,11 +30,11 @@ Program takes four arguments
 
 # More Details
 
-## Benefits
+## Benefit Areas
 
  - **Application Insights** - Provides application inventory details like number of files, types of files, files with DB interactions, etc 
- - **Application Complexity** - Output can assist in determining application complexity & effort estimations for tech upgrades
- - **Determining Discrapency** -  Find exact discrapencies in code on the basis on rules, provides complexity level for fixes
+ - **Assist in Application Complexity** - Output can help in determining application complexity & effort estimations for tech upgrades
+ - **Identify Discrapency** -  Find exact discrapencies in code / config on the basis on rules & provides complexity level for fixes for various tech upgrades
  - **Remediation** - Auto-Remediate common discrapencies and save human efforts 
  - **Rule Repository** - For future applications in factory, aim is to provide 'Discrepancy Rule Repository' for various tech upgrades like below
 
