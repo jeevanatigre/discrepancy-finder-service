@@ -32,7 +32,7 @@ Program takes four arguments
 
 ## Benefits 
 
-For tech upgrades in factory model,  this tool should assits in below areas 
+For tech upgrades in factory model,  this tool should assit in below areas 
 
  - **Application Insights** - Provide application inventory details like number of files, types of files, files with DB interactions, etc 
  - **Application Complexity** - Output should help in determining application complexity & effort estimations 
