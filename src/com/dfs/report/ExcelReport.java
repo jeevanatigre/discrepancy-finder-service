@@ -87,8 +87,8 @@ public class ExcelReport implements IReport {
         
 public void copyFile(String targetLocation) throws IOException {
 	       String discrepancyReportFileName = "discrepancy-list.xls";
-	       // String resourcesFileLocation = "resources\\\\sample-report.xls";
-	       String resourcesFileLocation = this.getClass().getClassLoader().getResource("sample-report.xls").getFile();
+	       String resourcesFileLocation = "config\\\\sample-report.xls";
+	       // String resourcesFileLocation = this.getClass().getClassLoader().getResource("sample-report.xls").getFile();
 	try {
 		    Files.deleteIfExists(Paths.get(targetLocation+ "\\" +discrepancyReportFileName)); 
 		    File dir = new File(targetLocation);
