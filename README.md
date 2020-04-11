@@ -30,13 +30,15 @@ Program takes four arguments
 
 # More Details
 
-## Benefit Areas
+## Benefits 
+
+For tech upgrades in factory model,  this tool should assits in below areas 
 
  - **Application Insights** - Provides application inventory details like number of files, types of files, files with DB interactions, etc 
- - **Assist in Application Complexity** - Output can help in determining application complexity & effort estimations for tech upgrades
- - **Identify Discrapencies** -  Find exact discrapencies in code / config on the basis on rules & provides complexity level for fixes for various tech upgrades
+ - **Application Complexity** - Output can help in determining application complexity & effort estimations 
+ - **Identify Discrapencies** -  Find exact discrapencies in code / config on the basis on rules & provides complexity level for fixes 
  - **Remediation** - Auto-Remediate common discrapencies and save human efforts 
- - **Rule Repository** - For future applications in factory, aim is to provide 'Discrepancy Rule Repository' for various tech upgrades like below
+ - **Rule Repository** - Aim is to provide 'Discrepancy Rule Repository' for various tech upgrades like below
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
