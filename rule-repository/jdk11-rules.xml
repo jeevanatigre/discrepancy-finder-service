@@ -2,6 +2,7 @@
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import java.rmi.registry.RegistryHandler;"/>
+			<text_pattern value = "import java.sql.Statement;"/>
 			<text_pattern value = "import java.rmi.server.LoaderHandler;"/>
 			<text_pattern value = "import java.rmi.server.RemoteCall;"/>
 			<text_pattern value = "import java.rmi.server.ServerRef;"/>
@@ -55,9 +56,12 @@
 			<text_pattern value = "import com.sun.javadoc.LanguageVersion;"/>
 			<remediation recommendation = "Replace this import with import javax.lang.model.SourceVersion;" complexity= "2" action = "replace" replace_with = "import javax.lang.model.SourceVersion;" condition = "import" savings="2"/>
 		</pattern_list>
+	</rule>
+	
+	<rule type="text_finder" category = "Information">
 		<pattern_list>
 			<text_pattern value = "runFinalizersOnExit"/>
-			<remediation recommendation = "This method is removed in jdk 11" complexity= "2" action = "information" savings="2"/>
+			<remediation recommendation = "This method is removed in jdk 11" complexity= "0" action = "information" savings="0"/>
 		</pattern_list>
 	</rule>
 </rules>
