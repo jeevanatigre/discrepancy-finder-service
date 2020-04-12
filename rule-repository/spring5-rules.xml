@@ -1,5 +1,5 @@
 <rules>
-<rule type="text_finder" category = "Mandatory">
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.apache.xmlbeans;"/>
 			<text_pattern value = "import org.apache.xmlbeans.Filer;"/>
@@ -76,55 +76,71 @@
 			<text_pattern value = "import org.springframework.test.jpa" />
 			<text_pattern value = "import org.springframework.web.servlet.view.tiles" />
 			<text_pattern value = "import org.springframework.web.struts" />
-			<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 		</pattern_list>
+		<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Optional">
 		<pattern_list>
 			<text_pattern value = "addItem"/>
-			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "jmsPollable"/>
-			<remediation recommendation = "Replace jmsPollable for list with Jms.pollableChannel" complexity= "2" action = "replace" replace_with = "Jms.pollableChannel" condition = "List" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace jmsPollable for list with Jms.pollableChannel" complexity= "2" action = "replace" replace_with = "Jms.pollableChannel" condition = "List" savings="2"/>
+	</rule>
+
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list >
 			<text_pattern value = "fileToString"/>
-			<remediation recommendation = "Replace fileToString for list with Files.toStringTransformer" complexity= "2" action = "replace" replace_with = "Files.toStringTransformer" condition = "List" savings="2"/>
 		</pattern_list>
-		<pattern_list>
-			<text_pattern value = "addItem"/>
-			<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
-		</pattern_list>
+		<remediation recommendation = "Replace fileToString for list with Files.toStringTransformer" complexity= "2" action = "replace" replace_with = "Files.toStringTransformer" condition = "List" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.core;"/>
-			<remediation recommendation = "Replace this import with import org.springframework.integration.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.dsl;" condition = "import" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.integration.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.dsl;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.config;"/>
-			<remediation recommendation = "Replace this import with import org.springframework.integration.config.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.config.dsl;" condition = "import" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.integration.config.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.config.dsl;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.transaction;"/>
-			<remediation recommendation = "Replace this import with import org.springframework.integration.transaction;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.transaction;" condition = "import" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.integration.transaction;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.transaction;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.mail;"/>
-			<remediation recommendation = "Replace this import with import org.springframework.integration.mail.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.mail.dsl;" condition = "import" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.integration.mail.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.mail.dsl;" condition = "import" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.kafka;"/>
-			<remediation recommendation = "Replace this import with import org.springframework.integration.kafka.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.kafka.dsl;" condition = "import" savings="2"/>
 		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.integration.kafka.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.kafka.dsl;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "Reactor2TcpStompSessionManager"/>
-			<remediation recommendation = "Replace this Reactor2TcpStompSessionManager with ReactorNettyTcpStompSessionManager;" complexity= "2" action = "replace" replace_with = "ReactorNettyTcpStompSessionManager" condition = "import" savings="2"/>
 		</pattern_list>
-		</rule>
-		<rule type="text_finder" category = "Optional">
+		<remediation recommendation = "Replace this Reactor2TcpStompSessionManager with ReactorNettyTcpStompSessionManager;" complexity= "2" action = "replace" replace_with = "ReactorNettyTcpStompSessionManager" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "jms-api"/>
 			<text_pattern value = "hibernate-jpa-1.1-api"/>
 			<text_pattern value = "javax.servlet-api"/>
-			<remediation recommendation = "Update jar version as per recommendation" complexity= "1" action = "information" savings="1"/>
 		</pattern_list>
-		</rule>
+		<remediation recommendation = "Update jar version as per recommendation" complexity= "1" action = "information" savings="1"/>
+	</rule>
 </rules>

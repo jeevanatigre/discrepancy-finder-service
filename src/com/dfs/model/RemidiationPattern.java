@@ -10,9 +10,6 @@ public class RemidiationPattern {
 	@JacksonXmlElementWrapper(localName = "text_pattern", useWrapping = false)
     private List<TextPattern> text_pattern;
 	
-    @JacksonXmlElementWrapper(localName = "remediation", useWrapping = false)
-    private Remediation remediation;
-    
     @JacksonXmlElementWrapper(localName = "files")
     private List<String> file;
 	
@@ -33,14 +30,6 @@ public class RemidiationPattern {
 
 	public void setText_pattern(List<TextPattern> text_pattern) {
 		this.text_pattern = text_pattern;
-	}
-
-	public Remediation getRemediation() {
-		return remediation;
-	}
-
-	public void setRemediation(Remediation remediation) {
-		this.remediation = remediation;
 	}
 
 	public List<String> getFile() {
