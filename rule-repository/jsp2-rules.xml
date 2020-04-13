@@ -1,0 +1,27 @@
+<rules>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "SimpleTag"/>
+		</pattern_list>
+		<remediation recommendation = "Replace SimpleTag with SimpleTagSupport" complexity= "2" action = "replace" replace_with = "SimpleTagSupport" condition = "interface" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "taglib version"/>
+		</pattern_list>
+		<remediation recommendation = "Update taglib version as per recommendation" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "getRootCause"/>
+		</pattern_list>
+		<remediation recommendation = "Replace getRootCause method with getCause" complexity= "2" action = "replace" replace_with = "getCause" condition = "List" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "javax.el.ELContext.getELResolver()"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this javax.el.ELContext.getELResolver() with jspContext.getELContext().getELResolver()" complexity= "2" action = "replace" replace_with = "jspContext.getELContext().getELResolver()" condition = "import" savings="2"/>
+	</rule>
+</rules>
+			

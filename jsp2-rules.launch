@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/discrepancy-finder-service/src/com/dfs/AppMain.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.dfs.AppMain"/>
+<stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="discrepancy-finder-service"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="rule-repository//jsp2-rules.xml  input-files discrepancy-output-files 1"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="discrepancy-finder-service"/>
+</launchConfiguration>
