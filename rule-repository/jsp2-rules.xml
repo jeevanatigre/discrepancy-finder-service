@@ -23,5 +23,11 @@
 		</pattern_list>
 		<remediation recommendation = "Replace this javax.el.ELContext.getELResolver() with jspContext.getELContext().getELResolver()" complexity= "2" action = "replace" replace_with = "jspContext.getELContext().getELResolver()" condition = "import" savings="2"/>
 	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "javax.servlet.jsp.el.ExpressionEvaluator180 getExpressionEvaluator()"/>
+		</pattern_list>
+		<remediation recommendation = "Replace javax.servlet.jsp.el.ExpressionEvaluator180 getExpressionEvaluator() with JspApplicationContext.getExpressionFactory()" complexity= "2" action = "replace" replace_with = "JspApplicationContext.getExpressionFactory()" condition = "import" savings="2"/>
+	</rule>
 </rules>
 			
