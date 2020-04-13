@@ -79,12 +79,6 @@
 		</pattern_list>
 		<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 	</rule>
-	<rule type="text_finder" category = "Optional">
-		<pattern_list>
-			<text_pattern value = "addItem"/>
-		</pattern_list>
-		<remediation recommendation = "Replace addItem for list with add" complexity= "2" action = "replace" replace_with = "add" condition = "List" savings="2"/>
-	</rule>
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "jmsPollable"/>
@@ -140,6 +134,9 @@
 			<text_pattern value = "jms-api"/>
 			<text_pattern value = "hibernate-jpa-1.1-api"/>
 			<text_pattern value = "javax.servlet-api"/>
+			<text_pattern value = "jsf-api" />
+			<text_pattern value = "jcache" />
+			<text_pattern value = "jdo-api" />
 		</pattern_list>
 		<remediation recommendation = "Update jar version as per recommendation" complexity= "1" action = "information" savings="1"/>
 	</rule>
