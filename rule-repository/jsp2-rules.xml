@@ -11,7 +11,6 @@
 		</pattern_list>
 		<remediation recommendation = "Replace Interface BodyTag with Class BodyTagSupport" complexity= "2" action = "replace" replace_with = "BodyTagSupport" condition = "interface" savings="2"/>
 	</rule>
-	BodyTag,
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "getRootCause"/>
