@@ -35,13 +35,13 @@ public class AppMain {
 	public static void main(String[] args) throws IOException {
 
 		if (null != args && 4 != args.length) {
-			System.err.println("Invalid inputs, please provide inputs based on below usage example");
-			System.err.println("###########################################################################################");
-			System.err.println("#                                                                                         #");
-			System.err.println("#   java AppMain <rule_file> <source_location> <target_location> <find_remediate_mode>    #");
-			System.err.println("#   example : java AppMain discrapency-rules.xml C:/input C:/output 0                     #");	
-			System.err.println("#                                                                                         #");
-			System.err.println("###########################################################################################");
+			System.err.println("Please provide inputs based on below usage example");
+			System.err.println("######################################################################################");
+			System.err.println("#                                                                                    #");
+			System.err.println("#   run.bat <rule_file> <source_location> <target_location> <find_remediate_mode>    #");
+			System.err.println("#   example : run.bat discrapency-rules.xml C:/input C:/output 0                     #");	
+			System.err.println("#                                                                                    #");
+			System.err.println("######################################################################################");
 			System.exit(0);
 		}
 
