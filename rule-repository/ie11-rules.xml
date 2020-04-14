@@ -1,0 +1,108 @@
+<rules>
+
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "attachEvent"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with addEventListener" complexity= "2" action = "replace" replace_with = "addEventListener" condition = "event" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "window.execScript"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with eval" complexity= "2" action = "replace" replace_with = "eval" condition = "event" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "window.doScroll"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with window.scrollLeft or window.scrollTop" complexity= "2" action = "replace" replace_with = "window.scrollTop" condition = "window" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "document.all"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with document.getElementById" complexity= "2" action = "replace" replace_with = "document.getElementById" condition = "window" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "script.onreadystatechange"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with script.onload" complexity= "2" action = "replace" replace_with = "script.onload" condition = "script" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "script.readyState"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with script.onload" complexity= "2" action = "replace" replace_with = "script.onload" condition = "script" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "document.selection"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with window.getSelection" complexity= "2" action = "replace" replace_with = "window.getSelection" condition = "window" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "document.createStyleSheet"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with document.createElement('style')" complexity= "2" action = "replace" replace_with = "document.createElement('style')" condition = "document" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "style.styleSheet"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with style.sheet" complexity= "2" action = "replace" replace_with = "style.sheet" condition = "style" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "XDomainRequest"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with CORS for XMLHttpRequest" complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "document.fileSize"/>
+		</pattern_list>
+		<remediation recommendation = "This API is removed in IE11 use XMLHttpRequest to fetch the source" complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "img.fileSize"/>
+		</pattern_list>
+		<remediation recommendation = "This API is removed in IE11 use XMLHttpRequest to fetch the source" complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "window.createPopup"/>
+		</pattern_list>
+		<remediation recommendation = "This API is removed in IE11 use div or iframe with a high zIndex value" complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "navigator.appName"/>
+		</pattern_list>
+		<remediation recommendation = "The navigator.appName property now returns 'Netscape' to reflect the HTML5 standard and to match behavior of other browsers." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "navigator.product"/>
+		</pattern_list>
+		<remediation recommendation = "The navigator.product property now returns 'Gecko' in order to reflect the HTML5 standard and to match behavior of other browsers." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+</rules>
