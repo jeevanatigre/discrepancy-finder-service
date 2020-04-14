@@ -3,14 +3,15 @@
 		<pattern_list>
 			<text_pattern value = "SimpleTag"/>
 		</pattern_list>
-		<remediation recommendation = "Replace SimpleTag with SimpleTagSupport" complexity= "2" action = "replace" replace_with = "SimpleTagSupport" condition = "interface" savings="2"/>
+		<remediation recommendation = "Replace Interfac SimpleTag with Class SimpleTagSupport" complexity= "2" action = "replace" replace_with = "SimpleTagSupport" condition = "interface" savings="2"/>
 	</rule>
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
-			<text_pattern value = "taglib version"/>
+			<text_pattern value = "BodyTag"/>
 		</pattern_list>
-		<remediation recommendation = "Update taglib version as per recommendation" complexity= "1" action = "information" savings="1"/>
+		<remediation recommendation = "Replace Interface BodyTag with Class BodyTagSupport" complexity= "2" action = "replace" replace_with = "BodyTagSupport" condition = "interface" savings="2"/>
 	</rule>
+	BodyTag,
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "getRootCause"/>
@@ -28,6 +29,48 @@
 			<text_pattern value = "javax.servlet.jsp.el.ExpressionEvaluator180 getExpressionEvaluator()"/>
 		</pattern_list>
 		<remediation recommendation = "Replace javax.servlet.jsp.el.ExpressionEvaluator180 getExpressionEvaluator() with JspApplicationContext.getExpressionFactory()" complexity= "2" action = "replace" replace_with = "JspApplicationContext.getExpressionFactory()" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "http://java.sun.com/jstl/core"/>
+		</pattern_list>
+		<remediation recommendation = "Replace http://java.sun.com/jstl/core with http://java.sun.com/jsp/jstl/core" complexity= "2" action = "replace" replace_with = "http://java.sun.com/jsp/jstl/core" condition = "taglib" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "http://java.sun.com/jstl/fmt"/>
+		</pattern_list>
+		<remediation recommendation = "Replace http://java.sun.com/jstl/fmt with http://java.sun.com/jsp/jstl/fmt" complexity= "2" action = "replace" replace_with = "http://java.sun.com/jsp/jstl/fmt" condition = "taglib" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "http://java.sun.com/jstl/sql"/>
+		</pattern_list>
+		<remediation recommendation = "Replace http://java.sun.com/jstl/sql with http://java.sun.com/jsp/jstl/sql" complexity= "2" action = "replace" replace_with = "http://java.sun.com/jsp/jstl/sql" condition = "taglib" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "http://java.sun.com/jstl/xml"/>
+		</pattern_list>
+		<remediation recommendation = "Replace http://java.sun.com/jstl/xml with http://java.sun.com/jsp/jstl/xml" complexity= "2" action = "replace" replace_with = "http://java.sun.com/jsp/jstl/xml" condition = "taglib" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "http://java.sun.com/jstl/functions"/>
+		</pattern_list>
+		<remediation recommendation = "Replace http://java.sun.com/jstl/functions with http://java.sun.com/jsp/jstl/functions" complexity= "2" action = "replace" replace_with = "http://java.sun.com/jsp/jstl/functions" condition = "taglib" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "&#60;groupId&#62;javax.el&#60;&#47;groupId&#62;"/>
+			<text_pattern value = "&#60;groupId&#62;jstl&#60;&#47;groupId&#62;"/>
+			<text_pattern value = "&#60;groupId&#62;taglibs&#60;&#47;groupId&#62;"/>
+			<text_pattern value = "&#60;taglib version=" />
+			<text_pattern value = "&#60;tlib-version&#62;1.0&#60;&#47;tlib-version&#62;" />
+			<text_pattern value = "&#60;jsp-version&#62;1.0&#60;&#47;jsp-version&#62;" />
+			<text_pattern value = "&#60;body-content&#62;scriptless&#60;&#47;body-content&#62;" />
+		</pattern_list>
+		<remediation recommendation = "Update version as per recommendation" complexity= "1" action = "information" savings="1"/>
 	</rule>
 </rules>
 			

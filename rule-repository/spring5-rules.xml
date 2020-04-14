@@ -131,12 +131,12 @@
 	</rule>
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
-			<text_pattern value = "jms-api"/>
-			<text_pattern value = "hibernate-jpa-1.1-api"/>
-			<text_pattern value = "javax.servlet-api"/>
-			<text_pattern value = "jsf-api" />
-			<text_pattern value = "jcache" />
-			<text_pattern value = "jdo-api" />
+			<text_pattern value = "&#60;artifactId&#62;jms-api&#60;&#47;artifactId&#62;"/>
+			<text_pattern value = "&#60;artifactId&#62;hibernate-jpa-1.1-api&#60;&#47;artifactId&#62;"/>
+			<text_pattern value = "&#60;artifactId&#62;javax.servlet-api&#60;&#47;artifactId&#62;"/>
+			<text_pattern value = "&#60;artifactId&#62;jsf-api&#60;&#47;artifactId&#62;" />
+			<text_pattern value = "&#60;artifactId&#62;jcache&#60;&#47;artifactId&#62;" />
+			<text_pattern value = "&#60;artifactId&#62;jdo-api&#60;&#47;artifactId&#62;" />
 		</pattern_list>
 		<remediation recommendation = "Update jar version as per recommendation" complexity= "1" action = "information" savings="1"/>
 	</rule>

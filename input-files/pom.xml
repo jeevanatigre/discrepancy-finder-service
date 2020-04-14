@@ -24,6 +24,22 @@
     <scope>provided</scope>
 	</dependency>
 	<dependency>
+    <groupId>javax.faces</groupId>
+    <artifactId>jsf-api</artifactId>
+    <version>2.1</version>
+    <scope>provided</scope>
+</dependency>
+<dependency>
+    <groupId>org.ehcache</groupId>
+    <artifactId>jcache</artifactId>
+    <version>1.0.0</version>
+</dependency>
+<dependency>
+    <groupId>javax.jdo</groupId>
+    <artifactId>jdo-api</artifactId>
+    <version>3.0.1</version>
+</dependency>
+	<dependency>
     <groupId>org.hibernate.validator</groupId>
     <artifactId>hibernate-validator</artifactId>
     <version>6.1.2.Final</version>
@@ -32,6 +48,16 @@
     <groupId>org.glassfish</groupId>
     <artifactId>jakarta.el</artifactId>
     <version>3.0.3</version>
+</dependency>
+<dependency>
+	<groupId>jstl</groupId>
+	<artifactId>jstl</artifactId>
+	<version>1.0</version>
+</dependency>
+<dependency>
+	<groupId>taglibs</groupId>
+	<artifactId>standard</artifactId>
+	<version>1.1.2</version>
 </dependency>
 		<dependency>
 			<groupId>junit</groupId>
