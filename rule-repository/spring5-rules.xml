@@ -76,6 +76,8 @@
 			<text_pattern value = "import org.springframework.test.jpa" />
 			<text_pattern value = "import org.springframework.web.servlet.view.tiles" />
 			<text_pattern value = "import org.springframework.web.struts" />
+			<text_pattern value = "import org.springframework.mock.jndi.SimpleNamingContext" />
+			<text_pattern value = "import org.springframework.mock.jndi.SimpleNamingContextBuilder" />
 		</pattern_list>
 		<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
 	</rule>
@@ -137,6 +139,9 @@
 			<text_pattern value = "&#60;artifactId&#62;jsf-api&#60;&#47;artifactId&#62;" />
 			<text_pattern value = "&#60;artifactId&#62;jcache&#60;&#47;artifactId&#62;" />
 			<text_pattern value = "&#60;artifactId&#62;jdo-api&#60;&#47;artifactId&#62;" />
+			<text_pattern value = "&#60;artifactId&#62;jackson-core&#60;&#47;artifactId&#62;" />
+			<text_pattern value = "&#60;artifactId&#62;reactor-kotlin-extensions&#60;&#47;artifactId&#62;" />
+			
 		</pattern_list>
 		<remediation recommendation = "Update jar version as per recommendation" complexity= "1" action = "information" savings="1"/>
 	</rule>

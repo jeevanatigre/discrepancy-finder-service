@@ -30,6 +30,11 @@
     <scope>provided</scope>
 </dependency>
 <dependency>
+    <groupId>javax.el</groupId>
+    <artifactId>javax.el-api</artifactId>
+    <version>2.0.0</version>
+</dependency>
+<dependency>
     <groupId>org.ehcache</groupId>
     <artifactId>jcache</artifactId>
     <version>1.0.0</version>
@@ -48,6 +53,16 @@
     <groupId>org.glassfish</groupId>
     <artifactId>jakarta.el</artifactId>
     <version>3.0.3</version>
+</dependency>
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>2.9.7</version>
+</dependency>
+<dependency>
+    <groupId>io.projectreactor.kotlin</groupId>
+    <artifactId>reactor-kotlin-extensions</artifactId>
+    <version>1.0.0.RELEASE</version>
 </dependency>
 <dependency>
 	<groupId>jstl</groupId>
