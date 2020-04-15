@@ -87,18 +87,54 @@
 		</pattern_list>
 		<remediation recommendation = "Replace jmsPollable for list with Jms.pollableChannel" complexity= "2" action = "replace" replace_with = "Jms.pollableChannel" condition = "List" savings="2"/>
 	</rule>
-
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list >
-			<text_pattern value = "fileToString"/>
+			<text_pattern value = "ConnectionFactory "/>
 		</pattern_list>
-		<remediation recommendation = "Replace fileToString for list with Files.toStringTransformer" complexity= "2" action = "replace" replace_with = "Files.toStringTransformer" condition = "List" savings="2"/>
+		<remediation recommendation = "Replace ConnectionFactory  by jmsConnectionFactory" complexity= "2" action = "replace" replace_with = "jmsConnectionFactory" condition = "connectionFactory" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "jmsPollable"/>
+		</pattern_list>
+		<remediation recommendation = "Replace jmsPollable for list with Jms.pollableChannel" complexity= "2" action = "replace" replace_with = "Jms.pollableChannel" condition = "List" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "resolveChannelName"/>
+		</pattern_list>
+		<remediation recommendation = "Replace  with resolvedDestination" complexity= "2" action = "replace" replace_with = "resolvedDestination" condition = "method" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.messaging;" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging;" condition = "import" savings="2"/>
 	</rule>
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.core;"/>
 		</pattern_list>
 		<remediation recommendation = "Replace this import with import org.springframework.integration.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.dsl;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.amqp.AmqpHeaders;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with import org.springframework.amqp.support.AmqpHeaders;" complexity= "2" action = "replace" replace_with = "import org.springframework.amqp.support.AmqpHeaders;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import com.sun.syndication.feed.synd.SyndEntry;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with import com.rometools.rome.feed.synd.SyndEntry for rome classes;" complexity= "2" action = "replace" replace_with = "import org.springframework.amqp.support.AmqpHeaders;" condition = "import" savings="2"/>
+	</rule>
+	com.sun.syndication.feed.synd.SyndEntry
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.annotation;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with org.springframework.messaging.handler.annotation; for Payload ,Header and Headers" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging.handler.annotation;" condition = "import" savings="2"/>
 	</rule>
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
@@ -133,6 +169,36 @@
 	</rule>
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.core;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with org.springframework.messaging;" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.channel.interceptor;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with org.springframework.messaging.support;" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging.support;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.message;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with org.springframework.messaging.support;" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging.support;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.support.channel;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with org.springframework.messaging.core;" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging.core;" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "import org.springframework.integration.channel.interceptor;"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this import with org.springframework.messaging.support;" complexity= "2" action = "replace" replace_with = "import org.springframework.messaging.support" condition = "import" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
 			<text_pattern value = "&#60;artifactId&#62;jms-api&#60;&#47;artifactId&#62;"/>
 			<text_pattern value = "&#60;artifactId&#62;hibernate-jpa-1.1-api&#60;&#47;artifactId&#62;"/>
 			<text_pattern value = "&#60;artifactId&#62;javax.servlet-api&#60;&#47;artifactId&#62;"/>
@@ -141,8 +207,92 @@
 			<text_pattern value = "&#60;artifactId&#62;jdo-api&#60;&#47;artifactId&#62;" />
 			<text_pattern value = "&#60;artifactId&#62;jackson-core&#60;&#47;artifactId&#62;" />
 			<text_pattern value = "&#60;artifactId&#62;reactor-kotlin-extensions&#60;&#47;artifactId&#62;" />
-			
 		</pattern_list>
 		<remediation recommendation = "Update jar version as per recommendation" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "Consumer"/>
+			<text_pattern value = "Function"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under java.util.function package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "Transformers"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.dsl package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "BeanNameMessageProcessor"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.handler package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "FunctionExpression"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.expression package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "GenericHandler"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.handler package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "MapBuilder"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.support package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "StringStringMapBuilder"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.support package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "PropertiesBuilder"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.support package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "org.springframework.integration.dsl.support.tuple"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under reactor.util.function package" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "DslIntegrationConfigurationInitializer"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.config.dsl package from org.springframework.integration.dsl.config" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "IntegrationFlowBeanPostProcessor"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.config.dsl package from org.springframework.integration.dsl.config" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "TransactionHandleMessageAdvice"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.transaction package from org.springframework.integration.dsl.transaction" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "TransactionInterceptorBuilder"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.transaction package from org.springframework.integration.dsl.transaction" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "ScatterGatherHandler"/>
+		</pattern_list>
+		<remediation recommendation = "Mentioned classes moved under org.springframework.integration.scattergather package from org.springframework.integration.handler" complexity= "1" action = "information" savings="1"/>
 	</rule>
 </rules>
