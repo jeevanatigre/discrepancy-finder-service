@@ -64,6 +64,13 @@
 			<text_pattern value = "&#60;groupId&#62;javax.el&#60;&#47;groupId&#62;"/>
 			<text_pattern value = "&#60;groupId&#62;jstl&#60;&#47;groupId&#62;"/>
 			<text_pattern value = "&#60;groupId&#62;taglibs&#60;&#47;groupId&#62;"/>
+			<text_pattern value = "&#60;artifactId&#62;javax.servlet-api&#60;&#47;artifactId&#62;"/>
+			<text_pattern value = "&#60;artifactId&#62;javax.el-api&#60;&#47;artifactId&#62;"/>
+			<text_pattern value = "&#60;feature&#62;el-2.0&#60;&#47;feature&#62;"/>
+			<text_pattern value = "&#60;feature&#62;appSecurity-3.0&#60;&#47;feature&#62;"/>
+			<text_pattern value = "&#60;feature&#62;beanValidation-1.1&#60;&#47;feature&#62;"/>
+			<text_pattern value = "&#60;feature&#62;jsp-2.3&#60;&#47;feature&#62;"/>
+			<text_pattern value = "&#60;feature&#62;webProfile-8.0&#60;&#47;feature&#62;"/>
 			<text_pattern value = "&#60;taglib version=" />
 			<text_pattern value = "&#60;tlib-version&#62;1.0&#60;&#47;tlib-version&#62;" />
 			<text_pattern value = "&#60;jsp-version&#62;1.0&#60;&#47;jsp-version&#62;" />

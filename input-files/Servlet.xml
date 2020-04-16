@@ -1,0 +1,7 @@
+<featureManager>
+<feature>el-2.0</feature>
+<feature>appSecurity-3.0</feature>
+<feature>beanValidation-1.1</feature>
+<feature>jsp-2.3</feature>
+<feature>webProfile-8.0</feature>
+</featureManager>

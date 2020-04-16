@@ -129,7 +129,6 @@
 		</pattern_list>
 		<remediation recommendation = "Replace this import with import com.rometools.rome.feed.synd.SyndEntry for rome classes;" complexity= "2" action = "replace" replace_with = "import org.springframework.amqp.support.AmqpHeaders;" condition = "import" savings="2"/>
 	</rule>
-	com.sun.syndication.feed.synd.SyndEntry
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.annotation;"/>
@@ -154,7 +153,6 @@
 		</pattern_list>
 		<remediation recommendation = "Replace this import with import org.springframework.integration.mail.dsl;" complexity= "2" action = "replace" replace_with = "import org.springframework.integration.mail.dsl;" condition = "import" savings="2"/>
 	</rule>
-	
 	<rule type="text_finder" category = "Mandatory">
 		<pattern_list>
 			<text_pattern value = "import org.springframework.integration.dsl.kafka;"/>
