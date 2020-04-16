@@ -54,4 +54,6 @@ See  [Rule Repository](https://github.com/jeevanatigre/discrepancy-finder-servic
 ## TODOs
 
  - Populate 'Discrepancy Rule Repository' for various tech upgrades
- - Web UI
+ - Cascading impact implementation
+ - Integrate with existing platforms / tools
+ - Web UI / Eclipse PlugIn / VSCode PlugIn
