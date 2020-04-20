@@ -1,0 +1,8 @@
+﻿<rules>
+  <rule type="text_finder" category = "Mandatory">
+    <pattern_list>
+      <text_pattern value = "System.Web.Mail"/>
+    </pattern_list>
+    <remediation recommendation = "Replace System.Web.Mail with System.Net.Mail" complexity= "2" action = "replace" replace_with = "System.Net.Mail" condition = "interface" savings="2"/>
+  </rule>
+</rules>
