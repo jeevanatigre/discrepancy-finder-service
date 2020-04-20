@@ -1,0 +1,68 @@
+<rules>
+
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "VARCHAR2"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this data type with VARCHAR" complexity= "1" action = "replace" replace_with = "VARCHAR" condition = "VARCHAR2" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "NUMBER"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this  data type with NUMERIC" complexity= "1" action = "replace" replace_with = "NUMERIC" condition = "NUMBER" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "DATE"/>
+		</pattern_list>
+		<remediation recommendation = "DATE in Postgres does not capture time like Oracle. Replace this  data type with TIMESTAMP(0)" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "CLOB"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this  data type with TEXT" complexity= "1" action = "replace" replace_with = "TEXT" condition = "CLOB" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "FROM DUAL"/>
+		</pattern_list>
+		<remediation recommendation = "DUAL table and FROM clause are not required in PostgreSQL" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "CREATE SYNONYM"/>
+		</pattern_list>
+		<remediation recommendation = "CREATE SYNONYM is not supporte in PostgreSQL. Use SET_SEARCH_PATH instead." complexity= "1" action = "information" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = ".nextval"/>
+		</pattern_list>
+		<remediation recommendation = "Postgres uses nextval('sequence_name') syntax for sequences." complexity= "1" action = "information" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = ".currval"/>
+		</pattern_list>
+		<remediation recommendation = "Postgres uses currval('sequence_name') syntax for sequences." complexity= "1" action = "information" savings="1"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "DELETE"/>
+		</pattern_list>
+		<remediation recommendation = "In Oracle DELETE does not require FROM clause while in Postgres FROM clause is necessary." complexity= "1" action = "information" savings="1"/>
+	</rule>
+	
+</rules>
+	
+	
