@@ -1,0 +1,82 @@
+<rules>
+
+		<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "org.apache.catalina.InstanceListener"/>
+			<text_pattern value = "org.apache.catalina.InstanceEvent"/>
+			<text_pattern value = "org.apache.catalina.util.InstanceSupport"/>
+		</pattern_list>
+		<remediation recommendation = "Remove this import" complexity= "1" action = "remove" savings="1"/>
+	</rule>
+
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "attachEvent"/>
+		</pattern_list>
+		<remediation recommendation = "Replace this API with addEventListener" complexity= "2" action = "replace" replace_with = "addEventListener" condition = "event" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "distributable"/>
+		</pattern_list>
+		<remediation recommendation = "This session manager attributes have been completely removed in 9.0.x." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "maxInactiveInterval"/>
+		</pattern_list>
+		<remediation recommendation = "This session manager attributes have been completely removed in 9.0.x." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "sessionIdLength"/>
+		</pattern_list>
+		<remediation recommendation = "This session manager attributes have been completely removed in 9.0.x." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "clearReferencesStatic"/>
+		</pattern_list>
+		<remediation recommendation = "This session manager attributes have been completely removed in 9.0.x." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+		<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "StandardContext.getServlets()"/>
+		</pattern_list>
+		<remediation recommendation = "This method that exposed to JMX have been removed." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+		<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "StandardContext.isStateManageable()"/>
+		</pattern_list>
+		<remediation recommendation = "This method that exposed to JMX have been removed." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "StandardContext.getDeploymentDescriptor()"/>
+		</pattern_list>
+		<remediation recommendation = "This method that exposed to JMX have been removed." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "StandardContext.isStateManageable()"/>
+		</pattern_list>
+		<remediation recommendation = "This method that exposed to JMX have been removed." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "MessageDispatch15Interceptor"/>
+		</pattern_list>
+		<remediation recommendation = "MessageDispatch15Interceptor has been removed in Tomcat 9.0.x by merging the Java 5 features to MessageDispatchInterceptor." complexity= "2" action = "information" savings="2"/>
+	</rule>
+	
+</rules>
