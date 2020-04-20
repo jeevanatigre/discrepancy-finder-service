@@ -1,0 +1,140 @@
+<rules>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_authn_default"/>
+			<text_pattern value = "mod_authz_default"/>
+			<text_pattern value = "mod_mem_cache"/>
+			<text_pattern value = "mod_dav_fs"/>
+			<text_pattern value = "DebugLevel"/>
+			<text_pattern value = "DumpIOLogLevel"/>
+			DebugLevel
+			</pattern_list>
+		<remediation recommendation = "Remove this module or content" complexity= "1" action = "remove" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_mem_cache"/>
+		</pattern_list>
+		<remediation recommendation = "Replace module mod_mem_cache with mod_cache_diskl" complexity= "2" action = "replace" replace_with = "mod_cache_disk" condition = "module" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "MaxRequestsPerChild"/>
+		</pattern_list>
+		<remediation recommendation = "Replace MaxRequestsPerChild with MaxConnectionsPerChild" complexity= "2" action = "replace" replace_with = "MaxConnectionsPerChild" condition = "tag" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "MaxClients"/>
+		</pattern_list>
+		<remediation recommendation = "Replace MaxClients with MaxRequestWorkers" complexity= "2" action = "replace" replace_with = "MaxRequestWorkers" condition = "tag" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "AllowOverride"/>
+		</pattern_list>
+		<remediation recommendation = "Replace AllowOverride value with none bydefault" complexity= "2" action = "information"  savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "EnableSendfile"/>
+		</pattern_list>
+		<remediation recommendation = "Replace EnableSendfile value with off bydefault" complexity= "2" action = "information"  savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "FileETag"/>
+		</pattern_list>
+		<remediation recommendation = "Replace FileETag value with MTime Size bydefault" complexity= "2" action = "information"  savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "KeepAlive"/>
+		</pattern_list>
+		<remediation recommendation = "Replace KeepAlive value with On/Off bydefault" complexity= "2" action = "information"  savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "AllowOverride"/>
+		</pattern_list>
+		<remediation recommendation = "Replace AllowOverride value with none bydefault" complexity= "2" action = "information"  savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "AcceptMutex"/>
+			<text_pattern value = "LockFile"/>
+			<text_pattern value = "RewriteLock"/>
+			<text_pattern value = "SSLMutex" />
+			<text_pattern value = "SSLStaplingMutex" />
+			<text_pattern value = "WatchdogMutexPath" />
+		</pattern_list>
+		<remediation recommendation = "Update all above Directives with Mutex" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "CacheIgnoreURLSessionIdentifiers"/>
+		</pattern_list>
+		<remediation recommendation = "mod_cache now searching for full string match" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "LDAPTrustedClientCert"/>
+		</pattern_list>
+		<remediation recommendation = "mod_ldap is per directory setting only" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "FilterProvider"/>
+		</pattern_list>
+		<remediation recommendation = "mod_filter accept bollean only" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "DebugLevel"/>
+		</pattern_list>
+		<remediation recommendation = "mod_charset_lite	 is per directory setting only" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_reqtimeout	"/>
+		</pattern_list>
+		<remediation recommendation = "mod_reqtimeout: If the module is loaded, it will now set some default timeouts" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_substitute"/>
+		</pattern_list>
+		<remediation recommendation = "mod_substitute : The maximum line length is now limited to 1MB" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "AuthzLDAPAuthoritative"/>
+			<text_pattern value = "AuthzDBDAuthoritative"/>
+			<text_pattern value = "AuthzDBMAuthoritative"/>
+			<text_pattern value = "AuthzGroupFileAuthoritative" />
+			<text_pattern value = "AuthzUserAuthoritative" />
+			<text_pattern value = "AuthzOwnerAuthoritative" />
+		</pattern_list>
+		<remediation recommendation = "These directives have been replaced by the more expressive RequireAny, RequireNone, and RequireAll" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_authz_dbm"/>
+		</pattern_list>
+		<remediation recommendation = "configuration to use Require dbm-group in place of Require group" complexity= "2" action = "information" condition = "tag" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "SSLProxyCheckPeerCN"/>
+			<text_pattern value = "SSLProxyCheckPeerExpire"/>
+			</pattern_list>
+		<remediation recommendation = "Value should be on by default" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_authn_alias"/>
+		</pattern_list>
+		<remediation recommendation = "Replace mod_authn_alias with mod_authn_core" complexity= "2" action = "replace" replace_with = "mod_authn_core" condition = "tag" savings="2"/>
+	</rule>
+	mod_authn_alias 
+	</rules>

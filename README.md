@@ -42,9 +42,9 @@ For tech upgrades in factory model,  this tool should assit in below areas
 
 | Languages | Frameworks | Application Servers | Databases | Operating Systems |
 | --------- | ---------- | ------------------- | --------- | ----------------- |
-| Java 6 to 11 | Spring 2.x to 5.0 | Weblogic migrate | Oracle 11 | Solaris 5.1 |
-| Java 7 to 11| Spring 3.x to 5.0 | Websphere migrate | Oracle 12 | RHEL 5.0 |
-| Java 8 to 11 | Spring 4.x to 5.0 | Tomcat 9 upgrade| SQL Server 2008 | RHEL 6.0 |
+| Java 6 to 11 | Spring 2.x to 5.0 | Weblogic migrate | Oracle 11 / 12 migrate to PostgreSQL | RHEL 7.0 upgrade |
+| Java 7 to 11| Spring 3.x to 5.0 | Websphere migrate | SQL Server 20016 upgrade| |
+| Java 8 to 11 | Spring 4.x to 5.0 | Tomcat 9 upgrade| | |
 | .NET 2.0  to 4.0| JSP 1.x to 2.0| Apache 2.4 upgrade| | 
 | .NET 3.0 to 4.0 | IE 1.8 to IE 11| | |
 
