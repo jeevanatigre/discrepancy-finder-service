@@ -7,9 +7,6 @@
 			<text_pattern value = "mod_dav_fs"/>
 			<text_pattern value = "DebugLevel"/>
 			<text_pattern value = "DumpIOLogLevel"/>
-			<text_pattern value = "mod_dav_fs"/>
-			<text_pattern value = "mod_dav_fs"/>
-			<text_pattern value = "mod_dav_fs"/>
 			DebugLevel
 			</pattern_list>
 		<remediation recommendation = "Remove this module or content" complexity= "1" action = "remove" savings="1"/>
@@ -109,4 +106,35 @@
 		</pattern_list>
 		<remediation recommendation = "mod_substitute : The maximum line length is now limited to 1MB" complexity= "1" action = "information" savings="1"/>
 	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "AuthzLDAPAuthoritative"/>
+			<text_pattern value = "AuthzDBDAuthoritative"/>
+			<text_pattern value = "AuthzDBMAuthoritative"/>
+			<text_pattern value = "AuthzGroupFileAuthoritative" />
+			<text_pattern value = "AuthzUserAuthoritative" />
+			<text_pattern value = "AuthzOwnerAuthoritative" />
+		</pattern_list>
+		<remediation recommendation = "These directives have been replaced by the more expressive RequireAny, RequireNone, and RequireAll" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_authz_dbm"/>
+		</pattern_list>
+		<remediation recommendation = "configuration to use Require dbm-group in place of Require group" complexity= "2" action = "information" condition = "tag" savings="2"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "SSLProxyCheckPeerCN"/>
+			<text_pattern value = "SSLProxyCheckPeerExpire"/>
+			</pattern_list>
+		<remediation recommendation = "Value should be on by default" complexity= "1" action = "information" savings="1"/>
+	</rule>
+	<rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "mod_authn_alias"/>
+		</pattern_list>
+		<remediation recommendation = "Replace mod_authn_alias with mod_authn_core" complexity= "2" action = "replace" replace_with = "mod_authn_core" condition = "tag" savings="2"/>
+	</rule>
+	mod_authn_alias 
 	</rules>
