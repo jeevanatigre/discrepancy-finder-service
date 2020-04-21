@@ -1,8 +1,59 @@
-﻿<rules>
+<rules>
+  
   <rule type="text_finder" category = "Mandatory">
     <pattern_list>
       <text_pattern value = "System.Web.Mail"/>
     </pattern_list>
     <remediation recommendation = "Replace System.Web.Mail with System.Net.Mail" complexity= "2" action = "replace" replace_with = "System.Net.Mail" condition = "interface" savings="2"/>
   </rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "StaticPopOutImageUrl"/>
+		</pattern_list>
+		<remediation recommendation = "In ASP.NET 4, the images that you specify using the Menu.StaticPopOutImageUrl properties will not render if the path contains backlashes (\)." complexity= "2" action = "information" savings="2"/>
+	</rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "DynamicPopOutImageUrl"/>
+		</pattern_list>
+		<remediation recommendation = "In ASP.NET 4, the images that you specify using the Menu.DynamicPopOutImageUrl properties will not render if the path contains backlashes (\)." complexity= "2" action = "information" savings="2"/>
+	</rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "System.Web.Security"/>
+		</pattern_list>
+		<remediation recommendation = "Change any code that uses Passport types in the System.Web.Security namespace (for example, PassportIdentity) to use the Windows Live ID SDK." complexity= "2" action = "information" savings="2"/>
+	</rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "HtmlEncode"/>
+		</pattern_list>
+		<remediation recommendation = "The HtmlEncode method encodes instances of the single quotation mark as &amp;#39;" complexity= "2" action = "information" savings="2"/>
+	</rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "UrlEncode"/>
+		</pattern_list>
+		<remediation recommendation = "The UrlEncode method encodes instances of the single quotation mark as %27" complexity= "2" action = "information" savings="2"/>
+	</rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+    <pattern_list>
+      <text_pattern value = "action=&quot;Default.aspx&quot;"/>
+    </pattern_list>
+    <remediation recommendation = "In ASP.NET 4, a request to http://contoso.com also results in a request to Default.aspx, but ASP.NET now renders the HTML opening form tag as action value with just emplty double quotes" complexity= "2" action = "replace" replace_with = "action=&quot;&quot;" condition = "interface" savings="2"/>
+  </rule>
+  
+  <rule type="text_finder" category = "Mandatory">
+		<pattern_list>
+			<text_pattern value = "border=&quot;0&quot;"/>
+		</pattern_list>
+		<remediation recommendation = "The table control no longer renders a border=&quot;0&quot;" complexity= "2" action = "information" savings="2"/>
+	</rule>
+
 </rules>
