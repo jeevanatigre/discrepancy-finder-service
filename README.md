@@ -5,6 +5,7 @@
  -  **discrapency-list.xls** - list of all discrepancies found in source files based on rules (and if applicable, corresponding line numbers)
  -  **remediated-{source-file}** - output file with possible fix for discrepancy
 
+![Screenshot](discrepancy-finder.png) <!-- .element height="100%" width="100%" -->
 
 ## Usage Example
 
